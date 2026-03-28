@@ -514,9 +514,15 @@ export default function Hero() {
             padding-top: 140px !important;
           }
           .hero-grid {
-            grid-template-columns: 1fr !important;
+            display: flex !important;
+            flex-direction: column !important;
             gap: 60px !important;
             text-align: center;
+            width: 100%;
+            overflow: hidden;
+          }
+          .hero-grid > div {
+            width: 100%;
           }
           .hero-grid p {
             margin-left: auto !important;
@@ -529,9 +535,13 @@ export default function Hero() {
             justify-content: center !important;
           }
         }
-        @media (max-width: 380px) {
+        @media (max-width: 400px) {
           .hero-mockup-container {
-            transform: scale(0.85);
+            transform: scale(0.8);
+            transform-origin: top center;
+          }
+          .hero-grid p {
+            font-size: 15px !important;
           }
         }
       `}</style>

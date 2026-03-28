@@ -24,10 +24,6 @@ function ScreenshotCard({ screenshot, index }) {
         cursor: 'default',
         boxShadow: '0 0 0 1px rgba(255,255,255,0.1), 0 20px 60px rgba(0,0,0,0.5)',
       }}
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       {/* Try to load real asset first, else show styled placeholder */}
       <img
