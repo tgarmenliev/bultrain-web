@@ -28,7 +28,6 @@ function ScreenshotCard({ screenshot, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.6, delay: index * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
-      whileHover={{ y: -12, scale: 1.02, transition: { duration: 0.3 } }}
     >
       {/* Try to load real asset first, else show styled placeholder */}
       <img
@@ -156,23 +155,25 @@ export default function Screenshots() {
         style={{
           overflowX: 'auto',
           overflowY: 'visible',
-          paddingBottom: '40px',
+          paddingBottom: '64px', /* Increased to prevent clipping of shadows */
           paddingTop: '24px',
           scrollSnapType: 'x mandatory',
           WebkitOverflowScrolling: 'touch',
+          display: 'flex',
         }}
         className="scroll-container"
       >
-        <div style={{
-          display: 'flex',
-          gap: 32,
-          padding: '0 24px',
-          width: 'max-content',
-          alignItems: 'center',
-          margin: '0 auto',
-        }}>
+        <div
+          className="screenshots-track"
+          style={{
+            display: 'flex',
+            gap: 32,
+            padding: '0 24px',
+            alignItems: 'center',
+          }}
+        >
           {screenshots.map((s, i) => (
-            <div key={s.id} style={{ scrollSnapAlign: 'start', marginTop: i % 2 === 1 ? 60 : 0 }}>
+            <div key={s.id} className={`screenshot-wrapper sw-${i}`} style={{ scrollSnapAlign: 'center', flexShrink: 0 }}>
               <ScreenshotCard screenshot={s} index={i} />
             </div>
           ))}
@@ -182,6 +183,21 @@ export default function Screenshots() {
       <style>{`
         .scroll-container::-webkit-scrollbar { display: none; }
         .scroll-container { -ms-overflow-style: none; scrollbar-width: none; }
+        @media (min-width: 900px) {
+          .screenshots-track {
+            margin: 0 auto;
+            width: max-content;
+          }
+          .sw-1, .sw-3 {
+            margin-top: 60px;
+          }
+        }
+        @media (max-width: 899px) {
+          .screenshots-track {
+            padding-right: calc(50vw - 140px) !important; 
+            padding-left: calc(50vw - 140px) !important;
+          }
+        }
       `}</style>
     </section>
   )

@@ -442,6 +442,7 @@ export default function Hero() {
             {/* CTA Buttons */}
             <motion.div
               variants={itemVariants}
+              className="hero-buttons"
               style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}
             >
               <AppStoreBadge />
@@ -460,9 +461,12 @@ export default function Hero() {
             {/* Social proof */}
             <motion.div
               variants={itemVariants}
+              className="hero-social-proof"
               style={{
                 display: 'flex',
                 alignItems: 'center',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
                 gap: 20,
                 marginTop: 48,
                 paddingTop: 32,
@@ -493,6 +497,7 @@ export default function Hero() {
 
           {/* Right — Phone mockup */}
           <motion.div
+            className="hero-mockup-container"
             initial={{ opacity: 0, scale: 0.9, x: 40 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -505,13 +510,28 @@ export default function Hero() {
 
       <style>{`
         @media (max-width: 900px) {
+          #hero {
+            padding-top: 140px !important;
+          }
           .hero-grid {
             grid-template-columns: 1fr !important;
             gap: 60px !important;
             text-align: center;
           }
-          .hero-grid > div:first-child > div:last-child {
-            justify-content: center;
+          .hero-grid p {
+            margin-left: auto !important;
+            margin-right: auto !important;
+          }
+          .hero-buttons {
+            justify-content: center !important;
+          }
+          .hero-social-proof {
+            justify-content: center !important;
+          }
+        }
+        @media (max-width: 380px) {
+          .hero-mockup-container {
+            transform: scale(0.85);
           }
         }
       `}</style>
