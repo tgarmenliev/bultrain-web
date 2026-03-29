@@ -21,7 +21,7 @@ function AppStoreBadge() {
           padding: '11px 20px',
           background: '#000',
           border: '1px solid rgba(255,255,255,0.2)',
-          borderRadius: 12,
+          borderRadius: 14,
           cursor: 'pointer',
           textDecoration: 'none',
         }}
@@ -31,11 +31,54 @@ function AppStoreBadge() {
           <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
         </svg>
         <div>
-          <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.7)', fontWeight: 400, letterSpacing: '0.04em', lineHeight: 1 }}>
+          <div style={{ fontSize: 8, color: 'rgba(255,255,255,0.6)', fontWeight: 500, letterSpacing: '0.04em', lineHeight: 1, textTransform: 'uppercase' }}>
             Свали от
           </div>
-          <div style={{ fontSize: 17, color: '#fff', fontWeight: 600, letterSpacing: '-0.01em', lineHeight: 1.2 }}>
+          <div style={{ fontSize: 16, color: '#fff', fontWeight: 700, letterSpacing: '-0.01em', lineHeight: 1.2 }}>
             App Store
+          </div>
+        </div>
+      </motion.div>
+    </a>
+  )
+}
+
+function GooglePlayBadge() {
+  return (
+    <a
+      id="hero-googleplay"
+      href="https://play.google.com/store/apps/details?id=com.bultrain.vlak_app_test"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ display: 'inline-block', flexShrink: 0 }}
+    >
+      <motion.div
+        whileHover={{ scale: 1.04 }}
+        whileTap={{ scale: 0.97 }}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 10,
+          padding: '11px 20px',
+          background: '#000',
+          border: '1px solid rgba(255,255,255,0.2)',
+          borderRadius: 14,
+          cursor: 'pointer',
+          textDecoration: 'none',
+        }}
+      >
+        {/* High-quality official Google Play logo */}
+        <img 
+          src="https://www.vectorlogo.zone/logos/google_play/google_play-icon.svg" 
+          alt="Google Play" 
+          style={{ width: 22, height: 22 }}
+        />
+        <div>
+          <div style={{ fontSize: 8, color: 'rgba(255,255,255,0.6)', fontWeight: 500, letterSpacing: '0.04em', lineHeight: 1, textTransform: 'uppercase' }}>
+            Свали от
+          </div>
+          <div style={{ fontSize: 16, color: '#fff', fontWeight: 700, letterSpacing: '-0.01em', lineHeight: 1.2 }}>
+            Google Play
           </div>
         </div>
       </motion.div>
@@ -443,15 +486,18 @@ export default function Hero() {
             <motion.div
               variants={itemVariants}
               className="hero-buttons"
-              style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}
+              style={{ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'flex-start' }}
             >
-              <AppStoreBadge />
+              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                <AppStoreBadge />
+                <GooglePlayBadge />
+              </div>
 
               <a
                 id="hero-support"
                 href="#support"
                 className="btn btn-ghost"
-                style={{ gap: 8 }}
+                style={{ gap: 8, padding: '12px 24px', fontSize: '14px' }}
               >
                 <Coffee size={16} />
                 Подкрепи проекта
@@ -476,7 +522,7 @@ export default function Hero() {
               {[
                 { value: 'Безплатно', label: 'за да пътуваш приятно' },
                 { value: 'Офлайн', label: 'за да пътуваш спокойно' },
-                { value: 'iOS', label: 'за да пътуваш лесно' },
+                { value: 'iOS & Android', label: 'за да пътуваш лесно' },
               ].map((stat, i) => (
                 <div key={i} style={{ textAlign: 'center' }}>
                   <div style={{
@@ -529,6 +575,10 @@ export default function Hero() {
             margin-right: auto !important;
           }
           .hero-buttons {
+            justify-content: center !important;
+            align-items: center !important;
+          }
+          .hero-buttons > div {
             justify-content: center !important;
           }
           .hero-social-proof {
