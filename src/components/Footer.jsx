@@ -38,7 +38,7 @@ export default function Footer() {
               { id: 'link-privacy', href: '/privacy', label: 'Политика за поверителност', isRouterLink: true },
               { id: 'link-privacy-app', href: '/privacy-app', label: 'Политика за поверителност на приложението', isRouterLink: true },
               { id: 'link-terms', href: '/terms', label: 'Условия за ползване', isRouterLink: true },
-              { id: 'link-contact', href: 'mailto:contact@bultrain.app', label: 'Контакти', isRouterLink: false },
+              { id: 'link-contact', href: '/contact', label: 'Контакти', isRouterLink: true },
             ].map(link => {
               const linkProps = {
                 key: link.id,

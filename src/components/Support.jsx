@@ -48,7 +48,7 @@ export default function Support() {
               className="section-heading"
               style={{ marginBottom: 20, maxWidth: 560, marginLeft: 'auto', marginRight: 'auto' }}
             >
-              BulTrain е безплатно.<br />
+              BulTrain е безплатен.<br />
               <span className="gradient-text">Твоята подкрепа го поддържа.</span>
             </h2>
 

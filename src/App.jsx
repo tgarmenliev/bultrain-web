@@ -10,6 +10,7 @@ import Footer from './components/Footer'
 import Privacy from './pages/Privacy'
 import PrivacyApp from './pages/PrivacyApp'
 import Terms from './pages/Terms'
+import Contact from './pages/Contact'
 
 function Home() {
   return (
@@ -45,6 +46,7 @@ export default function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/privacy-app" element={<PrivacyApp />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
     </div>
