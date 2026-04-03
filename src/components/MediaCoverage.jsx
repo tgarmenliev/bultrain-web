@@ -215,7 +215,7 @@ export default function MediaCoverage() {
             Медиите за нас
           </span>
           <h2 className="section-heading" style={{ marginBottom: 16 }}>
-            Какво казват <span className="gradient-text">другите.</span>
+            Какво казват <span className="gradient-text">другите?</span>
           </h2>
           <p className="section-subheading">
             Когато иновацията стъпи на релси, хората забелязват. Вижте отзвука за BulTrain в медийното пространство и защо технологичната общност заговори за бъдещето на пътуването.
