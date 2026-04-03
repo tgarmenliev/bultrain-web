@@ -98,7 +98,9 @@ export default function Navbar() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <a
               id="nav-cta"
-              href="#support"
+              href="https://apps.apple.com/us/app/bultrain-train-schedules-bg/id6759790703"
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn btn-primary"
               style={{ fontSize: 13, padding: '10px 20px' }}
             >
