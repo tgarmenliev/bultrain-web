@@ -75,7 +75,7 @@ function GooglePlayBadge() {
         />
         <div>
           <div style={{ fontSize: 8, color: 'rgba(255,255,255,0.6)', fontWeight: 500, letterSpacing: '0.04em', lineHeight: 1, textTransform: 'uppercase' }}>
-            Свали от
+            ПРЕДЛАГА СЕ В
           </div>
           <div style={{ fontSize: 16, color: '#fff', fontWeight: 700, letterSpacing: '-0.01em', lineHeight: 1.2 }}>
             Google Play
