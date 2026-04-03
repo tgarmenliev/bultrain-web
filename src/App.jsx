@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Features from './components/Features'
+import MediaCoverage from './components/MediaCoverage'
 import Screenshots from './components/Screenshots'
 import About from './components/About'
 import Support from './components/Support'
@@ -19,6 +20,7 @@ function Home() {
       <main>
         <Hero />
         <Features />
+        <MediaCoverage />
         <Screenshots />
         <About />
         <Support />
