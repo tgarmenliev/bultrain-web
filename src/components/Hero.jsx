@@ -6,7 +6,7 @@ function AppStoreBadge() {
   return (
     <a
       id="hero-appstore"
-      href="https://apps.apple.com/us/app/bultrain-train-schedules-bg/id6759790703"
+      href="https://apps.apple.com/bg/app/bultrain-train-schedules-bg/id6759790703"
       target="_blank"
       rel="noopener noreferrer"
       style={{ display: 'inline-block', flexShrink: 0 }}
