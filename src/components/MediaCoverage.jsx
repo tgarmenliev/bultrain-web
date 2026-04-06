@@ -212,7 +212,7 @@ export default function MediaCoverage() {
           transition={{ duration: 0.6 }}
         >
           <span className="tag" style={{ marginBottom: 20, display: 'inline-flex' }}>
-            Медиите за нас
+            Медиите за BulTrain
           </span>
           <h2 className="section-heading" style={{ marginBottom: 16 }}>
             Какво казват <span className="gradient-text">другите?</span>
