@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { GraduationCap, Trophy, Heart, Star, Award, Book, User, Globe } from 'lucide-react'
+import { GraduationCap, Trophy, Heart, Star, Award, Book, User, Globe, Sparkles } from 'lucide-react'
 
 const achievements = [
   {
@@ -45,6 +45,13 @@ const achievements = [
     detail: 'За BulTrain в категория "Младежки награди"',
     color: '#0A84FF',
   },
+  {
+    id: 'softuniada',
+    icon: Sparkles,
+    label: 'Първо място в Софтуниада 2024',
+    detail: 'Категория Софтуерни проекти (старша възраст) с BulTrain',
+    color: '#f59f0ba9',
+  }
 ]
 
 export default function About() {
