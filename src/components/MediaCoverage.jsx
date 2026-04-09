@@ -23,6 +23,14 @@ export const mediaArticles = [
   },
   {
     id: 'article-3',
+    title: 'Студент изпревари БДЖ и създаде удобно приложение на българската железница',
+    url: 'https://nixanbal.com/mlad-student-izprevari-bdzh-i-sazdade-udobno-i-funktsionalno-prilozhenie-za-razpisanie-na-balgarskata-zheleznitsa#:~:text=%D0%9C%D0%BB%D0%B0%D0%B4%D0%B8%D1%8F%D1%82%20%D1%81%D1%82%D1%83%D0%B4%D0%B5%D0%BD%D1%82%20%D0%B8%20%D1%84%D0%B8%D0%BD%D0%B0%D0%BD%D1%81%D0%B8%D1%81%D1%82%20%D0%A2%D0%B8%D1%85%D0%BE%D0%BC%D0%B8%D1%80,%D0%B4%D1%8A%D1%80%D0%B6%D0%B0%D0%B2%D0%BD%D0%B0%D1%82%D0%B0%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F%20%D0%BE%D1%82%D0%BB%D0%B0%D0%B3%D0%B0%20%D1%81%20%D0%B3%D0%BE%D0%B4%D0%B8%D0%BD%D0%B8.',
+    thumbnail: '',
+    snippet: 'Младият студент и финансист Тихомир Гърменлиев обяви своето доста полезно приложение BulTrain, което позволява следенето на разписанията и влаковете на БДЖ в реално време - нещо, което държавната компания отлага с години.',
+    source: 'nixanbal'
+  },
+  {
+    id: 'article-4',
     title: 'Мобилно приложение предлага всичко за пътуването с влак у нас на едно място',
     url: 'https://economy.bg/featured/view/58604/Mobilno-prilozhenie-predlaga-vsichko-za-pytuvaneto-s-vlak-u-nas-na-edno-myasto',
     thumbnail: 'https://i.newsroom.bg/uploads/photo_assets/2024/2024-05-23/b_Sn-2-392e5662cc.jpg', 
@@ -30,7 +38,7 @@ export const mediaArticles = [
     source: 'Economy.bg'
   },
   {
-    id: 'article-4',
+    id: 'article-5',
     title: 'Ученик създава приложение, следящо маршрути и разписания на българските влакове',
     url: 'https://www.bloombergtv.bg/a/16-biznes-start/131545-uchenik-sazdava-prilozhenie-sledyashto-marshruti-i-razpisaniya-na-balgarskite-vlakove',
     thumbnail: '',
