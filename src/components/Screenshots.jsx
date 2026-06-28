@@ -1,15 +1,19 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { useLanguage } from '../i18n/LanguageContext'
 
+// id/bg are structural; labels are localized under screenshots.labels by id.
 const screenshots = [
-  { id: 'schedule', label: 'Разписание', bg: '#1a1a2e' },
-  { id: 'station', label: 'Табло на живо', bg: '#0f1b2a' },
-  { id: 'alarm', label: 'Умна аларма', bg: '#1a1220' },
-  { id: 'journey', label: 'Детайли за пътуване', bg: '#0a1a15' },
-  { id: 'search', label: 'Търсене на гара', bg: '#1a1510' },
+  { id: 'schedule', bg: '#1a1a2e' },
+  { id: 'station', bg: '#0f1b2a' },
+  { id: 'alarm', bg: '#1a1220' },
+  { id: 'journey', bg: '#0a1a15' },
+  { id: 'search', bg: '#1a1510' },
 ]
 
 function ScreenshotCard({ screenshot, index }) {
+  const { t } = useLanguage()
+  const label = t.screenshots.labels[screenshot.id]
   return (
     <motion.div
       id={`screenshot-${screenshot.id}`}
@@ -28,7 +32,7 @@ function ScreenshotCard({ screenshot, index }) {
       {/* Try to load real asset first, else show styled placeholder */}
       <img
         src={`/assets/screenshot-${screenshot.id}.png`}
-        alt={`BulTrain ${screenshot.label} screen`}
+        alt={`BulTrain ${label} screen`}
         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
         onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
       />
@@ -86,7 +90,7 @@ function ScreenshotCard({ screenshot, index }) {
           color: 'rgba(255,255,255,0.25)',
           textAlign: 'center',
         }}>
-          {screenshot.label}
+          {label}
           <div style={{ color: 'rgba(255,255,255,0.1)', fontWeight: 400, letterSpacing: 0, textTransform: 'none', marginTop: 4 }}>
             /assets/screenshot-{screenshot.id}.png
           </div>
@@ -120,6 +124,7 @@ function ScreenshotCard({ screenshot, index }) {
 export default function Screenshots() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const { t } = useLanguage()
 
   return (
     <section id="screenshots" className="section" style={{ overflow: 'hidden' }}>
@@ -134,14 +139,14 @@ export default function Screenshots() {
           transition={{ duration: 0.6 }}
         >
           <span className="tag" style={{ marginBottom: 20, display: 'inline-flex' }}>
-            Галерия
+            {t.screenshots.tag}
           </span>
           <h2 className="section-heading" style={{ marginBottom: 16 }}>
-            Създадено с мисъл<br />
-            <span className="gradient-text">за всеки пътуващ.</span>
+            {t.screenshots.headingLine1}<br />
+            <span className="gradient-text">{t.screenshots.headingAccent}</span>
           </h2>
           <p className="section-subheading">
-            Всеки екран е проектиран с мисъл за удобство и яснота — от късните нощни пътувания до ранните сутрешни преходи.
+            {t.screenshots.subheading}
           </p>
         </motion.div>
       </div>

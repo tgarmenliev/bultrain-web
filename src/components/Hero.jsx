@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Coffee, Train, MapPin, Clock, Wifi, ChevronLeft, SlidersHorizontal, TrainFront, CalendarDays, Ticket, BookOpen, AlertTriangle } from 'lucide-react'
+import { useLanguage } from '../i18n/LanguageContext'
 
 // Apple App Store SVG badge (official proportions)
 function AppStoreBadge() {
+  const { t } = useLanguage()
   return (
     <a
       id="hero-appstore"
@@ -32,10 +34,10 @@ function AppStoreBadge() {
         </svg>
         <div>
           <div style={{ fontSize: 8, color: 'rgba(255,255,255,0.6)', fontWeight: 500, letterSpacing: '0.04em', lineHeight: 1, textTransform: 'uppercase' }}>
-            Свали от
+            {t.hero.appStoreLine1}
           </div>
           <div style={{ fontSize: 16, color: '#fff', fontWeight: 700, letterSpacing: '-0.01em', lineHeight: 1.2 }}>
-            App Store
+            {t.hero.appStoreLine2}
           </div>
         </div>
       </motion.div>
@@ -44,6 +46,7 @@ function AppStoreBadge() {
 }
 
 function GooglePlayBadge() {
+  const { t } = useLanguage()
   return (
     <a
       id="hero-googleplay"
@@ -75,10 +78,10 @@ function GooglePlayBadge() {
         />
         <div>
           <div style={{ fontSize: 8, color: 'rgba(255,255,255,0.6)', fontWeight: 500, letterSpacing: '0.04em', lineHeight: 1, textTransform: 'uppercase' }}>
-            ПРЕДЛАГА СЕ В
+            {t.hero.googlePlayLine1}
           </div>
           <div style={{ fontSize: 16, color: '#fff', fontWeight: 700, letterSpacing: '-0.01em', lineHeight: 1.2 }}>
-            Google Play
+            {t.hero.googlePlayLine2}
           </div>
         </div>
       </motion.div>
@@ -88,13 +91,16 @@ function GooglePlayBadge() {
 
 // Floating iPhone mockup with app UI preview
 function PhoneMockup() {
+  const { t } = useLanguage()
+  const m = t.hero.mockup
+
   const trains = [
-    { time: '16:49', dest: 'Волуяк', type: 'КПВ 10215', status: 'НАВРЕМЕ', color: '#22c55e' },
-    { time: '17:08', dest: 'Пловдив', type: 'БВ 1691', status: 'НАВРЕМЕ', color: '#22c55e' },
-    { oldTime: '17:43', time: '18:04', dest: 'Варна', type: 'БВ 8650', status: '+21 МИН', color: '#ef4444' },
-    { time: '17:27', dest: 'Костенец', type: 'БВ 10224', status: 'НАВРЕМЕ', color: '#22c55e' },
-    { time: '17:31', dest: 'Враца', type: 'БВ 20104', status: 'НАВРЕМЕ', color: '#22c55e' },
-    { time: '17:38', dest: 'Волуяк', type: 'БВ 10209', status: 'НАВРЕМЕ', color: '#22c55e' },
+    { time: '16:49', dest: m.trains[0].dest, type: 'КПВ 10215', delayed: false, color: '#22c55e' },
+    { time: '17:08', dest: m.trains[1].dest, type: 'БВ 1691', delayed: false, color: '#22c55e' },
+    { oldTime: '17:43', time: '18:04', dest: m.trains[2].dest, type: 'БВ 8650', delayed: true, color: '#ef4444' },
+    { time: '17:27', dest: m.trains[3].dest, type: 'БВ 10224', delayed: false, color: '#22c55e' },
+    { time: '17:31', dest: m.trains[4].dest, type: 'БВ 20104', delayed: false, color: '#22c55e' },
+    { time: '17:38', dest: m.trains[5].dest, type: 'БВ 10209', delayed: false, color: '#22c55e' },
   ]
 
   return (
@@ -171,7 +177,7 @@ function PhoneMockup() {
             <div style={{ width: 32, height: 32, borderRadius: 16, background: '#1c1f2e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <ChevronLeft size={18} color="#94a3b8" />
             </div>
-            <h3 style={{ fontSize: 16, fontWeight: 800, color: '#fff', letterSpacing: '0.05em', margin: 0 }}>С О Ф И Я</h3>
+            <h3 style={{ fontSize: 16, fontWeight: 800, color: '#fff', letterSpacing: '0.05em', margin: 0 }}>{m.city}</h3>
             <div style={{ width: 32, height: 32, borderRadius: 16, background: '#1c1f2e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <SlidersHorizontal size={16} color="#94a3b8" />
             </div>
@@ -179,15 +185,15 @@ function PhoneMockup() {
 
           {/* Toggle */}
           <div style={{ margin: '8px 20px 16px', display: 'flex', background: 'transparent', borderRadius: 10, border: '1px solid #1e293b', padding: 2 }}>
-            <div style={{ flex: 1, padding: '7px 0', textAlign: 'center', borderRadius: 8, background: '#1e293b', color: '#94a3b8', fontSize: 12, fontWeight: 600 }}>Заминаващи</div>
-            <div style={{ flex: 1, padding: '7px 0', textAlign: 'center', color: '#3b82f6', fontSize: 12, fontWeight: 600 }}>Пристигащи</div>
+            <div style={{ flex: 1, padding: '7px 0', textAlign: 'center', borderRadius: 8, background: '#1e293b', color: '#94a3b8', fontSize: 12, fontWeight: 600 }}>{m.departures}</div>
+            <div style={{ flex: 1, padding: '7px 0', textAlign: 'center', color: '#3b82f6', fontSize: 12, fontWeight: 600 }}>{m.arrivals}</div>
           </div>
 
           {/* Table Header */}
           <div style={{ display: 'flex', padding: '0 20px 8px', fontSize: 9, color: '#64748b', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            <div style={{ width: 77 }}>ВРЕМЕ</div>
-            <div style={{ flex: 1 }}>От</div>
-            <div style={{ width: 60, textAlign: 'right' }}>СТАТУС</div>
+            <div style={{ width: 77 }}>{m.colTime}</div>
+            <div style={{ flex: 1 }}>{m.colFrom}</div>
+            <div style={{ width: 60, textAlign: 'right' }}>{m.colStatus}</div>
           </div>
 
           {/* Train List */}
@@ -235,7 +241,7 @@ function PhoneMockup() {
                     ) : (
                       <AlertTriangle size={9} color="#ef4444" />
                     )}
-                    <span style={{ fontSize: 8, fontWeight: 800, color: train.color, letterSpacing: '0.05em' }}>{train.status}</span>
+                    <span style={{ fontSize: 8, fontWeight: 800, color: train.color, letterSpacing: '0.05em' }}>{train.delayed ? m.delayed : m.onTime}</span>
                   </div>
                 </div>
               </motion.div>
@@ -257,10 +263,10 @@ function PhoneMockup() {
             backdropFilter: 'blur(10px)',
           }}>
             {[
-              { Icon: CalendarDays, label: 'Разписание', active: false },
-              { Icon: Clock, label: 'Табло', active: true },
-              { Icon: Ticket, label: 'Пътувания', active: false },
-              { Icon: BookOpen, label: 'Наръчник', active: false },
+              { Icon: CalendarDays, label: m.tabs.schedule, active: false },
+              { Icon: Clock, label: m.tabs.board, active: true },
+              { Icon: Ticket, label: m.tabs.trips, active: false },
+              { Icon: BookOpen, label: m.tabs.guide, active: false },
             ].map(({ Icon, label, active }, i) => (
               <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
                 <div style={{ 
@@ -332,10 +338,10 @@ function PhoneMockup() {
         </div>
         <div>
           <div style={{ fontSize: 12, fontWeight: 700, color: '#fff', lineHeight: 1.2 }}>
-            Пристигане в Пловдив
+            {m.notifTitle}
           </div>
           <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)', marginTop: 2 }}>
-            Умна аларма · след 2 спирки
+            {m.notifSubtitle}
           </div>
         </div>
       </motion.div>
@@ -365,13 +371,14 @@ function PhoneMockup() {
           animate={{ opacity: [1, 0.3, 1] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         />
-        <span style={{ fontSize: 11, fontWeight: 600, color: '#22c55e' }}>На живо</span>
+        <span style={{ fontSize: 11, fontWeight: 600, color: '#22c55e' }}>{m.live}</span>
       </motion.div>
     </motion.div>
   )
 }
 
 export default function Hero() {
+  const { t } = useLanguage()
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -445,7 +452,7 @@ export default function Hero() {
             <motion.div variants={itemVariants}>
               <span className="tag" style={{ marginBottom: 28 }}>
                 <Wifi size={11} />
-                Всички влакове на едно място
+                {t.hero.badge}
               </span>
             </motion.div>
 
@@ -462,9 +469,9 @@ export default function Hero() {
                 margin: 0,
               }}
             >
-              Пътувай умно.<br />
-              И не изпускай<br />
-              <span className="gradient-text">гарата си.</span>
+              {t.hero.headlineLine1}<br />
+              {t.hero.headlineLine2}<br />
+              <span className="gradient-text">{t.hero.headlineAccent}</span>
             </motion.h1>
 
             {/* Subheading */}
@@ -479,7 +486,7 @@ export default function Hero() {
                 maxWidth: 440,
               }}
             >
-              Разписания и табла на БДЖ в реално време. Умни аларми по локация, които те известяват преди твоята спирка — създадено специално за теб.
+              {t.hero.subheading}
             </motion.p>
 
             {/* CTA Buttons */}
@@ -500,7 +507,7 @@ export default function Hero() {
                 style={{ gap: 8, padding: '12px 24px', fontSize: '14px' }}
               >
                 <Coffee size={16} />
-                Подкрепи проекта
+                {t.hero.supportCta}
               </a>
             </motion.div>
 
@@ -519,11 +526,7 @@ export default function Hero() {
                 borderTop: '1px solid var(--color-border)',
               }}
             >
-              {[
-                { value: 'Безплатно', label: 'за да пътуваш приятно' },
-                { value: 'Офлайн', label: 'за да пътуваш спокойно' },
-                { value: 'iOS & Android', label: 'за да пътуваш лесно' },
-              ].map((stat, i) => (
+              {t.hero.stats.map((stat, i) => (
                 <div key={i} style={{ textAlign: 'center' }}>
                   <div style={{
                     fontSize: 18,

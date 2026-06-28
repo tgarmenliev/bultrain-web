@@ -1,10 +1,12 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Coffee, CreditCard, Mail, ExternalLink } from 'lucide-react'
+import { useLanguage } from '../i18n/LanguageContext'
 
 export default function Support() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const { t } = useLanguage()
 
   return (
     <section id="support" className="section">
@@ -41,22 +43,22 @@ export default function Support() {
             }} />
 
             <span className="tag" style={{ marginBottom: 24, display: 'inline-flex' }}>
-              Подкрепи проекта
+              {t.support.tag}
             </span>
 
             <h2
               className="section-heading"
               style={{ marginBottom: 20, maxWidth: 560, marginLeft: 'auto', marginRight: 'auto' }}
             >
-              BulTrain е безплатен.<br />
-              <span className="gradient-text">Твоята подкрепа го поддържа.</span>
+              {t.support.headingLine1}<br />
+              <span className="gradient-text">{t.support.headingAccent}</span>
             </h2>
 
             <p
               className="section-subheading"
               style={{ maxWidth: 500, margin: '0 auto 48px', fontSize: '16px' }}
             >
-              Това е проект, създаден със страст, не с цел печалба. Ако BulTrain те е спасил от изпуснат влак или спирка, или е направил пътуването ти по-приятно, можеш да подкрепиш развитието му. Благодаря!
+              {t.support.subheading}
             </p>
 
             {/* Support buttons */}
@@ -78,7 +80,7 @@ export default function Support() {
                 whileTap={{ scale: 0.98 }}
               >
                 <Coffee size={18} />
-                Почерпи ме кафе
+                {t.support.coffee}
               </motion.a>
 
               <motion.a
@@ -92,7 +94,7 @@ export default function Support() {
                 whileTap={{ scale: 0.98 }}
               >
                 <CreditCard size={18} />
-                Подкрепи чрез Revolut
+                {t.support.revolut}
                 <ExternalLink size={14} style={{ opacity: 0.5 }} />
               </motion.a>
             </div>
@@ -102,7 +104,7 @@ export default function Support() {
             {/* Contact */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
               <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-text-muted)' }}>
-                Свържи се с мен
+                {t.support.contactLabel}
               </p>
               <a
                 id="contact-email"

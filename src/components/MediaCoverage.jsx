@@ -1,50 +1,39 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
+import { useLanguage } from '../i18n/LanguageContext'
 
 // ============================================================================
 // IN THE PRESS / MEDIA COVERAGE CONFIGURATION
+// Only the structural data lives here (id, url, thumbnail). The title,
+// snippet and source are localized in the translation dictionary, keyed by id
+// under media.articles.
 // ============================================================================
 export const mediaArticles = [
   {
     id: 'article-1',
-    title: 'Програмистът Тихомир Гърменлиев, който иска да решава проблеми на градската среда',
     url: 'http://capital.bg/politika_i_ikonomika/obrazovanie/2026/01/27/4876961_talantite_ot_20_pod_20_programistut_tihomir_gurmenliev/',
     thumbnail: '',
-    snippet: 'Едва на 20 години, Тихомир вече има две платформи зад гърба си - с едната улеснява пътуването с влак из България, а с другата картографира опасните пешеходни участъци в столицата',
-    source: 'Капитал'
   },
   {
     id: 'article-2',
-    title: '"Как се пътува умно с БДЖ": Тихомир Гърменлиев в подкаста "Дума на седмицата"',
     url: 'https://www.dnevnik.bg/duma_na_sedmitsa/2026/04/01/4898677_kak_se_putuva_umno_s_bdj_tihomir_gurmenliev_v_podkasta/?ref=rss',
-    thumbnail: '', 
-    snippet: 'В специалната рубрика на подкаста "Дума на седмицата" с Ива Дойчинова, гостува 20-годишният Тихомир Гърменлиев, създател на BulTrain, мобилно приложение, което улеснява значително пътуването с влак из България',
-    source: 'Дневник'
+    thumbnail: '',
   },
   {
     id: 'article-3',
-    title: 'Студент изпревари БДЖ и създаде удобно приложение на българската железница',
     url: 'https://nixanbal.com/mlad-student-izprevari-bdzh-i-sazdade-udobno-i-funktsionalno-prilozhenie-za-razpisanie-na-balgarskata-zheleznitsa#:~:text=%D0%9C%D0%BB%D0%B0%D0%B4%D0%B8%D1%8F%D1%82%20%D1%81%D1%82%D1%83%D0%B4%D0%B5%D0%BD%D1%82%20%D0%B8%20%D1%84%D0%B8%D0%BD%D0%B0%D0%BD%D1%81%D0%B8%D1%81%D1%82%20%D0%A2%D0%B8%D1%85%D0%BE%D0%BC%D0%B8%D1%80,%D0%B4%D1%8A%D1%80%D0%B6%D0%B0%D0%B2%D0%BD%D0%B0%D1%82%D0%B0%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F%20%D0%BE%D1%82%D0%BB%D0%B0%D0%B3%D0%B0%20%D1%81%20%D0%B3%D0%BE%D0%B4%D0%B8%D0%BD%D0%B8.',
     thumbnail: '',
-    snippet: 'Младият студент и финансист Тихомир Гърменлиев обяви своето доста полезно приложение BulTrain, което позволява следенето на разписанията и влаковете на БДЖ в реално време - нещо, което държавната компания отлага с години.',
-    source: 'nixanbal'
   },
   {
     id: 'article-4',
-    title: 'Мобилно приложение предлага всичко за пътуването с влак у нас на едно място',
     url: 'https://economy.bg/featured/view/58604/Mobilno-prilozhenie-predlaga-vsichko-za-pytuvaneto-s-vlak-u-nas-na-edno-myasto',
-    thumbnail: 'https://i.newsroom.bg/uploads/photo_assets/2024/2024-05-23/b_Sn-2-392e5662cc.jpg', 
-    snippet: '„Пътуването с влак може да бъде наистина много приятно и много красиво“, казва Тихомир Гърменлиев, дванадесетокласник в ТУЕС и създател на приложението BulTrain',
-    source: 'Economy.bg'
+    thumbnail: 'https://i.newsroom.bg/uploads/photo_assets/2024/2024-05-23/b_Sn-2-392e5662cc.jpg',
   },
   {
     id: 'article-5',
-    title: 'Ученик създава приложение, следящо маршрути и разписания на българските влакове',
     url: 'https://www.bloombergtv.bg/a/16-biznes-start/131545-uchenik-sazdava-prilozhenie-sledyashto-marshruti-i-razpisaniya-na-balgarskite-vlakove',
     thumbnail: '',
-    snippet: 'Тихомир Гърменлиев, създател на приложението BulTrain, в "Бизнес старт" 14.06.2024 г.',
-    source: 'Bloomberg TV'
-  }
+  },
 ];
 // ============================================================================
 
@@ -54,7 +43,9 @@ const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1620023419356-9a5d15a5
 function ArticleCard({ article, index }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
-  
+  const { t } = useLanguage()
+  const copy = t.media.articles[article.id]
+
   const [thumbnailUrl, setThumbnailUrl] = useState(article.thumbnail || '')
   const [isLoadingImage, setIsLoadingImage] = useState(!article.thumbnail && !!article.url && article.url !== '#')
   const [imageError, setImageError] = useState(false);
@@ -125,7 +116,7 @@ function ArticleCard({ article, index }) {
         ) : (
           <motion.img
             src={imageError ? FALLBACK_IMAGE : (thumbnailUrl || FALLBACK_IMAGE)}
-            alt={article.title}
+            alt={copy.title}
             onError={() => setImageError(true)}
             style={{
               width: '100%',
@@ -156,7 +147,7 @@ function ArticleCard({ article, index }) {
           marginBottom: '10px',
           display: 'block'
         }}>
-          {article.source}
+          {copy.source}
         </span>
         
         <h3 style={{
@@ -167,7 +158,7 @@ function ArticleCard({ article, index }) {
           marginBottom: '12px',
           letterSpacing: '-0.01em'
         }}>
-          {article.title}
+          {copy.title}
         </h3>
         
         <p style={{
@@ -178,7 +169,7 @@ function ArticleCard({ article, index }) {
           marginBottom: '20px',
           flexGrow: 1
         }}>
-          {article.snippet}
+          {copy.snippet}
         </p>
 
         <div style={{
@@ -190,7 +181,7 @@ function ArticleCard({ article, index }) {
           gap: '6px',
           marginTop: 'auto'
         }} className="read-more">
-          Прочети повече
+          {t.common.readMore}
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 12h14"></path>
             <path d="m12 5 7 7-7 7"></path>
@@ -204,6 +195,7 @@ function ArticleCard({ article, index }) {
 export default function MediaCoverage() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const { t } = useLanguage()
 
   return (
     <section id="media-coverage" className="section" style={{ position: 'relative', zIndex: 1 }}>
@@ -220,13 +212,13 @@ export default function MediaCoverage() {
           transition={{ duration: 0.6 }}
         >
           <span className="tag" style={{ marginBottom: 20, display: 'inline-flex' }}>
-            Медиите за BulTrain
+            {t.media.tag}
           </span>
           <h2 className="section-heading" style={{ marginBottom: 16 }}>
-            Какво казват <span className="gradient-text">другите?</span>
+            {t.media.headingLine1} <span className="gradient-text">{t.media.headingAccent}</span>
           </h2>
           <p className="section-subheading">
-            Когато иновацията стъпи на релси, хората забелязват. Вижте отзвука за BulTrain в медийното пространство и защо технологичната общност заговори за бъдещето на пътуването.
+            {t.media.subheading}
           </p>
         </motion.div>
 

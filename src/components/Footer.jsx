@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
+import { useLanguage } from '../i18n/LanguageContext'
 
 export default function Footer() {
   const year = new Date().getFullYear()
+  const { t } = useLanguage()
 
   return (
     <footer style={{
@@ -35,10 +37,10 @@ export default function Footer() {
           {/* Links */}
           <div style={{ display: 'flex', gap: 32, alignItems: 'center', flexWrap: 'wrap' }}>
             {[
-              { id: 'link-privacy', href: '/privacy', label: 'Политика за поверителност', isRouterLink: true },
-              { id: 'link-privacy-app', href: '/privacy-app', label: 'Политика за поверителност на приложението', isRouterLink: true },
-              { id: 'link-terms', href: '/terms', label: 'Условия за ползване', isRouterLink: true },
-              { id: 'link-contact', href: '/contact', label: 'Контакти', isRouterLink: true },
+              { id: 'link-privacy', href: '/privacy', label: t.footer.privacy, isRouterLink: true },
+              { id: 'link-privacy-app', href: '/privacy-app', label: t.footer.privacyApp, isRouterLink: true },
+              { id: 'link-terms', href: '/terms', label: t.footer.terms, isRouterLink: true },
+              { id: 'link-contact', href: '/contact', label: t.footer.contact, isRouterLink: true },
             ].map(link => {
               const linkProps = {
                 key: link.id,
@@ -85,7 +87,7 @@ export default function Footer() {
           textAlign: 'center',
           lineHeight: 1.6,
         }}>
-          BulTrain е независим проект и не е свързан с, нито е официално одобрен от БДЖ (Български държавни железници).
+          {t.footer.disclaimer}
         </p>
       </div>
     </footer>

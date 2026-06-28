@@ -1,46 +1,22 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Train, Bell, Server, Moon } from 'lucide-react'
+import { useLanguage } from '../i18n/LanguageContext'
 
-const cards = [
-  {
-    id: 'smart-alarms',
-    title: 'Умни аларми по локация',
-    description: 'Избери маршрут, запази пътуване и BulTrain ще ти изпрати известие преди да пристигнеш. Вече няма нужда да следиш всяка гара, просто можеш да се насладиш на пътуването, а за останалото ще ти помогне приложението.',
-    icon: Bell,
-    size: 'large',
-    accent: true,
-    gridArea: 'alarm',
-  },
-  {
-    id: 'live-boards',
-    title: 'Електронни Табла на живо',
-    description: 'Заминаващи и пристигащи влакове в реално време от всяка гара в България с информация за закъснения — като истинско табло, но в джоба ти.',
-    icon: Server,
-    size: 'medium',
-    gridArea: 'live',
-  },
-  {
-    id: 'offline-schedules',
-    title: 'Пълно разписание офлайн',
-    description: 'Достъп до разписанието без връзка с интернет за твоето запазено пътуване. Запази веднъж и пътувай спокойно.',
-    icon: Train,
-    size: 'medium',
-    gridArea: 'offline',
-  },
-  {
-    id: 'dark-mode',
-    title: 'Удобен тъмен режим',
-    description: 'Красиво проектиран за нощни пътувания. Всеки детайл е оптимизиран за комфорт при слаба светлина. Всичко е направено така, че да ти е удобно.',
-    icon: Moon,
-    size: 'small',
-    gridArea: 'dark',
-  },
+// Layout / visual config — copy lives in the translation dictionary,
+// keyed by `tKey` under features.cards.
+const cardConfig = [
+  { id: 'smart-alarms', tKey: 'smartAlarms', icon: Bell, size: 'large', accent: true, gridArea: 'alarm' },
+  { id: 'live-boards', tKey: 'liveBoards', icon: Server, size: 'medium', gridArea: 'live' },
+  { id: 'offline-schedules', tKey: 'offlineSchedules', icon: Train, size: 'medium', gridArea: 'offline' },
+  { id: 'dark-mode', tKey: 'darkMode', icon: Moon, size: 'small', gridArea: 'dark' },
 ]
 
 function BentoCard({ card, index }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const { t } = useLanguage()
+  const copy = t.features.cards[card.tKey]
 
   const Icon = card.icon
 
@@ -79,7 +55,7 @@ function BentoCard({ card, index }) {
         marginBottom: '10px',
         lineHeight: 1.2,
       }}>
-        {card.title}
+        {copy.title}
       </h3>
 
       <p style={{
@@ -88,7 +64,7 @@ function BentoCard({ card, index }) {
         color: 'var(--color-text-secondary)',
         margin: 0,
       }}>
-        {card.description}
+        {copy.description}
       </p>
 
       {card.accent && (
@@ -123,6 +99,7 @@ function BentoCard({ card, index }) {
 export default function Features() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const { t } = useLanguage()
 
   return (
     <section id="features" className="section">
@@ -137,14 +114,14 @@ export default function Features() {
           transition={{ duration: 0.6 }}
         >
           <span className="tag" style={{ marginBottom: 20, display: 'inline-flex' }}>
-            Функции
+            {t.features.tag}
           </span>
           <h2 className="section-heading" style={{ marginBottom: 16 }}>
-            Всичко, от което се нуждаеш при пътуване<br />
-            <span className="gradient-text">по релси.</span>
+            {t.features.headingLine1}<br />
+            <span className="gradient-text">{t.features.headingAccent}</span>
           </h2>
           <p className="section-subheading">
-            BulTrain обединява всички инструменти, от които се нуждае всеки пътуващ с влак в България — в едно красиво приложение.
+            {t.features.subheading}
           </p>
         </motion.div>
 
@@ -161,7 +138,7 @@ export default function Features() {
           }}
           className="bento-grid"
         >
-          {cards.map((card, i) => (
+          {cardConfig.map((card, i) => (
             <BentoCard key={card.id} card={card} index={i} />
           ))}
         </div>

@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export default function PrivacyApp() {
+  const { t } = useLanguage();
+
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -14,7 +17,7 @@ export default function PrivacyApp() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} style={{ position: 'relative', zIndex: 1, maxWidth: '800px', margin: '0 auto' }}>
         <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--color-text-secondary)', textDecoration: 'none', marginBottom: '40px', fontWeight: '500' }}>
           <ArrowLeft size={18} />
-          Назад към началната страница
+          {t.common.backHome}
         </Link>
         
         <h1 className="section-heading" style={{ marginBottom: '10px' }}>BulTrain App Privacy Policy</h1>

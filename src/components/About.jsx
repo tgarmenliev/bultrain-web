@@ -1,62 +1,24 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { GraduationCap, Trophy, Heart, Star, Award, Book, User, Globe, Sparkles } from 'lucide-react'
+import { useLanguage } from '../i18n/LanguageContext'
 
-const achievements = [
-  {
-    id: 'tues',
-    icon: GraduationCap,
-    label: 'Завършил ТУЕС',
-    detail: 'Технологично училище "Електронни системи"',
-    color: '#3b82f6',
-  },
-  {
-    id: 'tu',
-    icon: Book,
-    label: 'Студент в Технически университет - София',
-    detail: 'Факултет по приложна математика и информатика',
-    color: '#3bf641ff',
-  },
-  {
-    id: 'hacktues',
-    icon: Trophy,
-    label: 'Победител в HackTUES 10',
-    detail: 'Най-големият ученически хакатон на Балканите',
-    color: '#f59e0b',
-  },
-  {
-    id: 'teenovator',
-    icon: Heart,
-    label: 'Доброволец на Тийноватор',
-    detail: 'Инициатива, която дава първи стъпки в предприемачеството на ученици',
-    color: '#ec4899',
-  },
-  {
-    id: '20under20',
-    icon: Star,
-    label: '"20 под 20" випуск 2025',
-    detail: 'Съвместна инициатива на "Капитал" и Младежкия съвет към американския посланик',
-    color: '#8b5cf6',
-  },
-  {
-    id: 'bait',
-    icon: Award,
-    label: 'Номинация за наградите на БАИТ',
-    detail: 'За BulTrain в категория "Младежки награди"',
-    color: '#0A84FF',
-  },
-  {
-    id: 'softuniada',
-    icon: Sparkles,
-    label: 'Първо място в Софтуниада 2024',
-    detail: 'Категория Софтуерни проекти (старша възраст) с BulTrain',
-    color: '#f59f0ba9',
-  }
+// id/icon/color are structural; label + detail are localized under
+// about.achievements, keyed by id.
+const achievementConfig = [
+  { id: 'tues', icon: GraduationCap, color: '#3b82f6' },
+  { id: 'tu', icon: Book, color: '#3bf641ff' },
+  { id: 'hacktues', icon: Trophy, color: '#f59e0b' },
+  { id: 'teenovator', icon: Heart, color: '#ec4899' },
+  { id: '20under20', icon: Star, color: '#8b5cf6' },
+  { id: 'bait', icon: Award, color: '#0A84FF' },
+  { id: 'softuniada', icon: Sparkles, color: '#f59f0ba9' },
 ]
 
 export default function About() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const { t } = useLanguage()
 
   return (
     <section id="about" className="section">
@@ -113,7 +75,7 @@ export default function About() {
                 {/* Try to load the creator photo first */}
                 <img
                   src="/assets/creator-photo.jpg"
-                  alt="BulTrain creator"
+                  alt={t.about.name}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
                 />
@@ -167,12 +129,12 @@ export default function About() {
             transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             <span className="tag" style={{ marginBottom: 24, display: 'inline-flex' }}>
-              Зад проекта
+              {t.about.tag}
             </span>
 
             <h2 className="section-heading" style={{ marginBottom: 8 }}>
-              Направено от<br />
-              <span className="gradient-text">студент. За всички.</span>
+              {t.about.headingLine1}<br />
+              <span className="gradient-text">{t.about.headingAccent}</span>
             </h2>
 
             <p style={{
@@ -182,7 +144,7 @@ export default function About() {
               marginBottom: 16,
               marginTop: 24,
             }}>
-              Тихомир Гърменлиев
+              {t.about.name}
             </p>
 
             <p style={{
@@ -191,26 +153,27 @@ export default function About() {
               color: 'var(--color-text-secondary)',
               marginBottom: 32,
             }}>
-              BulTrain не е просто поредното приложение, а лична мисия за модернизиране на железопътния транспорт в България. Проектът започна като смела идея и прерасна в цялостна екосистема – от мобилно приложение до собственоръчно разработен хардуерен e-ink дисплей за гарите. Всичко това, създадено с една цел: по-добро изживяване за всеки пътуващ.
+              {t.about.bio}
             </p>
 
             {/* Achievements */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-              {achievements.map((a, i) => {
+              {achievementConfig.map((a, i) => {
                 const Icon = a.icon
+                const copy = t.about.achievements[a.id]
                 return (
                   <motion.div
                     key={a.id}
                     id={`achievement-${a.id}`}
                     className="achievement-pill"
-                    title={a.detail}
+                    title={copy.detail}
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
                     whileHover={{ scale: 1.05 }}
                   >
                     <Icon size={13} style={{ color: a.color, flexShrink: 0 }} />
-                    <span>{a.label}</span>
+                    <span>{copy.label}</span>
                   </motion.div>
                 )
               })}

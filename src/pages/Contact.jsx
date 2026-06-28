@@ -1,33 +1,28 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Mail, MessageSquare, User, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export default function Contact() {
+  const { t } = useLanguage();
+
   const contactMethods = [
     {
       id: 'contact-email',
       icon: <Mail size={24} />,
-      label: 'Имейл',
+      label: t.contact.methods.email.label,
       value: 'bultrain.app@gmail.com',
       href: 'mailto:bultrain.app@gmail.com',
-      description: 'За въпроси, предложения и техническа поддръжка.'
+      description: t.contact.methods.email.description
     },
     {
       id: 'contact-linkedin',
       icon: <User size={24} />,
-      label: 'LinkedIn',
+      label: t.contact.methods.linkedin.label,
       value: 'Tihomir Garmenliev',
       href: 'https://www.linkedin.com/in/tgarmenliev/',
-      description: 'Професионална мрежа и бизнес контакти.'
+      description: t.contact.methods.linkedin.description
     }
-    // {
-    //   id: 'contact-facebook',
-    //   icon: <Globe size={24} />,
-    //   label: 'Facebook',
-    //   value: 'BulTrain Спътник',
-    //   href: 'https://www.facebook.com/bultrain.app',
-    //   description: 'Последвайте ни за последните новини и ъпдейти.'
-    // }
   ];
 
   return (
@@ -43,12 +38,12 @@ export default function Contact() {
       >
         <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--color-text-secondary)', textDecoration: 'none', marginBottom: '40px', fontWeight: '500', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = 'var(--color-text-primary)'} onMouseLeave={e => e.target.style.color = 'var(--color-text-secondary)'}>
           <ArrowLeft size={18} />
-          Назад към началната страница
+          {t.common.backHome}
         </Link>
-        
-        <h1 className="section-heading" style={{ marginBottom: '16px' }}>Свържете се с нас</h1>
+
+        <h1 className="section-heading" style={{ marginBottom: '16px' }}>{t.contact.heading}</h1>
         <p className="section-subheading" style={{ marginBottom: '60px', maxWidth: '600px' }}>
-          Имате въпрос или просто искате да ни поздравите? Изберете най-удобния за Вас начин за връзка с екипа на BulTrain.
+          {t.contact.subheading}
         </p>
 
         <div style={{ 
@@ -99,9 +94,9 @@ export default function Contact() {
 
         <div className="glass-card" style={{ padding: '40px', textAlign: 'center' }}>
           <MessageSquare size={32} style={{ color: 'var(--color-accent)', marginBottom: '20px' }} />
-          <h2 style={{ color: 'var(--color-text-primary)', fontSize: '24px', fontWeight: 800, marginBottom: '12px' }}>Очакваме Ви!</h2>
+          <h2 style={{ color: 'var(--color-text-primary)', fontSize: '24px', fontWeight: 800, marginBottom: '12px' }}>{t.contact.ctaTitle}</h2>
           <p style={{ color: 'var(--color-text-secondary)', fontSize: '16px', maxWidth: '500px', margin: '0 auto' }}>
-            Ние ценим всяка обратна връзка. Вашите мнения ни помагат да направим BulTrain още по-добър за всички пътуващи в България.
+            {t.contact.ctaText}
           </p>
         </div>
       </motion.div>

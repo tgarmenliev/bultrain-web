@@ -1,18 +1,21 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
-
-const navLinks = [
-  { id: 'nav-features', href: '#features', label: 'Функции' },
-  { id: 'nav-screenshots', href: '#screenshots', label: 'Галерия' },
-  { id: 'nav-about', href: '#about', label: 'Зад проекта' },
-  { id: 'nav-support', href: '#support', label: 'Подкрепа' },
-]
+import { useLanguage } from '../i18n/LanguageContext'
+import LanguageSwitcher from './LanguageSwitcher'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const { scrollY } = useScroll()
+  const { t } = useLanguage()
+
+  const navLinks = [
+    { id: 'nav-features', href: '#features', label: t.nav.features },
+    { id: 'nav-screenshots', href: '#screenshots', label: t.nav.gallery },
+    { id: 'nav-about', href: '#about', label: t.nav.about },
+    { id: 'nav-support', href: '#support', label: t.nav.support },
+  ]
 
   useEffect(() => {
     return scrollY.on('change', (y) => setScrolled(y > 40))
@@ -96,15 +99,17 @@ export default function Navbar() {
 
           {/* CTA */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <LanguageSwitcher />
+
             <a
               id="nav-cta"
               href="https://apps.apple.com/bg/app/bultrain-train-schedules-bg/id6759790703"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary"
+              className="btn btn-primary nav-cta-btn"
               style={{ fontSize: 13, padding: '10px 20px' }}
             >
-              Свали безплатно
+              {t.nav.cta}
             </a>
 
             {/* Mobile menu toggle */}
@@ -171,6 +176,7 @@ export default function Navbar() {
         @media (max-width: 768px) {
           .nav-links { display: none !important; }
           .mobile-toggle { display: flex !important; }
+          .nav-cta-btn { display: none !important; }
         }
       `}</style>
     </motion.header>
