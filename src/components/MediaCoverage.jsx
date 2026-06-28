@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
 
 // ============================================================================
@@ -11,18 +11,18 @@ import { useLanguage } from '../i18n/LanguageContext'
 export const mediaArticles = [
   {
     id: 'article-1',
-    url: 'http://capital.bg/politika_i_ikonomika/obrazovanie/2026/01/27/4876961_talantite_ot_20_pod_20_programistut_tihomir_gurmenliev/',
-    thumbnail: '',
+    url: 'https://bnrnews.bg/horizont/post/492979/tihomir-garmenliev-i-bultrain-za-po-informiran-zhelezopaten-transport',
+    thumbnail: 'https://bnrnews.bg/api/media/d1913cc6-690b-473a-9a2d-0b538cdc80e7?Size=large',
   },
   {
     id: 'article-2',
-    url: 'https://www.dnevnik.bg/duma_na_sedmitsa/2026/04/01/4898677_kak_se_putuva_umno_s_bdj_tihomir_gurmenliev_v_podkasta/?ref=rss',
-    thumbnail: '',
+    url: 'http://capital.bg/politika_i_ikonomika/obrazovanie/2026/01/27/4876961_talantite_ot_20_pod_20_programistut_tihomir_gurmenliev/',
+    thumbnail: 'https://img.capital.bg/shimg/zx1200y630captrw_4877072.jpg',
   },
   {
     id: 'article-3',
-    url: 'https://nixanbal.com/mlad-student-izprevari-bdzh-i-sazdade-udobno-i-funktsionalno-prilozhenie-za-razpisanie-na-balgarskata-zheleznitsa#:~:text=%D0%9C%D0%BB%D0%B0%D0%B4%D0%B8%D1%8F%D1%82%20%D1%81%D1%82%D1%83%D0%B4%D0%B5%D0%BD%D1%82%20%D0%B8%20%D1%84%D0%B8%D0%BD%D0%B0%D0%BD%D1%81%D0%B8%D1%81%D1%82%20%D0%A2%D0%B8%D1%85%D0%BE%D0%BC%D0%B8%D1%80,%D0%B4%D1%8A%D1%80%D0%B6%D0%B0%D0%B2%D0%BD%D0%B0%D1%82%D0%B0%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F%20%D0%BE%D1%82%D0%BB%D0%B0%D0%B3%D0%B0%20%D1%81%20%D0%B3%D0%BE%D0%B4%D0%B8%D0%BD%D0%B8.',
-    thumbnail: '',
+    url: 'https://www.dnevnik.bg/duma_na_sedmitsa/2026/04/01/4898677_kak_se_putuva_umno_s_bdj_tihomir_gurmenliev_v_podkasta/?ref=rss',
+    thumbnail: 'https://img.dnevnik.bg/shimg/zx1200y630d_4898674.jpg',
   },
   {
     id: 'article-4',
@@ -32,53 +32,32 @@ export const mediaArticles = [
   {
     id: 'article-5',
     url: 'https://www.bloombergtv.bg/a/16-biznes-start/131545-uchenik-sazdava-prilozhenie-sledyashto-marshruti-i-razpisaniya-na-balgarskite-vlakove',
-    thumbnail: '',
+    thumbnail: 'https://www.bloombergtv.bg/media/files/resized/article/1280x720/f58/85d6bff41e593bdcedc9c7c470f4ff58-bdz-plan-reforma-1-3276-760x0-541-1140x0.jpg',
   },
 ];
 // ============================================================================
 
 const SKELETON_BG = 'linear-gradient(90deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%)';
-const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1620023419356-9a5d15a51ebd?w=800&q=80&auto=format&fit=crop'; // A neat abstract dark blue premium texture
+const FALLBACK_IMAGE =
+  'data:image/svg+xml;charset=UTF-8,' +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0b1a2b"/><stop offset="50%" stop-color="#133454"/><stop offset="100%" stop-color="#0a84ff"/></linearGradient></defs><rect width="1200" height="675" fill="url(#g)"/><circle cx="950" cy="120" r="220" fill="rgba(255,255,255,0.08)"/><circle cx="180" cy="560" r="260" fill="rgba(255,255,255,0.06)"/></svg>'
+  );
+
+const DEFAULT_ARTICLE_COPY = {
+  title: 'BulTrain media coverage',
+  snippet: 'Read the latest media coverage about BulTrain.',
+  source: 'BulTrain',
+};
 
 function ArticleCard({ article, index }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
   const { t } = useLanguage()
-  const copy = t.media.articles[article.id]
+  const copy = t?.media?.articles?.[article.id] || DEFAULT_ARTICLE_COPY
 
-  const [thumbnailUrl, setThumbnailUrl] = useState(article.thumbnail || '')
-  const [isLoadingImage, setIsLoadingImage] = useState(!article.thumbnail && !!article.url && article.url !== '#')
+  const thumbnailUrl = article.thumbnail || FALLBACK_IMAGE
   const [imageError, setImageError] = useState(false);
-
-  useEffect(() => {
-    if (article.thumbnail || !article.url || article.url === '#') {
-      return;
-    }
-
-    const fetchThumbnail = async () => {
-      try {
-        // opengraph.io proxy bypasses strict bot protections on sites like capital.bg
-        const proxyUrl = `https://opengraph.io/api/1.1/site/${encodeURIComponent(article.url)}?app_id=58858c7bcf07b61e64257391`;
-        const response = await fetch(proxyUrl);
-        const data = await response.json();
-        
-        // Extract the best available image from the proxy response
-        const imageUrl = data.hybridGraph?.image || data.openGraph?.image?.url || data.htmlInferred?.image;
-        if (imageUrl) {
-          setThumbnailUrl(imageUrl);
-        } else {
-          setThumbnailUrl(FALLBACK_IMAGE);
-        }
-      } catch (error) {
-        console.error("Failed to fetch thumbnail for", article.url, error);
-        setThumbnailUrl(FALLBACK_IMAGE);
-      } finally {
-        setIsLoadingImage(false);
-      }
-    };
-
-    fetchThumbnail();
-  }, [article.url, article.thumbnail]);
 
   return (
     <motion.a
@@ -107,26 +86,18 @@ function ArticleCard({ article, index }) {
     >
       {/* Thumbnail Container with Overflow Hidden */}
       <div style={{ width: '100%', height: '220px', overflow: 'hidden', position: 'relative', backgroundColor: 'var(--color-bg-elevated)' }}>
-        {isLoadingImage ? (
-          <motion.div
-            style={{ width: '100%', height: '100%', background: SKELETON_BG, backgroundSize: '200% 100%' }}
-            animate={{ backgroundPosition: ['100% 0%', '-100% 0%'] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
-          />
-        ) : (
-          <motion.img
-            src={imageError ? FALLBACK_IMAGE : (thumbnailUrl || FALLBACK_IMAGE)}
-            alt={copy.title}
-            onError={() => setImageError(true)}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              transition: 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-            }}
-            className="media-image"
-          />
-        )}
+        <motion.img
+          src={imageError ? FALLBACK_IMAGE : thumbnailUrl}
+          alt={copy.title}
+          onError={() => setImageError(true)}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            transition: 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+          }}
+          className="media-image"
+        />
         <div style={{
            position: 'absolute',
            bottom: 0,

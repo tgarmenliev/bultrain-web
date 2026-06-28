@@ -109,24 +109,24 @@ export const translations = {
       articles: {
         'article-1': {
           title:
+            'Тихомир Гърменлиев и BulTrain - за по-информиран железопътен транспорт',
+          snippet:
+            '20-годишният Тихомир Гърменлиев е амбициозен програмист. До момента има две разработени платформи зад гърба си - онлайн пътеводителя BullTrain - приложение, посветено на влаковете, което си поставя за цел по-качествено информиране на пътуващия...',
+          source: 'Българско национално радио',
+        },
+        'article-2': {
+          title:
             'Програмистът Тихомир Гърменлиев, който иска да решава проблеми на градската среда',
           snippet:
             'Едва на 20 години, Тихомир вече има две платформи зад гърба си - с едната улеснява пътуването с влак из България, а с другата картографира опасните пешеходни участъци в столицата',
           source: 'Капитал',
         },
-        'article-2': {
+        'article-3': {
           title:
             '"Как се пътува умно с БДЖ": Тихомир Гърменлиев в подкаста "Дума на седмицата"',
           snippet:
             'В специалната рубрика на подкаста "Дума на седмицата" с Ива Дойчинова, гостува 20-годишният Тихомир Гърменлиев, създател на BulTrain, мобилно приложение, което улеснява значително пътуването с влак из България',
           source: 'Дневник',
-        },
-        'article-3': {
-          title:
-            'Студент изпревари БДЖ и създаде удобно приложение на българската железница',
-          snippet:
-            'Младият студент и финансист Тихомир Гърменлиев обяви своето доста полезно приложение BulTrain, което позволява следенето на разписанията и влаковете на БДЖ в реално време - нещо, което държавната компания отлага с години.',
-          source: 'nixanbal',
         },
         'article-4': {
           title:
@@ -402,24 +402,24 @@ export const translations = {
       articles: {
         'article-1': {
           title:
+            'Tihomir Garmenliev and BulTrain — for a more informed railway transport',
+          snippet:
+            'The 20-year-old Tihomir Garmenliev is an ambitious programmer. So far, he has two developed platforms behind him — the online guide BullTrain, an app dedicated to trains, which aims to provide better information for travellers...',
+          source: 'Bulgarian National Radio',
+        },
+        'article-2': {
+          title:
             'Developer Tihomir Garmenliev, on a mission to fix the problems of the urban environment',
           snippet:
             'At just 20, Tihomir already has two platforms behind him — one makes rail travel across Bulgaria easier, the other maps out the most dangerous pedestrian crossings in the capital.',
           source: 'Capital',
         },
-        'article-2': {
+        'article-3': {
           title:
             '“Travelling smart with BDZ”: Tihomir Garmenliev on the “Word of the Week” podcast',
           snippet:
             'In a special segment of the “Word of the Week” podcast with Iva Doychinova, 20-year-old Tihomir Garmenliev — creator of BulTrain — joins to discuss the app that dramatically simplifies rail travel across Bulgaria.',
           source: 'Dnevnik',
-        },
-        'article-3': {
-          title:
-            'Student outpaces BDZ and builds a convenient app for the Bulgarian railways',
-          snippet:
-            'Young student and finance enthusiast Tihomir Garmenliev has launched his remarkably useful app BulTrain, which lets you track BDZ timetables and trains in real time — something the state company has delayed for years.',
-          source: 'nixanbal',
         },
         'article-4': {
           title:
