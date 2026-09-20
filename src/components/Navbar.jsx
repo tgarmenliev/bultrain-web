@@ -12,6 +12,8 @@ export default function Navbar() {
 
   const navLinks = [
     { id: 'nav-features', href: '#features', label: t.nav.features },
+    { id: 'nav-whats-new', href: '#whats-new', label: t.nav.whatsNew },
+    { id: 'nav-media', href: '#media-coverage', label: t.nav.media },
     { id: 'nav-screenshots', href: '#screenshots', label: t.nav.gallery },
     { id: 'nav-about', href: '#about', label: t.nav.about },
     { id: 'nav-support', href: '#support', label: t.nav.support },
@@ -46,9 +48,9 @@ export default function Navbar() {
             href="#"
             style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}
           >
-            <img 
-              src="/favicon.svg" 
-              alt="BulTrain Logo" 
+            <img
+              src="/favicon.svg"
+              alt="BulTrain Logo"
               style={{
                 width: 36,
                 height: 36,
@@ -173,7 +175,7 @@ export default function Navbar() {
       </div>
 
       <style>{`
-        @media (max-width: 768px) {
+        @media (max-width: 1000px) {
           .nav-links { display: none !important; }
           .mobile-toggle { display: flex !important; }
           .nav-cta-btn { display: none !important; }

@@ -3,11 +3,13 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Features from './components/Features'
+import WhatsNew from './components/WhatsNew'
 import MediaCoverage from './components/MediaCoverage'
 import Screenshots from './components/Screenshots'
 import About from './components/About'
 import Support from './components/Support'
 import Footer from './components/Footer'
+import ScrollProgress from './components/ScrollProgress'
 import Privacy from './pages/Privacy'
 import PrivacyApp from './pages/PrivacyApp'
 import Terms from './pages/Terms'
@@ -20,6 +22,7 @@ function Home() {
       <main>
         <Hero />
         <Features />
+        <WhatsNew />
         <MediaCoverage />
         <Screenshots />
         <About />
@@ -42,6 +45,7 @@ function ScrollToTop() {
 export default function App() {
   return (
     <div style={{ position: 'relative' }}>
+      <ScrollProgress />
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />

@@ -12,6 +12,8 @@ export const translations = {
   bg: {
     nav: {
       features: 'Функции',
+      whatsNew: 'Ново',
+      media: 'Отзвук',
       gallery: 'Галерия',
       about: 'Зад проекта',
       support: 'Подкрепа',
@@ -100,6 +102,60 @@ export const translations = {
       },
     },
 
+    whatsNew: {
+      tag: 'Какво ново',
+      headingLine1: 'Влакът ти живее',
+      headingAccent: 'на заключения екран.',
+      subheading:
+        'Live Activity показва закъснението, прогреса и часа на пристигане в реално време. Без отключване, без отваряне на приложението.',
+      features: [
+        {
+          title: 'Live Activity на заключения екран',
+          description:
+            'Закъснението, лентата с прогреса и времето за пристигане се обновяват сами, докато ти гледаш през прозореца.',
+        },
+        {
+          title: 'Известия само когато има значение',
+          description:
+            'Получавай известия в реално време, когато влакът ти закъснява и когато навакса.',
+        },
+        {
+          title: 'Закъснението — още в търсенето',
+          description:
+            'Виждаш веднага дали влакът закъснява, директно в резултатите от разписанието. Без допълнителни стъпки.',
+        },
+      ],
+      availability: {
+        ios: 'iOS',
+        iosStatus: 'Налично сега',
+        androidSoon: 'Скоро налично и за Android',
+      },
+      cta: 'Свали за iOS',
+      honesty: {
+        label: 'Честни данни',
+        title: 'Само реални данни.',
+        text: 'Закъснението идва от официалния публичен поток на Министерството на транспорта. Ако той не е наличен, виждаш ясно обозначен час по разписание — а не измислено число.',
+      },
+      alarm: {
+        label: 'Отделна система',
+        title: 'Алармата остава офлайн.',
+        text: 'Алармата за пристигане работи само по GPS. Местоположението ти не напуска телефона.',
+        chips: ['GPS', 'Работи без интернет'],
+      },
+      mock: {
+        date: 'събота, 19 септември',
+        time: '18:31',
+        train: 'БВ 2611',
+        from: 'София',
+        to: 'Пловдив',
+        late: '+8 мин',
+        lateLabel: 'закъснение',
+        arrives: 'Пристига в',
+        arrivesAt: '19:14',
+        arrivesIn: 'след 43 мин',
+      },
+    },
+
     media: {
       tag: 'Медиите за BulTrain',
       headingLine1: 'Какво казват',
@@ -107,14 +163,21 @@ export const translations = {
       subheading:
         'Когато иновацията стъпи на релси, хората забелязват. Вижте отзвука за BulTrain в медийното пространство и защо технологичната общност заговори за бъдещето на пътуването.',
       articles: {
-        'article-1': {
+        'article-6': {
+          title:
+            'Целта ми винаги е била да реша свой или чужд проблем с помощта на технологиите',
+          snippet:
+            'След успеха на BulTrain и финала на европейското състезание за млади иноватори в Дъблин студентът от Техническия университет в София Тихомир Гърменлиев разказва как превръща ежедневните проблеми в технологични решения',
+          source: 'Economy.bg',
+        },
+        'article-5': {
           title:
             'Тихомир Гърменлиев и BulTrain - за по-информиран железопътен транспорт',
           snippet:
             '20-годишният Тихомир Гърменлиев е амбициозен програмист. До момента има две разработени платформи зад гърба си - онлайн пътеводителя BullTrain - приложение, посветено на влаковете, което си поставя за цел по-качествено информиране на пътуващия...',
           source: 'Българско национално радио',
         },
-        'article-2': {
+        'article-4': {
           title:
             'Програмистът Тихомир Гърменлиев, който иска да решава проблеми на градската среда',
           snippet:
@@ -128,14 +191,14 @@ export const translations = {
             'В специалната рубрика на подкаста "Дума на седмицата" с Ива Дойчинова, гостува 20-годишният Тихомир Гърменлиев, създател на BulTrain, мобилно приложение, което улеснява значително пътуването с влак из България',
           source: 'Дневник',
         },
-        'article-4': {
+        'article-2': {
           title:
             'Мобилно приложение предлага всичко за пътуването с влак у нас на едно място',
           snippet:
             '„Пътуването с влак може да бъде наистина много приятно и много красиво“, казва Тихомир Гърменлиев, дванадесетокласник в ТУЕС и създател на приложението BulTrain',
           source: 'Economy.bg',
         },
-        'article-5': {
+        'article-1': {
           title:
             'Ученик създава приложение, следящо маршрути и разписания на българските влакове',
           snippet:
@@ -305,6 +368,8 @@ export const translations = {
   en: {
     nav: {
       features: 'Features',
+      whatsNew: 'What’s new',
+      media: 'Coverage',
       gallery: 'Gallery',
       about: 'The Story',
       support: 'Support',
@@ -393,6 +458,60 @@ export const translations = {
       },
     },
 
+    whatsNew: {
+      tag: 'What’s new',
+      headingLine1: 'Your train lives',
+      headingAccent: 'on your lock screen.',
+      subheading:
+        'Live Activity shows your delay, trip progress and arrival time in real time. No unlocking, no opening the app.',
+      features: [
+        {
+          title: 'Live Activity on your lock screen',
+          description:
+            'The delay, progress bar and arrival time update on their own while you watch the world go by.',
+        },
+        {
+          title: 'Alerts only when it matters',
+          description:
+            'Get real-time alerts when your train runs late, and when it makes up time.',
+        },
+        {
+          title: 'Delays right in search',
+          description:
+            'See at a glance whether a train is running late, straight in the timetable results. No extra taps.',
+        },
+      ],
+      availability: {
+        ios: 'iOS',
+        iosStatus: 'Available now',
+        androidSoon: 'Coming soon to Android',
+      },
+      cta: 'Download for iOS',
+      honesty: {
+        label: 'Honest data',
+        title: 'Real data only.',
+        text: 'Delays come straight from the official public feed of the Ministry of Transport. If it’s unavailable, you’ll see a clearly labelled scheduled time, never a made-up number.',
+      },
+      alarm: {
+        label: 'Separate system',
+        title: 'The alarm stays offline.',
+        text: 'The arrival alarm runs on GPS alone. Your location never leaves your phone.',
+        chips: ['GPS', 'Works offline'],
+      },
+      mock: {
+        date: 'Saturday, 19 September',
+        time: '18:31',
+        train: 'БВ 2611',
+        from: 'Sofia',
+        to: 'Plovdiv',
+        late: '+8 min',
+        lateLabel: 'late',
+        arrives: 'Arrives at',
+        arrivesAt: '19:14',
+        arrivesIn: 'in 43 min',
+      },
+    },
+
     media: {
       tag: 'BulTrain in the press',
       headingLine1: 'What others are',
@@ -400,14 +519,21 @@ export const translations = {
       subheading:
         'When innovation hits the rails, people notice. See how BulTrain is making headlines and why the tech community is talking about the future of travel.',
       articles: {
-        'article-1': {
+        'article-6': {
+          title:
+            'My goal has always been to solve my own or someone else’s problem with technology',
+          snippet:
+            'After the success of BulTrain and the final of the European competition for young innovators in Dublin, Tihomir Garmenliev, a student at the Technical University of Sofia, talks about how he turns everyday problems into technological solutions',
+          source: 'Economy.bg',
+        },
+        'article-5': {
           title:
             'Tihomir Garmenliev and BulTrain — for a more informed railway transport',
           snippet:
             'The 20-year-old Tihomir Garmenliev is an ambitious programmer. So far, he has two developed platforms behind him — the online guide BullTrain, an app dedicated to trains, which aims to provide better information for travellers...',
           source: 'Bulgarian National Radio',
         },
-        'article-2': {
+        'article-4': {
           title:
             'Developer Tihomir Garmenliev, on a mission to fix the problems of the urban environment',
           snippet:
@@ -421,14 +547,14 @@ export const translations = {
             'In a special segment of the “Word of the Week” podcast with Iva Doychinova, 20-year-old Tihomir Garmenliev — creator of BulTrain — joins to discuss the app that dramatically simplifies rail travel across Bulgaria.',
           source: 'Dnevnik',
         },
-        'article-4': {
+        'article-2': {
           title:
             'A mobile app brings everything about rail travel in Bulgaria into one place',
           snippet:
             '“Travelling by train can be truly enjoyable and truly beautiful,” says Tihomir Garmenliev, a senior at TUES and the creator of the BulTrain app.',
           source: 'Economy.bg',
         },
-        'article-5': {
+        'article-1': {
           title:
             'Student builds an app that tracks routes and timetables of Bulgarian trains',
           snippet:

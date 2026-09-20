@@ -31,9 +31,9 @@ export default function Contact() {
       <div className="orb" style={{ width: 800, height: 800, top: '-10%', left: '-20%', background: 'radial-gradient(circle, rgba(10, 132, 255, 0.2) 0%, transparent 60%)' }} />
       <div className="orb" style={{ width: 600, height: 600, bottom: '-10%', right: '-10%', background: 'radial-gradient(circle, rgba(10, 132, 255, 0.15) 0%, transparent 60%)' }} />
 
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }} 
-        animate={{ opacity: 1, y: 0 }} 
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         style={{ position: 'relative', zIndex: 1, maxWidth: '900px', margin: '0 auto' }}
       >
         <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--color-text-secondary)', textDecoration: 'none', marginBottom: '40px', fontWeight: '500', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = 'var(--color-text-primary)'} onMouseLeave={e => e.target.style.color = 'var(--color-text-secondary)'}>
@@ -46,9 +46,9 @@ export default function Contact() {
           {t.contact.subheading}
         </p>
 
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
           gap: '24px',
           marginBottom: '60px'
         }}>

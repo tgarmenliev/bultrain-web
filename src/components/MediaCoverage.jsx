@@ -1,68 +1,105 @@
 import { motion, useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
 
 // ============================================================================
-// IN THE PRESS / MEDIA COVERAGE CONFIGURATION
-// Only the structural data lives here (id, url, thumbnail). The title,
-// snippet and source are localized in the translation dictionary, keyed by id
-// under media.articles.
+// IN THE PRESS / MEDIA COVERAGE
+//
+// HOW TO ADD A NEW ARTICLE (2 steps):
+//   1. Add an entry at the BOTTOM of the list below with the next number
+//      (the last one is article-6, so the next is 'article-7').
+//   2. In src/i18n/translations.js add the same key ('article-7') under
+//      media.articles in BOTH `bg` and `en` (title, snippet, source).
+//
+// Display order is automatic: the HIGHEST number is shown FIRST, so the newest
+// article always appears at the top. The order of this list does not matter.
+// An article whose translation is missing is skipped (with a console warning)
+// instead of breaking the page.
 // ============================================================================
 export const mediaArticles = [
   {
-    id: 'article-1',
-    url: 'https://bnrnews.bg/horizont/post/492979/tihomir-garmenliev-i-bultrain-za-po-informiran-zhelezopaten-transport',
-    thumbnail: 'https://bnrnews.bg/api/media/d1913cc6-690b-473a-9a2d-0b538cdc80e7?Size=large',
+    id: 'article-1', // Bloomberg TV
+    url: 'https://www.bloombergtv.bg/a/16-biznes-start/131545-uchenik-sazdava-prilozhenie-sledyashto-marshruti-i-razpisaniya-na-balgarskite-vlakove',
+    thumbnail: '',
   },
   {
-    id: 'article-2',
-    url: 'http://capital.bg/politika_i_ikonomika/obrazovanie/2026/01/27/4876961_talantite_ot_20_pod_20_programistut_tihomir_gurmenliev/',
-    thumbnail: 'https://img.capital.bg/shimg/zx1200y630captrw_4877072.jpg',
-  },
-  {
-    id: 'article-3',
-    url: 'https://www.dnevnik.bg/duma_na_sedmitsa/2026/04/01/4898677_kak_se_putuva_umno_s_bdj_tihomir_gurmenliev_v_podkasta/?ref=rss',
-    thumbnail: 'https://img.dnevnik.bg/shimg/zx1200y630d_4898674.jpg',
-  },
-  {
-    id: 'article-4',
+    id: 'article-2', // Economy.bg (2024)
     url: 'https://economy.bg/featured/view/58604/Mobilno-prilozhenie-predlaga-vsichko-za-pytuvaneto-s-vlak-u-nas-na-edno-myasto',
     thumbnail: 'https://i.newsroom.bg/uploads/photo_assets/2024/2024-05-23/b_Sn-2-392e5662cc.jpg',
   },
   {
-    id: 'article-5',
-    url: 'https://www.bloombergtv.bg/a/16-biznes-start/131545-uchenik-sazdava-prilozhenie-sledyashto-marshruti-i-razpisaniya-na-balgarskite-vlakove',
-    thumbnail: 'https://www.bloombergtv.bg/media/files/resized/article/1280x720/f58/85d6bff41e593bdcedc9c7c470f4ff58-bdz-plan-reforma-1-3276-760x0-541-1140x0.jpg',
+    id: 'article-3', // Дневник
+    url: 'https://www.dnevnik.bg/duma_na_sedmitsa/2026/04/01/4898677_kak_se_putuva_umno_s_bdj_tihomir_gurmenliev_v_podkasta/?ref=rss',
+    thumbnail: 'https://image-cdn-ak.spotifycdn.com/image/ab6772ab000015bea07e6d5cef51900f74943a84',
+  },
+  {
+    id: 'article-4', // Капитал
+    url: 'http://capital.bg/politika_i_ikonomika/obrazovanie/2026/01/27/4876961_talantite_ot_20_pod_20_programistut_tihomir_gurmenliev/',
+    thumbnail: '',
+  },
+  {
+    id: 'article-5', // Българско национално радио
+    url: 'https://bnrnews.bg/horizont/post/492979/tihomir-garmenliev-i-bultrain-za-po-informiran-zhelezopaten-transport',
+    thumbnail: 'https://bnrnews.bg/api/media/d1913cc6-690b-473a-9a2d-0b538cdc80e7?Size=large',
+  },
+  {
+    id: 'article-6', // Economy.bg (2026)
+    url: 'https://www.economy.bg/bulgaria/view/64492/Celta-mi-vinagi-e-bila-da-resha-svoj-ili-chuzhd-problem-s-pomoshtta-na-tehnologiite',
+    thumbnail: 'https://i.newsroom.bg/uploads/photo_assets/2026/2026-07-16/b_TUD-086-6a883ac671.jpg',
   },
 ];
+
+// Newest first: highest article number on top.
+const articleNumber = (a) => Number(a.id.replace(/\D/g, ''))
+const sortedArticles = [...mediaArticles].sort((a, b) => articleNumber(b) - articleNumber(a))
 // ============================================================================
 
 const SKELETON_BG = 'linear-gradient(90deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%)';
-const FALLBACK_IMAGE =
-  'data:image/svg+xml;charset=UTF-8,' +
-  encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0b1a2b"/><stop offset="50%" stop-color="#133454"/><stop offset="100%" stop-color="#0a84ff"/></linearGradient></defs><rect width="1200" height="675" fill="url(#g)"/><circle cx="950" cy="120" r="220" fill="rgba(255,255,255,0.08)"/><circle cx="180" cy="560" r="260" fill="rgba(255,255,255,0.06)"/></svg>'
-  );
-
-const DEFAULT_ARTICLE_COPY = {
-  title: 'BulTrain media coverage',
-  snippet: 'Read the latest media coverage about BulTrain.',
-  source: 'BulTrain',
-};
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1620023419356-9a5d15a51ebd?w=800&q=80&auto=format&fit=crop'; // A neat abstract dark blue premium texture
 
 function ArticleCard({ article, index }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
   const { t } = useLanguage()
-  const copy = t?.media?.articles?.[article.id] || DEFAULT_ARTICLE_COPY
+  const copy = t.media.articles[article.id]
 
-  const thumbnailUrl = article.thumbnail || FALLBACK_IMAGE
+  const hasLink = article.url && article.url !== '#'
+  const [thumbnailUrl, setThumbnailUrl] = useState(article.thumbnail || '')
+  const [isLoadingImage, setIsLoadingImage] = useState(!article.thumbnail && hasLink)
   const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    if (article.thumbnail || !hasLink) {
+      return;
+    }
+
+    let cancelled = false;
+    const fetchThumbnail = async () => {
+      try {
+        // opengraph.io proxy bypasses strict bot protections on sites like capital.bg
+        const proxyUrl = `https://opengraph.io/api/1.1/site/${encodeURIComponent(article.url)}?app_id=58858c7bcf07b61e64257391`;
+        const response = await fetch(proxyUrl);
+        const data = await response.json();
+
+        // Extract the best available image from the proxy response
+        const imageUrl = data.hybridGraph?.image || data.openGraph?.image?.url || data.htmlInferred?.image;
+        if (!cancelled) setThumbnailUrl(imageUrl || FALLBACK_IMAGE);
+      } catch (error) {
+        console.error("Failed to fetch thumbnail for", article.url, error);
+        if (!cancelled) setThumbnailUrl(FALLBACK_IMAGE);
+      } finally {
+        if (!cancelled) setIsLoadingImage(false);
+      }
+    };
+
+    fetchThumbnail();
+    return () => { cancelled = true; };
+  }, [article.url, article.thumbnail, hasLink]);
 
   return (
     <motion.a
       href={article.url}
-      target="_blank"
+      target={hasLink ? '_blank' : undefined}
       rel="noopener noreferrer"
       ref={ref}
       style={{
@@ -86,18 +123,26 @@ function ArticleCard({ article, index }) {
     >
       {/* Thumbnail Container with Overflow Hidden */}
       <div style={{ width: '100%', height: '220px', overflow: 'hidden', position: 'relative', backgroundColor: 'var(--color-bg-elevated)' }}>
-        <motion.img
-          src={imageError ? FALLBACK_IMAGE : thumbnailUrl}
-          alt={copy.title}
-          onError={() => setImageError(true)}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            transition: 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-          }}
-          className="media-image"
-        />
+        {isLoadingImage ? (
+          <motion.div
+            style={{ width: '100%', height: '100%', background: SKELETON_BG, backgroundSize: '200% 100%' }}
+            animate={{ backgroundPosition: ['100% 0%', '-100% 0%'] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+          />
+        ) : (
+          <motion.img
+            src={imageError ? FALLBACK_IMAGE : (thumbnailUrl || FALLBACK_IMAGE)}
+            alt={copy.title}
+            onError={() => setImageError(true)}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              transition: 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+            }}
+            className="media-image"
+          />
+        )}
         <div style={{
            position: 'absolute',
            bottom: 0,
@@ -109,18 +154,18 @@ function ArticleCard({ article, index }) {
       </div>
 
       <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-        <span style={{ 
-          fontSize: '12px', 
-          fontWeight: 700, 
-          color: 'var(--color-accent)', 
-          textTransform: 'uppercase', 
+        <span style={{
+          fontSize: '12px',
+          fontWeight: 700,
+          color: 'var(--color-accent)',
+          textTransform: 'uppercase',
           letterSpacing: '0.05em',
           marginBottom: '10px',
           display: 'block'
         }}>
           {copy.source}
         </span>
-        
+
         <h3 style={{
           fontSize: '1.25rem',
           fontWeight: 700,
@@ -131,7 +176,7 @@ function ArticleCard({ article, index }) {
         }}>
           {copy.title}
         </h3>
-        
+
         <p style={{
           fontSize: '14px',
           lineHeight: 1.6,
@@ -166,7 +211,7 @@ function ArticleCard({ article, index }) {
 export default function MediaCoverage() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
 
   return (
     <section id="media-coverage" className="section" style={{ position: 'relative', zIndex: 1 }}>
@@ -200,9 +245,15 @@ export default function MediaCoverage() {
           position: 'relative',
           zIndex: 2
         }}>
-          {mediaArticles.map((article, i) => (
-            <ArticleCard key={article.id} article={article} index={i} />
-          ))}
+          {sortedArticles
+            .filter((article) => {
+              if (t.media.articles[article.id]) return true
+              console.warn(`[MediaCoverage] Missing translation for "${article.id}" in "${lang}" - skipped. Add it to src/i18n/translations.js.`)
+              return false
+            })
+            .map((article, i) => (
+              <ArticleCard key={article.id} article={article} index={i} />
+            ))}
         </div>
       </div>
 

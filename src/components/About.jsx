@@ -180,26 +180,26 @@ export default function About() {
             </div>
 
             {/* Social Buttons */}
-            <motion.div 
+            <motion.div
               style={{ display: 'flex', gap: 12, marginTop: 40, flexWrap: 'wrap' }}
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.8 }}
             >
-              <a 
-                href="https://www.linkedin.com/in/tgarmenliev/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.linkedin.com/in/tgarmenliev/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn btn-ghost"
                 style={{ padding: '10px 20px', fontSize: '14px' }}
               >
                 <User size={16} />
                 LinkedIn
               </a>
-              <a 
-                href="https://www.facebook.com/tgarmenliev" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.facebook.com/tgarmenliev"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn btn-ghost"
                 style={{ padding: '10px 20px', fontSize: '14px' }}
               >

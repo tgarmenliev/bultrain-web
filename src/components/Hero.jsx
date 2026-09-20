@@ -71,9 +71,9 @@ function GooglePlayBadge() {
         }}
       >
         {/* High-quality official Google Play logo */}
-        <img 
-          src="https://www.vectorlogo.zone/logos/google_play/google_play-icon.svg" 
-          alt="Google Play" 
+        <img
+          src="https://www.vectorlogo.zone/logos/google_play/google_play-icon.svg"
+          alt="Google Play"
           style={{ width: 22, height: 22 }}
         />
         <div>
@@ -147,10 +147,10 @@ function PhoneMockup() {
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#090a10' }}>
-          
+
           {/* Status bar */}
           <div style={{ padding: '14px 24px 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 20 }}>
-            <span style={{ fontSize: 13, color: '#fff', fontWeight: 600 }}>16:58</span>
+            <span className="tabular" style={{ fontSize: 13, color: '#fff', fontWeight: 600 }}>16:58</span>
             <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
               <Wifi size={12} color="#fff" strokeWidth={2.5} />
               <div style={{ width: 14, height: 10, background: 'transparent', border: '1px solid #fff', borderRadius: 3, position: 'relative' }}>
@@ -213,26 +213,26 @@ function PhoneMockup() {
                 <div style={{ width: 65, flexShrink: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   {train.oldTime ? (
                     <>
-                      <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', textDecoration: 'line-through' }}>{train.oldTime}</div>
-                      <div style={{ fontSize: 20, fontWeight: 800, color: '#ef4444', letterSpacing: '-0.02em', lineHeight: 1 }}>{train.time}</div>
+                      <div className="tabular" style={{ fontSize: 11, fontWeight: 600, color: '#64748b', textDecoration: 'line-through' }}>{train.oldTime}</div>
+                      <div className="tabular" style={{ fontSize: 20, fontWeight: 800, color: '#ef4444', letterSpacing: '-0.02em', lineHeight: 1 }}>{train.time}</div>
                     </>
                   ) : (
-                    <div style={{ fontSize: 20, fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.02em' }}>{train.time}</div>
+                    <div className="tabular" style={{ fontSize: 20, fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.02em' }}>{train.time}</div>
                   )}
                 </div>
-                
+
                 <div style={{ flex: 1, paddingLeft: 8 }}>
                   <div style={{ fontSize: 13, fontWeight: 800, color: '#f8fafc', letterSpacing: '0.02em', marginBottom: 2 }}>{train.dest}</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                     <TrainFront size={11} style={{ color: '#3b82f6' }} />
-                    <span style={{ fontSize: 10, fontWeight: 600, color: '#94a3b8' }}>{train.type}</span>
+                    <span className="tabular" style={{ fontSize: 10, fontWeight: 600, color: '#94a3b8' }}>{train.type}</span>
                   </div>
                 </div>
 
                 <div style={{ flexShrink: 0 }}>
                   <div style={{
-                    display: 'flex', alignItems: 'center', gap: 4, 
-                    padding: '4px 6px', borderRadius: 4, 
+                    display: 'flex', alignItems: 'center', gap: 4,
+                    padding: '4px 6px', borderRadius: 4,
                     background: train.color === '#22c55e' ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.15)',
                     border: train.color === '#22c55e' ? '1px solid rgba(34,197,94,0.2)' : '1px solid rgba(239,68,68,0.3)',
                   }}>
@@ -267,26 +267,26 @@ function PhoneMockup() {
               { Icon: Clock, label: m.tabs.board, active: true },
               { Icon: Ticket, label: m.tabs.trips, active: false },
               { Icon: BookOpen, label: m.tabs.guide, active: false },
-            ].map(({ Icon, label, active }, i) => (
+            ].map((tab, i) => (
               <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                <div style={{ 
-                  position: 'relative', 
-                  display: 'flex', 
-                  alignItems: 'center', 
+                <div style={{
+                  position: 'relative',
+                  display: 'flex',
+                  alignItems: 'center',
                   justifyContent: 'center',
                   width: 44,
                   height: 28,
-                  background: active ? 'rgba(59,130,246,0.15)' : 'transparent',
+                  background: tab.active ? 'rgba(59,130,246,0.15)' : 'transparent',
                   borderRadius: 14,
                 }}>
-                  <Icon size={18} style={{ color: active ? '#3b82f6' : '#64748b' }} strokeWidth={active ? 2.5 : 2} />
+                  <tab.Icon size={18} style={{ color: tab.active ? '#3b82f6' : '#64748b' }} strokeWidth={tab.active ? 2.5 : 2} />
                 </div>
-                <span style={{ fontSize: 9, color: active ? '#3b82f6' : '#64748b', fontWeight: 600 }}>
-                  {label}
+                <span style={{ fontSize: 9, color: tab.active ? '#3b82f6' : '#64748b', fontWeight: 600 }}>
+                  {tab.label}
                 </span>
               </div>
             ))}
-            
+
             {/* iOS home indicator */}
             <div style={{
               position: 'absolute',
@@ -379,6 +379,7 @@ function PhoneMockup() {
 
 export default function Hero() {
   const { t } = useLanguage()
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -434,20 +435,6 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
           >
-            {/* Logo Image
-            <motion.div variants={itemVariants} style={{ marginBottom: 32 }}>
-              <img 
-                src="/assets/logo-no-bg.png" 
-                alt="BulTrain Icon" 
-                style={{ 
-                  width: 90, 
-                  height: 90, 
-                  objectFit: 'contain',
-                  filter: 'drop-shadow(0 12px 24px rgba(10, 132, 255, 0.6))'
-                }} 
-              />
-            </motion.div> */}
-
             {/* Badge */}
             <motion.div variants={itemVariants}>
               <span className="tag" style={{ marginBottom: 28 }}>

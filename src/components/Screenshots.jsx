@@ -14,6 +14,7 @@ const screenshots = [
 function ScreenshotCard({ screenshot, index }) {
   const { t } = useLanguage()
   const label = t.screenshots.labels[screenshot.id]
+
   return (
     <motion.div
       id={`screenshot-${screenshot.id}`}
@@ -195,7 +196,7 @@ export default function Screenshots() {
         }
         @media (max-width: 899px) {
           .screenshots-track {
-            padding-right: calc(50vw - 140px) !important; 
+            padding-right: calc(50vw - 140px) !important;
             padding-left: calc(50vw - 140px) !important;
           }
         }

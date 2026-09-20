@@ -2,6 +2,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Train, Bell, Server, Moon } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
+import { useSpotlight } from '../hooks/useSpotlight'
 
 // Layout / visual config — copy lives in the translation dictionary,
 // keyed by `tKey` under features.cards.
@@ -13,7 +14,8 @@ const cardConfig = [
 ]
 
 function BentoCard({ card, index }) {
-  const ref = useRef(null)
+  // One node, two behaviours: reveal-on-scroll and the cursor spotlight.
+  const ref = useSpotlight()
   const isInView = useInView(ref, { once: true, margin: '-80px' })
   const { t } = useLanguage()
   const copy = t.features.cards[card.tKey]

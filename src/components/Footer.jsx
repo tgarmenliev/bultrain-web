@@ -20,9 +20,9 @@ export default function Footer() {
         }}>
           {/* Logo */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <img 
-              src="/favicon.svg" 
-              alt="BulTrain Logo" 
+            <img
+              src="/favicon.svg"
+              alt="BulTrain Logo"
               style={{
                 width: 32,
                 height: 32,
@@ -43,7 +43,6 @@ export default function Footer() {
               { id: 'link-contact', href: '/contact', label: t.footer.contact, isRouterLink: true },
             ].map(link => {
               const linkProps = {
-                key: link.id,
                 id: link.id,
                 style: {
                   fontSize: 13,
@@ -57,11 +56,11 @@ export default function Footer() {
               };
 
               return link.isRouterLink ? (
-                <Link to={link.href} {...linkProps}>
+                <Link key={link.id} to={link.href} {...linkProps}>
                   {link.label}
                 </Link>
               ) : (
-                <a href={link.href} {...linkProps}>
+                <a key={link.id} href={link.href} {...linkProps}>
                   {link.label}
                 </a>
               );

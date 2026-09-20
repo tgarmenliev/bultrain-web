@@ -19,7 +19,7 @@ export default function PrivacyApp() {
           <ArrowLeft size={18} />
           {t.common.backHome}
         </Link>
-        
+
         <h1 className="section-heading" style={{ marginBottom: '10px' }}>BulTrain App Privacy Policy</h1>
         <p style={{ color: 'var(--color-text-muted)', marginBottom: '30px', fontSize: '14px' }}>Last updated / Последна актуализация: 28.03.2026</p>
 
@@ -27,9 +27,9 @@ export default function PrivacyApp() {
           <button onClick={() => scrollTo('en')} className="tag" style={{ cursor: 'pointer', background: 'rgba(10, 132, 255, 0.1)', border: '1px solid rgba(10,132,255,0.2)', padding: '8px 16px' }}>English</button>
           <button onClick={() => scrollTo('bg')} className="tag" style={{ cursor: 'pointer', background: 'rgba(10, 132, 255, 0.1)', border: '1px solid rgba(10,132,255,0.2)', padding: '8px 16px' }}>Български</button>
         </div>
-        
+
         <div style={{ color: 'var(--color-text-secondary)', lineHeight: 1.8, fontSize: '15px' }}>
-          
+
           {/* ENGLISH SECTION */}
           <div id="en" style={{ paddingTop: '20px' }}>
             <div style={{ background: 'rgba(239, 68, 68, 0.05)', borderLeft: '4px solid #ef4444', padding: '20px', borderRadius: '8px', marginBottom: '30px', color: '#fca5a5' }}>
