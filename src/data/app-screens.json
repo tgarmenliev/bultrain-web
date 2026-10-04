@@ -1,0 +1,38 @@
+{
+ "dark": {
+  "bg": {
+   "home": "/img/app/dark-bg-home.webp",
+   "results": "/img/app/dark-bg-results.webp",
+   "trip": "/img/app/dark-bg-trip.webp",
+   "board": "/img/app/dark-bg-board.webp",
+   "route": "/img/app/dark-bg-route.webp",
+   "info": "/img/app/dark-bg-info.webp",
+   "lock": "/img/app/dark-bg-lock.webp"
+  },
+  "en": {
+   "home": "/img/app/dark-en-home.webp",
+   "results": "/img/app/dark-en-results.webp",
+   "trip": "/img/app/dark-en-trip.webp",
+   "route": "/img/app/dark-en-route.webp",
+   "info": "/img/app/dark-en-info.webp"
+  }
+ },
+ "light": {
+  "bg": {
+   "home": "/img/app/light-bg-home.webp",
+   "results": "/img/app/light-bg-results.webp",
+   "board": "/img/app/light-bg-board.webp",
+   "route": "/img/app/light-bg-route.webp",
+   "info": "/img/app/light-bg-info.webp"
+  },
+  "en": {
+   "home": "/img/app/light-en-home.webp",
+   "results": "/img/app/light-en-results.webp",
+   "trip": "/img/app/light-en-trip.webp",
+   "board": "/img/app/light-en-board.webp",
+   "route": "/img/app/light-en-route.webp",
+   "info": "/img/app/light-en-info.webp",
+   "lock": "/img/app/light-en-lock.webp"
+  }
+ }
+}

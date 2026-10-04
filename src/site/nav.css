@@ -1,0 +1,64 @@
+.nav-sentinel { position: absolute; top: 0; left: 0; width: 1px; height: 8px; pointer-events: none; }
+
+.nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 100;
+  border-bottom: 1px solid transparent;
+  transition: background-color 240ms ease, border-color 240ms ease, backdrop-filter 240ms ease;
+}
+.nav[data-scrolled='true'], .nav[data-open='true'] {
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom-color: var(--line);
+}
+.nav__bar { height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+
+.nav__logo { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; color: var(--ink); flex-shrink: 0; }
+.nav__logo img { display: block; border-radius: 9px; box-shadow: 0 0 0 1px var(--line); }
+.nav__logo span { font-weight: 800; font-size: 19px; letter-spacing: -0.03em; }
+
+.nav__links { display: flex; align-items: center; gap: 4px; }
+.nav__links a {
+  position: relative; padding: 9px 12px; border-radius: 10px;
+  font-size: 14.5px; font-weight: 600; color: var(--ink2); text-decoration: none;
+  transition: color 160ms ease;
+}
+.nav__tools { display: flex; align-items: center; gap: 10px; }
+
+@media (hover: hover) and (pointer: fine) { .nav__links a:hover { color: var(--ink); } }
+
+/* language: sliding thumb, pure CSS */
+.nav-lang { position: relative; display: inline-grid; grid-template-columns: 1fr 1fr; height: 40px; padding: 3px; border-radius: 12px; background: var(--raised); }
+.nav-lang button {
+  position: relative; z-index: 1; min-width: 40px; border: 0; background: transparent; cursor: pointer;
+  font-family: inherit; font-size: 12px; font-weight: 800; line-height: 1; letter-spacing: 0.06em; color: var(--ink3); border-radius: 9px;
+  transition: color 180ms ease;
+}
+.nav-lang button[aria-pressed='true'] { color: var(--ink); }
+.nav-lang__thumb {
+  position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); border-radius: 9px;
+  background: var(--surface); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18), inset 0 0 0 1px var(--line);
+  transition: transform 260ms var(--ease-out);
+}
+.nav-lang[data-lang='en'] .nav-lang__thumb { transform: translateX(100%); }
+
+/* theme toggle: the two icons trade places */
+.nav-theme { position: relative; width: 40px; height: 40px; border: 0; border-radius: 12px; background: var(--raised); color: var(--ink2); cursor: pointer; transition: transform 160ms var(--ease-out), color 160ms ease; }
+.nav-theme:active { transform: scale(0.94); }
+.nav-theme svg { position: absolute; inset: 0; margin: auto; transition: opacity 220ms ease, transform 320ms var(--ease-out); }
+[data-theme='dark'] .nav-theme__sun { opacity: 0; transform: rotate(-70deg); }
+[data-theme='dark'] .nav-theme__moon { opacity: 1; transform: rotate(0); }
+[data-theme='light'] .nav-theme__sun { opacity: 1; transform: rotate(0); }
+[data-theme='light'] .nav-theme__moon { opacity: 0; transform: rotate(70deg); }
+@media (hover: hover) and (pointer: fine) { .nav-theme:hover { color: var(--ink); } }
+
+.nav__burger { display: none; width: 40px; height: 40px; border: 0; border-radius: 12px; background: var(--raised); color: var(--ink); cursor: pointer; }
+
+.nav__sheet {
+  display: none; overflow: hidden; max-height: 0; transition: max-height 320ms var(--ease-out);
+}
+.nav__sheet .wrap { display: flex; flex-direction: column; padding-bottom: 20px; }
+.nav__sheet a:not(.ds-btn) { padding: 15px 2px; font-size: 22px; font-weight: 700; letter-spacing: -0.025em; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
+.nav__sheet-cta { margin-top: 18px; }
+
+@media (max-width: 1180px) { .nav__links { display: none; } .nav__burger { display: inline-flex; align-items: center; justify-content: center; } .nav__sheet { display: block; } .nav[data-open='true'] .nav__sheet { max-height: 80vh; } }
+@media (max-width: 640px) { .nav .nav__cta { display: none; } .nav-lang button { min-width: 36px; } }

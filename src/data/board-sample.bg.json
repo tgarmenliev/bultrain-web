@@ -1,0 +1,109 @@
+{
+    "station": "София ",
+    "trains": [
+        {
+            "direction": "Радомир ",
+            "time": "20:38",
+            "isDelayed": true,
+            "delayedTime": "20:33",
+            "delayInfo": {
+                "delayMinutes": 5,
+                "delayString": "Закъснение 5 мин. ",
+                "delayInfo": ""
+            },
+            "type": "КПВ",
+            "trainNum": "50211"
+        },
+        {
+            "direction": "Драгоман ",
+            "time": "21:00",
+            "isDelayed": true,
+            "delayedTime": "20:55",
+            "delayInfo": {
+                "delayMinutes": 5,
+                "delayString": "Закъснение 5 мин. ",
+                "delayInfo": ""
+            },
+            "type": "КПВ",
+            "trainNum": "10212"
+        },
+        {
+            "direction": "Варна ",
+            "time": "21:00",
+            "isDelayed": false,
+            "delayedTime": 0,
+            "delayInfo": {
+                "delayMinutes": 0,
+                "delayString": "",
+                "delayInfo": ""
+            },
+            "type": "БВ",
+            "trainNum": "8657"
+        },
+        {
+            "direction": "Мездра ",
+            "time": "21:25",
+            "isDelayed": false,
+            "delayedTime": 0,
+            "delayInfo": {
+                "delayMinutes": 0,
+                "delayString": "",
+                "delayInfo": ""
+            },
+            "type": "КПВ",
+            "trainNum": "20209"
+        },
+        {
+            "direction": "Перник ",
+            "time": "21:30",
+            "isDelayed": false,
+            "delayedTime": 0,
+            "delayInfo": {
+                "delayMinutes": 0,
+                "delayString": "",
+                "delayInfo": ""
+            },
+            "type": "КПВ",
+            "trainNum": "50213"
+        },
+        {
+            "direction": "Перник ",
+            "time": "22:40",
+            "isDelayed": false,
+            "delayedTime": 0,
+            "delayInfo": {
+                "delayMinutes": 0,
+                "delayString": "",
+                "delayInfo": ""
+            },
+            "type": "КПВ",
+            "trainNum": "50215"
+        },
+        {
+            "direction": "Бургас ",
+            "time": "22:50",
+            "isDelayed": false,
+            "delayedTime": 0,
+            "delayInfo": {
+                "delayMinutes": 0,
+                "delayString": "",
+                "delayInfo": ""
+            },
+            "type": "БВ",
+            "trainNum": "8627"
+        },
+        {
+            "direction": "Варна ",
+            "time": "23:00",
+            "isDelayed": false,
+            "delayedTime": 0,
+            "delayInfo": {
+                "delayMinutes": 0,
+                "delayString": "",
+                "delayInfo": ""
+            },
+            "type": "БВ",
+            "trainNum": "2627"
+        }
+    ]
+}

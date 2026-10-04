@@ -1,32 +1,41 @@
 import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
+import Nav from './site/Nav'
+import Hero from './site/Hero'
+import Footer from './site/Footer'
+import DesignSystem from './site/DesignSystem'
 import Features from './components/Features'
 import WhatsNew from './components/WhatsNew'
 import MediaCoverage from './components/MediaCoverage'
 import Screenshots from './components/Screenshots'
 import About from './components/About'
 import Support from './components/Support'
-import Footer from './components/Footer'
 import ScrollProgress from './components/ScrollProgress'
 import Privacy from './pages/Privacy'
 import PrivacyApp from './pages/PrivacyApp'
 import Terms from './pages/Terms'
 import Contact from './pages/Contact'
 
+// Sections not yet migrated to the new design system keep a fixed dark theme,
+// so the page stays coherent in light mode while we rebuild them one by one.
+function Legacy({ children }) {
+  return <div data-theme="dark" className="legacy">{children}</div>
+}
+
 function Home() {
   return (
     <>
-      <Navbar />
+      <Nav />
       <main>
         <Hero />
-        <Features />
-        <WhatsNew />
-        <MediaCoverage />
-        <Screenshots />
-        <About />
-        <Support />
+        <Legacy>
+          <Features />
+          <WhatsNew />
+          <MediaCoverage />
+          <Screenshots />
+          <About />
+          <Support />
+        </Legacy>
       </main>
     </>
   )
@@ -34,11 +43,7 @@ function Home() {
 
 function ScrollToTop() {
   const { pathname } = useLocation()
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
-
+  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
   return null
 }
 
@@ -49,10 +54,11 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/privacy-app" element={<PrivacyApp />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/design" element={<><Nav /><DesignSystem /></>} />
+        <Route path="/privacy" element={<Legacy><Privacy /></Legacy>} />
+        <Route path="/privacy-app" element={<Legacy><PrivacyApp /></Legacy>} />
+        <Route path="/terms" element={<Legacy><Terms /></Legacy>} />
+        <Route path="/contact" element={<Legacy><Contact /></Legacy>} />
       </Routes>
       <Footer />
     </div>

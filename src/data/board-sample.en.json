@@ -1,0 +1,109 @@
+{
+    "station": "Sofia ",
+    "trains": [
+        {
+            "direction": "Radomir ",
+            "time": "20:38",
+            "isDelayed": true,
+            "delayedTime": "20:33",
+            "delayInfo": {
+                "delayMinutes": 5,
+                "delayString": "Delay 5 min. ",
+                "delayInfo": ""
+            },
+            "type": "SU",
+            "trainNum": "50211"
+        },
+        {
+            "direction": "Dragoman ",
+            "time": "21:00",
+            "isDelayed": true,
+            "delayedTime": "20:55",
+            "delayInfo": {
+                "delayMinutes": 5,
+                "delayString": "Delay 5 min. ",
+                "delayInfo": ""
+            },
+            "type": "SU",
+            "trainNum": "10212"
+        },
+        {
+            "direction": "Varna ",
+            "time": "21:00",
+            "isDelayed": false,
+            "delayedTime": 0,
+            "delayInfo": {
+                "delayMinutes": 0,
+                "delayString": "",
+                "delayInfo": ""
+            },
+            "type": "ICF",
+            "trainNum": "8657"
+        },
+        {
+            "direction": "Mezdra ",
+            "time": "21:25",
+            "isDelayed": false,
+            "delayedTime": 0,
+            "delayInfo": {
+                "delayMinutes": 0,
+                "delayString": "",
+                "delayInfo": ""
+            },
+            "type": "SU",
+            "trainNum": "20209"
+        },
+        {
+            "direction": "Pernik ",
+            "time": "21:30",
+            "isDelayed": false,
+            "delayedTime": 0,
+            "delayInfo": {
+                "delayMinutes": 0,
+                "delayString": "",
+                "delayInfo": ""
+            },
+            "type": "SU",
+            "trainNum": "50213"
+        },
+        {
+            "direction": "Pernik ",
+            "time": "22:40",
+            "isDelayed": false,
+            "delayedTime": 0,
+            "delayInfo": {
+                "delayMinutes": 0,
+                "delayString": "",
+                "delayInfo": ""
+            },
+            "type": "SU",
+            "trainNum": "50215"
+        },
+        {
+            "direction": "Burgas ",
+            "time": "22:50",
+            "isDelayed": false,
+            "delayedTime": 0,
+            "delayInfo": {
+                "delayMinutes": 0,
+                "delayString": "",
+                "delayInfo": ""
+            },
+            "type": "ICF",
+            "trainNum": "8627"
+        },
+        {
+            "direction": "Varna ",
+            "time": "23:00",
+            "isDelayed": false,
+            "delayedTime": 0,
+            "delayInfo": {
+                "delayMinutes": 0,
+                "delayString": "",
+                "delayInfo": ""
+            },
+            "type": "ICF",
+            "trainNum": "2627"
+        }
+    ]
+}

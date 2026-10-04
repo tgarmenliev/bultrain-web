@@ -18,6 +18,9 @@ export const translations = {
       about: 'Зад проекта',
       support: 'Подкрепа',
       cta: 'Свали безплатно',
+      menu: 'Меню',
+      theme: 'Смени темата',
+      language: 'Език',
     },
 
     common: {
@@ -43,6 +46,13 @@ export const translations = {
         { value: 'Офлайн', label: 'за да пътуваш спокойно' },
         { value: 'iOS & Android', label: 'за да пътуваш лесно' },
       ],
+      facts: [
+        { value: '702', label: 'гари' },
+        { value: '550', label: 'влака' },
+        { value: '4,8', label: 'в Google Play' },
+      ],
+      photoCredit: 'Снимка: Тихомир Гърменлиев',
+      photoAlt: 'Червен локомотив на гара, на светлината преди залез',
       mockup: {
         city: 'С О Ф И Я',
         departures: 'Заминаващи',
@@ -100,6 +110,19 @@ export const translations = {
             'Красиво проектиран за нощни пътувания. Всеки детайл е оптимизиран за комфорт при слаба светлина. Всичко е направено така, че да ти е удобно.',
         },
       },
+    },
+
+    live: {
+      live: 'На живо',
+      sample: 'Пример',
+      station: 'София',
+      headline: 'Заминаващи от София',
+      sampleNote: 'Примерни данни, не са на живо',
+      updated: 'Обновено',
+      summary: '{late} от {total} влака закъсняват',
+      summaryNone: 'Всички влакове са навреме',
+      unavailable: 'Таблото не е налично в момента',
+      late: 'мин',
     },
 
     whatsNew: {
@@ -279,6 +302,7 @@ export const translations = {
       privacyApp: 'Политика за поверителност на приложението',
       terms: 'Условия за ползване',
       contact: 'Контакти',
+      madeBy: 'Направено от Тихомир Гърменлиев.',
       disclaimer:
         'BulTrain е независим проект и не е свързан с, нито е официално одобрен от БДЖ (Български държавни железници).',
     },
@@ -374,6 +398,9 @@ export const translations = {
       about: 'The Story',
       support: 'Support',
       cta: 'Download free',
+      menu: 'Menu',
+      theme: 'Switch theme',
+      language: 'Language',
     },
 
     common: {
@@ -399,6 +426,13 @@ export const translations = {
         { value: 'Offline', label: 'so you can travel with peace of mind' },
         { value: 'iOS & Android', label: 'so getting around is effortless' },
       ],
+      facts: [
+        { value: '702', label: 'stations' },
+        { value: '550', label: 'trains' },
+        { value: '4.8', label: 'on Google Play' },
+      ],
+      photoCredit: 'Photo: Tihomir Garmenliev',
+      photoAlt: 'A red locomotive at a station in the light before sunset',
       mockup: {
         city: 'S O F I A',
         departures: 'Departures',
@@ -456,6 +490,19 @@ export const translations = {
             'Beautifully designed for night-time journeys. Every detail is tuned for comfort in low light, so the app stays easy on the eyes from dusk till dawn.',
         },
       },
+    },
+
+    live: {
+      live: 'Live',
+      sample: 'Sample',
+      station: 'Sofia',
+      headline: 'Departures from Sofia',
+      sampleNote: 'Sample data, not live',
+      updated: 'Updated',
+      summary: '{late} of {total} trains running late',
+      summaryNone: 'Every train is on time',
+      unavailable: 'The board is unavailable right now',
+      late: 'min',
     },
 
     whatsNew: {
@@ -635,6 +682,7 @@ export const translations = {
       privacyApp: 'App Privacy Policy',
       terms: 'Terms of Use',
       contact: 'Contact',
+      madeBy: 'Built by Tihomir Garmenliev.',
       disclaimer:
         'BulTrain is an independent project and is not affiliated with, nor officially endorsed by, BDZ (Bulgarian State Railways).',
     },

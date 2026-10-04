@@ -2,6 +2,18 @@
 <html lang="bg">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      /* Theme: saved choice > system preference > dark. Runs before first paint (no flash). */
+      (function () {
+        var t = 'dark';
+        try {
+          var saved = localStorage.getItem('bultrain-theme');
+          t = saved === 'light' || saved === 'dark' ? saved
+            : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        } catch (e) {}
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
     <link rel="icon" type="image/png" href="/assets/logo-no-bg.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="BulTrain — Умният железопътен спътник за България. Табла и разписания на БДЖ в реално време, както и умни аларми по локация. Никога повече не изпускай влака си." />
@@ -9,9 +21,8 @@
     <meta property="og:title" content="BulTrain — Твоят умен железопътен спътник" />
     <meta property="og:description" content="Табла и разписания на БДЖ в реално време, умни аларми по локация. Никога повече не изпускай влака си." />
     <meta property="og:type" content="website" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <meta name="apple-itunes-app" content="app-id=6759790703" />
+    <meta name="theme-color" content="#09090C" />
     <title>BulTrain</title>
   </head>
   <body>
