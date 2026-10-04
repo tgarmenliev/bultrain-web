@@ -24,6 +24,8 @@ const photos = [
   ['photos/eink-display/IMG_5830.HEIC', 'eink-1', [1800, 900]],
   ['photos/eink-display/IMG_5831.HEIC', 'eink-2', [1800, 900]],
   ['photos/me/IMG_7708.heic', 'me-platform', [1400, 700]],
+  ['photos/events/IMG_6085.HEIC', 'event-dublin', [1400, 700]],
+  ['photos/events/N97A6470.jpg', 'event-president', [1600, 800]],
 ]
 for (const [src, name, widths] of photos) {
   const full = join(TMP, `${name}.jpg`)

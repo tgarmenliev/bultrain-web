@@ -5,11 +5,11 @@ import Hero from './site/Hero'
 import LiveNetwork from './site/LiveNetwork'
 import Tour from './site/Tour'
 import Promises from './site/Promises'
+import Press from './site/Press'
+import Maker from './site/Maker'
+import SupportSection from './site/SupportSection'
 import Footer from './site/Footer'
 import DesignSystem from './site/DesignSystem'
-import MediaCoverage from './components/MediaCoverage'
-import About from './components/About'
-import Support from './components/Support'
 import ScrollProgress from './components/ScrollProgress'
 import Privacy from './pages/Privacy'
 import PrivacyApp from './pages/PrivacyApp'
@@ -31,11 +31,9 @@ function Home() {
         <LiveNetwork />
         <Tour />
         <Promises />
-        <Legacy>
-          <MediaCoverage />
-          <About />
-          <Support />
-        </Legacy>
+        <Press />
+        <Maker />
+        <SupportSection />
       </main>
     </>
   )

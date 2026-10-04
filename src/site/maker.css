@@ -1,0 +1,35 @@
+.maker { padding: clamp(64px, 9vw, 128px) 0; scroll-margin-top: var(--nav-h); }
+.maker__grid { display: grid; grid-template-columns: minmax(0, 440px) minmax(0, 1fr); gap: clamp(32px, 7vw, 112px); align-items: start; }
+.maker__portrait { margin: 0; position: sticky; top: calc(var(--nav-h) + 24px); }
+.maker__portrait img { display: block; width: 100%; height: auto; border-radius: var(--r-l); box-shadow: var(--shadow); }
+
+.maker__name { font-size: clamp(2.2rem, 4.6vw, 3.8rem); }
+.maker__role { margin: 14px 0 0; font-size: clamp(1.02rem, 1.4vw, 1.15rem); font-weight: 600; color: var(--ink2); }
+.maker__intro { margin: 26px 0 0; max-width: 56ch; font-size: clamp(1.02rem, 1.3vw, 1.12rem); line-height: 1.7; color: var(--ink2); text-wrap: pretty; }
+
+.maker__quote { margin: 40px 0 0; padding: 4px 0 4px 24px; border-left: 3px solid var(--accent); }
+.maker__quote p { margin: 0; font-size: clamp(1.25rem, 2.2vw, 1.7rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.3; text-wrap: balance; max-width: 30ch; }
+.maker__quote footer { margin-top: 12px; font-size: 13.5px; font-weight: 600; color: var(--ink3); }
+
+.maker__lists { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); margin-top: clamp(40px, 5vw, 64px); }
+.maker__lists h3 { margin: 0 0 14px; font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink3); }
+.maker__lists ul { list-style: none; margin: 0; padding: 0; }
+.maker__lists li { display: flex; flex-direction: column; gap: 2px; padding: 14px 0; border-top: 1px solid var(--line); }
+.maker__lists li:last-child { border-bottom: 1px solid var(--line); }
+.maker__lists b { font-size: 15px; font-weight: 800; letter-spacing: -0.01em; color: var(--ink); line-height: 1.35; }
+.maker__lists span { font-size: 13.5px; line-height: 1.5; color: var(--ink3); }
+.maker__lists li.is-major b { font-size: 17px; }
+
+.maker__president { margin: clamp(40px, 5vw, 64px) 0 0; max-width: 560px; }
+.maker__president img { display: block; width: 100%; height: auto; border-radius: var(--r-m); box-shadow: var(--shadow); }
+.maker__president figcaption { margin-top: 12px; font-size: 13.5px; font-weight: 600; color: var(--ink3); }
+
+.maker__links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 36px 0 0; }
+.maker__links a { display: inline-flex; align-items: center; gap: 5px; font-size: 14.5px; font-weight: 800; color: var(--accent); text-decoration: none; }
+@media (hover: hover) and (pointer: fine) { .maker__links a:hover { text-decoration: underline; text-underline-offset: 4px; } }
+
+@media (max-width: 900px) {
+  .maker__grid { grid-template-columns: minmax(0, 1fr); }
+  .maker__portrait { position: static; max-width: 360px; }
+  .maker__lists { grid-template-columns: minmax(0, 1fr); }
+}

@@ -138,6 +138,35 @@ export const translations = {
       ],
     },
 
+    press: {
+      title: 'За BulTrain в медиите и в магазините.',
+      pressLabel: 'В медиите',
+      storesLabel: 'От магазините',
+      dublinCaption: 'На европейското състезание за млади иноватори в Дъблин.',
+      ratingCount: '{n} оценки',
+      outOf: 'от 5',
+      translated: 'Преведено от български',
+      reviews: [
+        { text: 'Браво! Най-сетне работещо приложение без реклами. Похвално е, че може да се вижда разписанието и на спирките, а не само на гарите. Изненада ме, че се вижда времето за изчакване на връзка, когато има прекачване. Вижда се и причината за закъснението на влака! Още веднъж БРАВО! БЛАГОДАРЯ, че помислихте за нас, пътниците.', name: 'Пламен Георгиев', store: 'Google Play', date: '2024-04-16', lang: 'bg' },
+        { text: 'Приложението е супер. Просто пример как ТРЯБВА да се правят нещата и приложенията.', name: 'Даниел Кузманов', store: 'Google Play', date: '2026-06-30', lang: 'bg' },
+        { text: 'Exceptional design and usability! Traveling by train in Bulgaria has never been easier - this app makes everything smooth and convenient.', name: 'dellinex', store: 'App Store', date: '2026-04-12', lang: 'en' },
+      ],
+    },
+
+    maker: {
+      name: 'Тихомир Гърменлиев',
+      role: 'Създател на BulTrain. Студент в Технически университет София.',
+      intro: 'BulTrain започна като ученически проект в ТУЕС. Днес е приложение за iOS и Android, което показва закъснения и позиции на влаковете от официалните данни на жп мрежата. За гарите направих и собствен e-ink дисплей.',
+      quote: 'Целта ми винаги е била да реша свой или чужд проблем с помощта на технологиите.',
+      quoteBy: 'Тихомир Гърменлиев, за Economy.bg',
+      awardsTitle: 'Отличия',
+      educationTitle: 'Образование',
+      dublin: { label: 'Финал на европейско състезание за млади иноватори, Дъблин', detail: 'С BulTrain' },
+      presidentCaption: 'С президента на България Илиана Йотова.',
+      presidentAlt: 'Тихомир Гърменлиев с президента на България Илиана Йотова пред държавния герб',
+      portraitAlt: 'Тихомир Гърменлиев на перон, пред червен влак',
+    },
+
     network: {
       title: 'Влаковете в България, в този момент.',
       lead: '{running} влака в движение, за {withRealtime} има данни на живо.',
@@ -592,6 +621,35 @@ export const translations = {
         { title: 'The alarm works offline', text: 'The arrival alarm runs entirely on GPS, with no server and no mobile coverage. It works even with no connection.' },
         { title: 'No account, no tracking', text: 'Your location never leaves your phone. We do not ask for an account and we do not collect personal data.' },
       ],
+    },
+
+    press: {
+      title: 'BulTrain in the press and in the stores.',
+      pressLabel: 'In the press',
+      storesLabel: 'From the stores',
+      dublinCaption: 'At the European competition for young innovators in Dublin.',
+      ratingCount: '{n} ratings',
+      outOf: 'out of 5',
+      translated: 'Translated from Bulgarian',
+      reviews: [
+        { text: 'Bravo! At last a working app without ads. It is great that you can see the timetable for stops, not only for stations. I was surprised that it shows the waiting time for a connection when you have to change trains. It even shows the reason for the train\u2019s delay! Bravo once again! THANK YOU for thinking of us, the passengers.', name: 'Plamen Georgiev', store: 'Google Play', date: '2024-04-16', lang: 'bg' },
+        { text: 'The app is great. Just an example of how apps SHOULD be made.', name: 'Daniel Kuzmanov', store: 'Google Play', date: '2026-06-30', lang: 'bg' },
+        { text: 'Exceptional design and usability! Traveling by train in Bulgaria has never been easier - this app makes everything smooth and convenient.', name: 'dellinex', store: 'App Store', date: '2026-04-12', lang: 'en' },
+      ],
+    },
+
+    maker: {
+      name: 'Tihomir Garmenliev',
+      role: 'Creator of BulTrain. Student at the Technical University of Sofia.',
+      intro: 'BulTrain started as a school project at TUES. Today it is an iOS and Android app that shows train delays and positions from the rail network\u2019s official data. I also built my own e-ink display for stations.',
+      quote: 'My goal has always been to solve my own or someone else\u2019s problem with technology.',
+      quoteBy: 'Tihomir Garmenliev, to Economy.bg',
+      awardsTitle: 'Awards',
+      educationTitle: 'Education',
+      dublin: { label: 'Final of a European competition for young innovators, Dublin', detail: 'With BulTrain' },
+      presidentCaption: 'With the President of Bulgaria, Iliana Iotova.',
+      presidentAlt: 'Tihomir Garmenliev with the President of Bulgaria, Iliana Iotova, in front of the national coat of arms',
+      portraitAlt: 'Tihomir Garmenliev on a platform in front of a red train',
     },
 
     network: {

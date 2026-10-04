@@ -1,0 +1,11 @@
+.support { padding: clamp(64px, 9vw, 128px) 0; scroll-margin-top: var(--nav-h); border-top: 1px solid var(--line); }
+.support__grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(28px, 6vw, 96px); align-items: center; }
+.support__title { font-size: clamp(1.9rem, 3.8vw, 3.1rem); max-width: 18ch; }
+.support__text { margin: 20px 0 0; max-width: 54ch; font-size: clamp(1rem, 1.3vw, 1.1rem); line-height: 1.65; color: var(--ink2); text-wrap: pretty; }
+.support__actions { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.support__contact { display: flex; flex-direction: column; gap: 6px; margin: 18px 0 0; padding-top: 18px; border-top: 1px solid var(--line); width: 100%; }
+.support__contact span { font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink3); }
+.support__contact a { display: inline-flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; color: var(--ink); text-decoration: none; transition: color 160ms ease; }
+.support__contact a svg { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) { .support__contact a:hover { color: var(--accent); } }
+@media (max-width: 900px) { .support__grid { grid-template-columns: minmax(0, 1fr); } .support__actions .ds-btn { width: 100%; } }
