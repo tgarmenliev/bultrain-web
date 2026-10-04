@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { Menu, X, Sun, Moon } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useTheme } from '../theme/ThemeContext'
@@ -29,8 +30,14 @@ function ThemeToggle() {
   )
 }
 
+// On the home page a hash link scrolls; elsewhere it goes home first, then scrolls.
+function Anchor({ hash, home, children, ...rest }) {
+  return home ? <a href={hash} {...rest}>{children}</a> : <Link to={`/${hash}`} {...rest}>{children}</Link>
+}
+
 export default function Nav() {
   const { t } = useLanguage()
+  const home = useLocation().pathname === '/'
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const sentinel = useRef(null)
@@ -58,14 +65,14 @@ export default function Nav() {
       <div ref={sentinel} className="nav-sentinel" aria-hidden="true" />
       <header className="nav" data-scrolled={scrolled} data-open={open}>
         <div className="wrap nav__bar">
-          <a className="nav__logo" href="#" aria-label="BulTrain">
+          <Anchor className="nav__logo" hash="#" home={home} aria-label="BulTrain">
             <img src="/favicon.svg" alt="" width="32" height="32" />
             <span>BulTrain</span>
-          </a>
+          </Anchor>
 
           <nav className="nav__links" aria-label="Main">
             {links.map(([id, href, label]) => (
-              <a key={id} href={href}>{label}</a>
+              <Anchor key={id} hash={href} home={home}>{label}</Anchor>
             ))}
           </nav>
 
@@ -84,7 +91,7 @@ export default function Nav() {
         <div className="nav__sheet" aria-hidden={!open}>
           <div className="wrap">
             {links.map(([id, href, label]) => (
-              <a key={id} href={href} tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}>{label}</a>
+              <Anchor key={id} hash={href} home={home} tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}>{label}</Anchor>
             ))}
             <a className="ds-btn ds-btn--primary nav__sheet-cta" href={store} target="_blank" rel="noopener noreferrer" tabIndex={open ? 0 : -1}>
               {t.nav.cta}

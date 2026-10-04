@@ -138,6 +138,11 @@ export const translations = {
       ],
     },
 
+    notFound: {
+      title: 'Страницата не е намерена.',
+      text: 'Адресът може да е грешен или страницата да е преместена.',
+    },
+
     press: {
       title: 'За BulTrain в медиите и в магазините.',
       pressLabel: 'В медиите',
@@ -621,6 +626,11 @@ export const translations = {
         { title: 'The alarm works offline', text: 'The arrival alarm runs entirely on GPS, with no server and no mobile coverage. It works even with no connection.' },
         { title: 'No account, no tracking', text: 'Your location never leaves your phone. We do not ask for an account and we do not collect personal data.' },
       ],
+    },
+
+    notFound: {
+      title: 'Page not found.',
+      text: 'The address may be wrong, or the page may have moved.',
     },
 
     press: {

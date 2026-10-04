@@ -55,7 +55,7 @@ body {
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
 
 /* Scoped legacy blocks stay dark until each is migrated (see src/App.jsx). */
-.legacy { background: var(--bg); color: var(--ink); }
+
 
 /* ---- Buttons ----------------------------------------------------------- */
 .ds-btn {
