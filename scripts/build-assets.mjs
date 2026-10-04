@@ -39,11 +39,11 @@ const S = 'screens/ios'
 // Verified by eye against labelled contact sheets (file numbers are NOT in a uniform order across sets).
 const screens = {
   dark: {
-    bg: { home: '9741', results: '9742', trip: '9743', board: '9744', route: '9745', info: '9746', lock: '9778' },
-    en: { home: '9769', results: '9770', trip: '9771', route: '9772', info: '9773' },
+    bg: { home: '9741', homeLive: '9777', results: '9742', trip: '9743', board: '9744', route: '9745', info: '9746', lock: '9778' },
+    en: { home: '9769', results: '9770', trip: '9771', board: 'F:Screenshot 2026-10-04 at 20.57.18.png', route: '9772', info: '9773' },
   },
   light: {
-    bg: { home: '9750', results: '9751', board: '9753', route: '9754', info: '9756' },
+    bg: { home: '9750', results: '9751', trip: 'F:Screenshot 2026-10-04 at 19.58.29.png', board: '9753', route: '9754', info: '9756' },
     en: { home: '9759', results: '9760', trip: '9761', board: '9762', route: '9763', info: '9764', lock: '9768' },
   },
 }
@@ -53,7 +53,7 @@ for (const [theme, langs] of Object.entries(screens)) {
   for (const [lang, names] of Object.entries(langs)) {
     manifest[theme][lang] = {}
     for (const [name, n] of Object.entries(names)) {
-      const src = join(IN, S, theme, lang, `IMG_${n}.PNG`)
+      const src = join(IN, S, theme, lang, n.startsWith('F:') ? n.slice(2) : `IMG_${n}.PNG`)
       if (!existsSync(src)) { console.log('MISSING', src); continue }
       const out = `${OUT}/app/${theme}-${lang}-${name}.webp`
       run('magick', [src, '-alpha', 'off', '-strip', '-resize', '900x', '-quality', '84', out])
