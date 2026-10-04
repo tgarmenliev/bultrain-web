@@ -48,6 +48,10 @@ function createResource(path, intervalMs) {
         if (holders > 0 && document.visibilityState === 'visible') schedule(0)
         return
       }
+      if (import.meta.env.DEV && e instanceof TypeError) {
+        // Almost always CORS in development: the API allows only localhost:5173 / 4173 / 3000.
+        console.warn(`[live] ${path} failed (${location.origin}). The API allows only localhost:5173, :4173, :3000 and bultrain.eu. Run the dev server on 5173.`)
+      }
       emit({ status: 'error' }) // keeps state.data: the last good snapshot stays on screen
       schedule(Math.min(intervalMs, 30_000))
     } finally {
