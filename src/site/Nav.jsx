@@ -62,11 +62,12 @@ export default function Nav() {
 
   return (
     <>
+      <a className="skip" href="#main" onClick={(e) => { const m = document.getElementById('main'); if (m) { e.preventDefault(); m.focus(); m.scrollIntoView() } }}>{t.nav.skip}</a>
       <div ref={sentinel} className="nav-sentinel" aria-hidden="true" />
       <header className="nav" data-scrolled={scrolled} data-open={open}>
         <div className="wrap nav__bar">
           <Anchor className="nav__logo" hash="#" home={home} aria-label="BulTrain">
-            <img src="/favicon.svg" alt="" width="32" height="32" />
+            <img src="/img/logo-128.webp" alt="" width="32" height="32" />
             <span>BulTrain</span>
           </Anchor>
 

@@ -1,5 +1,5 @@
 import { tokens } from '../design/tokens.mjs'
-import { appScreen } from '../data/screens'
+import { appScreen, screenProps } from '../data/screens'
 import { useLanguage } from '../i18n/LanguageContext'
 import './design-system.css'
 
@@ -14,7 +14,7 @@ const PAIRS = [
 function Panel({ name, theme }) {
   const { lang } = useLanguage()
   const t = tokens[theme]
-  const shot = appScreen(theme, lang, ['board', 'results', 'home'])
+  const shot = appScreen(theme, lang, ['board', 'results'])
   return (
     <section className="dsx" data-theme={theme}>
       <h2 className="dsx__name">{name}</h2>
@@ -50,7 +50,7 @@ function Panel({ name, theme }) {
       </div>
 
       <h3>Рамка на устройство</h3>
-      {shot && <div className="dsx__phone"><div className="ds-device"><img src={shot} alt="" /></div></div>}
+      {shot && <div className="dsx__phone"><div className="ds-device"><img {...screenProps(shot)} sizes="190px" alt="" /></div></div>}
     </section>
   )
 }

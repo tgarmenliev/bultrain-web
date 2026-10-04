@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { lazy, Suspense, useRef, useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
-import { networkResource, useResource, useNow, ageMinutes, STALE_MS, stationName } from '../data/live'
+import { networkResource, useResource, useNow, ageMinutes, STALE_MS, stationName, trainLabel } from '../data/live'
 import EinkBoard from './EinkBoard'
-import Radar from './Radar'
+const Radar = lazy(() => import('./Radar'))
 import './network.css'
 
 const fill = (str, vars) => Object.entries(vars).reduce((s, [k, v]) => s.replace(`{${k}}`, v), str)
@@ -41,6 +41,7 @@ export default function LiveNetwork() {
   const d = snap.data
   const fr = freshness(snap, now, t)
   const [tab, setTab] = useState('sofia')
+  const tabRefs = useRef({})
 
   const available = d?.realtime.available === true
   const s = d?.summary
@@ -96,7 +97,7 @@ export default function LiveNetwork() {
               <Stat label={n.max} value={s.maxDelay?.min} unit={` ${n.unit}`}
                 empty={!available || !s.maxDelay ? n.noRealtime : null}
                 note={available && s.maxDelay
-                  ? `${s.maxDelay.type ? s.maxDelay.type + ' ' : ''}${s.maxDelay.trainNum} → ${stationName(s.maxDelay.to, lang)}`
+                  ? `${trainLabel(s.maxDelay.type, s.maxDelay.trainNum, lang)} → ${stationName(s.maxDelay.to, lang)}`
                   : n.noRealtimeNote} />
             )}
           </div>
@@ -105,15 +106,27 @@ export default function LiveNetwork() {
         <div className="net__boards">
           <div className="net__boardcol">
             {boardKeys.length > 1 && (
-              <div className="net__tabs" role="tablist" aria-label={n.board.title}>
+              <div className="net__tabs" role="tablist" aria-label={n.board.title}
+                onKeyDown={(e) => {
+                  const i = boardKeys.indexOf(board === d.boards[tab] ? tab : boardKeys[0])
+                  const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0
+                  if (!step) return
+                  e.preventDefault()
+                  const next = boardKeys[(i + step + boardKeys.length) % boardKeys.length]
+                  setTab(next); tabRefs.current[next]?.focus()
+                }}>
                 {boardKeys.map((k) => (
-                  <button key={k} role="tab" type="button" aria-selected={board === d.boards[k]} onClick={() => setTab(k)}>
+                  <button key={k} ref={(el) => (tabRefs.current[k] = el)} id={`board-tab-${k}`} role="tab" type="button"
+                    aria-selected={board === d.boards[k]} aria-controls="board-panel" tabIndex={board === d.boards[k] ? 0 : -1}
+                    onClick={() => setTab(k)}>
                     {stationName(d.boards[k].name, lang)}
                   </button>
                 ))}
               </div>
             )}
-            {d ? <EinkBoard board={board} lang={lang} labels={n.board} stamp={stamp} /> : <div className="net__skeleton" aria-hidden="true" />}
+            <div id="board-panel" role="tabpanel" aria-labelledby={`board-tab-${tab}`}>
+              {d ? <EinkBoard board={board} lang={lang} labels={n.board} stamp={stamp} /> : <div className="net__skeleton" aria-hidden="true" />}
+            </div>
             <p className="net__boardnote">{n.board.note}</p>
           </div>
 
@@ -126,7 +139,9 @@ export default function LiveNetwork() {
 
         <div className="net__radar">
           <h3 className="net__h3">{n.radar.title}</h3>
-          <Radar lang={lang} t={t} />
+          <Suspense fallback={<div style={{ aspectRatio: '1072 / 722', maxWidth: '62%' }} aria-hidden="true" />}>
+            <Radar lang={lang} t={t} />
+          </Suspense>
         </div>
       </div>
     </section>

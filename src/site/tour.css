@@ -5,15 +5,18 @@
 
 .tour__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: clamp(32px, 6vw, 96px); margin-top: clamp(24px, 4vw, 48px); }
 
-.tour__step { min-height: 82vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 14px; max-width: 480px; opacity: 0.32; transition: opacity 320ms ease; }
-.tour__step[data-active='true'] { opacity: 1; }
-.tour__n { font-size: 14px; font-weight: 800; letter-spacing: 0.06em; color: var(--accent); }
+.tour__step { min-height: 82vh; min-height: 82svh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 14px; max-width: 480px; }
+/* The active step is marked by colour (never by dimming text: that cannot pass contrast). */
+.tour__n { font-size: 14px; font-weight: 800; letter-spacing: 0.06em; color: var(--ink3); transition: color 320ms ease; }
+.tour__step[data-active='true'] .tour__n { color: var(--accent); }
 .tour__tag { padding: 4px 10px; border-radius: 7px; background: var(--raised); font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink2); }
-.tour__step h3 { margin: 0; font-size: clamp(1.6rem, 2.6vw, 2.3rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.12; text-wrap: balance; }
-.tour__step p { margin: 0; font-size: clamp(1.02rem, 1.3vw, 1.15rem); line-height: 1.65; color: var(--ink2); text-wrap: pretty; }
+.tour__step h3 { color: var(--ink2); transition: color 320ms ease; margin: 0; font-size: clamp(1.6rem, 2.6vw, 2.3rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.12; text-wrap: balance; }
+.tour__step[data-active='true'] h3 { color: var(--ink); }
+.tour__step[data-active='true'] p { color: var(--ink2); }
+.tour__step p { color: var(--ink3); transition: color 320ms ease; margin: 0; font-size: clamp(1.02rem, 1.3vw, 1.15rem); line-height: 1.65; color: var(--ink2); text-wrap: pretty; }
 
-.tour__stage { position: sticky; top: 0; height: 100vh; display: grid; place-items: center; }
-.tour__phone { width: min(300px, 34vh); }
+.tour__stage { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; place-items: center; }
+.tour__phone { width: min(300px, 34vh); width: min(300px, 34svh); }
 .tour__screens { position: relative; width: 100%; height: 100%; border-radius: 11% / 5.1%; overflow: hidden; background: var(--raised); }
 .tour__screens img { position: absolute; inset: 0; opacity: 0; filter: blur(3px); transform: scale(1.015); transition: opacity 340ms ease, filter 340ms ease, transform 420ms var(--ease-out); }
 .tour__screens img[data-on='true'] { opacity: 1; filter: none; transform: none; }
@@ -31,7 +34,8 @@
 @media (max-width: 900px) {
   .tour__grid { grid-template-columns: minmax(0, 1fr); }
   .tour__stage { display: none; }
-  .tour__step { min-height: 0; opacity: 1; max-width: none; padding: 40px 0; border-top: 1px solid var(--line); }
+  .tour__step h3 { color: var(--ink); } .tour__step p { color: var(--ink2); } .tour__n { color: var(--accent); }
+  .tour__step { min-height: 0; max-width: none; padding: 40px 0; border-top: 1px solid var(--line); }
   .tour__inline { display: block; width: min(250px, 62vw); margin: 14px auto 0; }
 }
-@media (prefers-reduced-motion: reduce) { .tour__screens img, .tour__step, .tour__dots li { transition: none; } .tour__screens img { filter: none; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .tour__screens img, .tour__n, .tour__step h3, .tour__step p, .tour__dots li { transition: none; } .tour__screens img { filter: none; transform: none; } }

@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Nav from './site/Nav'
+import RouteMeta from './site/RouteMeta'
 import Hero from './site/Hero'
 import LiveNetwork from './site/LiveNetwork'
 import Tour from './site/Tour'
@@ -9,17 +10,17 @@ import Press from './site/Press'
 import Maker from './site/Maker'
 import SupportSection from './site/SupportSection'
 import Footer from './site/Footer'
-import DesignSystem from './site/DesignSystem'
 import ScrollProgress from './components/ScrollProgress'
-import Privacy from './pages/Privacy'
-import PrivacyApp from './pages/PrivacyApp'
-import Terms from './pages/Terms'
-import Contact from './pages/Contact'
-import NotFound from './pages/NotFound'
+const DesignSystem = lazy(() => import('./site/DesignSystem'))
+const Privacy = lazy(() => import('./pages/Privacy'))
+const PrivacyApp = lazy(() => import('./pages/PrivacyApp'))
+const Terms = lazy(() => import('./pages/Terms'))
+const Contact = lazy(() => import('./pages/Contact'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 function Home() {
   return (
-    <main>
+    <main id="main" tabIndex={-1}>
       <Hero />
       <LiveNetwork />
       <Tour />
@@ -47,7 +48,9 @@ export default function App() {
     <div style={{ position: 'relative' }}>
       <ScrollProgress />
       <ScrollToTop />
+      <RouteMeta />
       <Nav />
+      <Suspense fallback={<div style={{ minHeight: '70vh' }} />}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/privacy" element={<Privacy />} />
@@ -57,6 +60,7 @@ export default function App() {
         <Route path="/design" element={<DesignSystem />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      </Suspense>
       <Footer />
     </div>
   )

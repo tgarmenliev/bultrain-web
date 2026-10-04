@@ -16,7 +16,7 @@ export default function Footer() {
       <div className="wrap">
         <div className="foot__row">
           <Link to="/" className="foot__brand" aria-label="BulTrain">
-            <img src="/favicon.svg" alt="" width="28" height="28" />
+            <img src="/img/logo-128.webp" alt="" width="28" height="28" />
             <span>BulTrain</span>
           </Link>
           <nav className="foot__links" aria-label="Legal">

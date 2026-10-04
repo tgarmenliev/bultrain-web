@@ -1,6 +1,6 @@
 import { useLanguage } from '../i18n/LanguageContext'
 import { useTheme } from '../theme/ThemeContext'
-import { appScreen } from '../data/screens'
+import { appScreen, screenProps } from '../data/screens'
 import LiveLine from './LiveLine'
 import './hero.css'
 
@@ -58,7 +58,7 @@ export default function Hero() {
             {screen && (
               <div className="hero__phone" data-rise style={{ '--i': 4 }}>
                 <div className="ds-device">
-                  <img src={screen} alt={`BulTrain, ${t.screenshots.labels.station}`} width="900" height="1948" />
+                  <img {...screenProps(screen)} sizes="(min-width: 960px) 320px, 220px" alt={`BulTrain, ${t.screenshots.labels.station}`} width="900" height="1948" />
                 </div>
               </div>
             )}

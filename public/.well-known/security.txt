@@ -1,0 +1,4 @@
+Contact: mailto:bultrain.app@gmail.com
+Expires: 2027-10-04T00:00:00.000Z
+Preferred-Languages: bg, en
+Canonical: https://bultrain.eu/.well-known/security.txt

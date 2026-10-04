@@ -20,9 +20,7 @@ const run = (cmd, args) => execFileSync(cmd, args, { stdio: 'pipe' })
 // --- photos: [source, name, widths]
 const photos = [
   ['photos/trains/IMG_4721_edited.JPG', 'loco-evening', [2000, 1000]],
-  ['photos/trains/IMG_5280.HEIC', 'sunset-platform', [2000, 1000]],
   ['photos/eink-display/IMG_5830.HEIC', 'eink-1', [1800, 900]],
-  ['photos/eink-display/IMG_5831.HEIC', 'eink-2', [1800, 900]],
   ['photos/me/IMG_7708.heic', 'me-platform', [1400, 700]],
   ['photos/events/IMG_6085.HEIC', 'event-dublin', [1400, 700]],
   ['photos/events/N97A6470.jpg', 'event-president', [1600, 800]],
@@ -39,14 +37,15 @@ for (const [src, name, widths] of photos) {
 // --- app screens: theme/lang -> { name: file }
 const S = 'screens/ios'
 // Verified by eye against labelled contact sheets (file numbers are NOT in a uniform order across sets).
+// Only the screens the site actually shows (hero: board/results/route, tour: results/board/route/lock).
 const screens = {
   dark: {
-    bg: { home: '9741', homeLive: '9777', results: '9742', trip: '9743', board: '9744', route: '9745', info: '9746', lock: '9778' },
-    en: { home: '9769', results: '9770', trip: '9771', board: 'F:Screenshot 2026-10-04 at 20.57.18.png', route: '9772', info: '9773' },
+    bg: { results: '9742', board: '9744', route: '9745', lock: '9778' },
+    en: { results: '9770', board: 'F:Screenshot 2026-10-04 at 20.57.18.png', route: '9772' },
   },
   light: {
-    bg: { home: '9750', results: '9751', trip: 'F:Screenshot 2026-10-04 at 19.58.29.png', board: '9753', route: '9754', info: '9756' },
-    en: { home: '9759', results: '9760', trip: '9761', board: '9762', route: '9763', info: '9764', lock: '9768' },
+    bg: { results: '9751', board: '9753', route: '9754' },
+    en: { results: '9760', board: '9762', route: '9763', lock: '9768' },
   },
 }
 const manifest = {}
@@ -58,7 +57,8 @@ for (const [theme, langs] of Object.entries(screens)) {
       const src = join(IN, S, theme, lang, n.startsWith('F:') ? n.slice(2) : `IMG_${n}.PNG`)
       if (!existsSync(src)) { console.log('MISSING', src); continue }
       const out = `${OUT}/app/${theme}-${lang}-${name}.webp`
-      run('magick', [src, '-alpha', 'off', '-strip', '-resize', '900x', '-quality', '84', out])
+      run('magick', [src, '-alpha', 'off', '-strip', '-resize', '900x', '-quality', '82', out])
+      for (const w of [480, 640]) run('magick', [src, '-alpha', 'off', '-strip', '-resize', `${w}x`, '-quality', '82', out.replace('.webp', `-${w}.webp`)])
       manifest[theme][lang][name] = `/img/app/${theme}-${lang}-${name}.webp`
     }
   }

@@ -1,5 +1,12 @@
 import screens from './app-screens.json'
 
+/** src + srcSet for a screenshot path returned by appScreen (files: <name>-480.webp, <name>-640.webp, <name>.webp = 900w). */
+export function screenProps(path) {
+  if (!path) return {}
+  const base = path.replace(/\.webp$/, '')
+  return { src: path, srcSet: `${base}-480.webp 480w, ${base}-640.webp 640w, ${path} 900w` }
+}
+
 // Pick a screenshot for the current theme + language, falling back gracefully.
 export function appScreen(theme, lang, names) {
   const list = Array.isArray(names) ? names : [names]

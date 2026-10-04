@@ -14,6 +14,7 @@ export const translations = {
       support: 'Подкрепа',
       cta: 'Свали безплатно',
       menu: 'Меню',
+      skip: 'Към съдържанието',
       live: 'На живо',
       tour: 'Приложението',
       theme: 'Смени темата',
@@ -82,24 +83,31 @@ export const translations = {
       title: 'Страницата не е намерена.',
       text: 'Адресът може да е грешен или страницата да е преместена.',
     },
+    meta: {
+      title: 'BulTrain: влаковете в България на живо',
+      description: 'BulTrain показва закъснения и позиции на влаковете в България в реално време от официалните данни. Табла на гари, разписание и аларма за пристигане. За iOS и Android.',
+      design: 'Дизайн система',
+    },
+
     press: {
       title: 'За BulTrain в медиите и в магазините.',
       storesLabel: 'От магазините',
       dublinCaption: 'На европейското състезание за млади иноватори в Дъблин.',
+      dublinAlt: 'Тихомир Гърменлиев до щанда на BulTrain на състезанието в Дъблин',
       ratingCount: '{n} оценки',
       outOf: 'от 5',
       translated: 'Преведено от български',
       reviews: [
         {
           text: 'Браво! Най-сетне работещо приложение без реклами. Похвално е, че може да се вижда разписанието и на спирките, а не само на гарите. Изненада ме, че се вижда времето за изчакване на връзка, когато има прекачване. Вижда се и причината за закъснението на влака! Още веднъж БРАВО! БЛАГОДАРЯ, че помислихте за нас, пътниците.',
-          name: 'Пламен Георгиев',
+          name: 'Пламен Г.',
           store: 'Google Play',
           date: '2024-04-16',
           lang: 'bg',
         },
         {
           text: 'Приложението е супер. Просто пример как ТРЯБВА да се правят нещата и приложенията.',
-          name: 'Даниел Кузманов',
+          name: 'Даниел К.',
           store: 'Google Play',
           date: '2026-06-30',
           lang: 'bg',
@@ -295,23 +303,43 @@ export const translations = {
       intro: 'Добре дошли в BulTrain! Ние уважаваме Вашата поверителност и се ангажираме да защитаваме Вашите данни. Моля, прочетете тази Политика, за да разберете как събираме, използваме и защитаваме всяка информация, когато използвате нашето приложение и уебсайт.',
       sections: [
         {
-          title: '1. Събиране на данни',
-          body: 'BulTrain е разработено с мисъл за сигурността. Ние <strong>НЕ</strong> изискваме създаване на профил и <strong>НЕ</strong> събираме лични данни, които могат да Ви идентифицират директно (като имена, имейл адреси или телефонни номера). Всички данни се обработват локално на Вашето устройство.',
+          title: '1. Кой отговаря за данните',
+          body: 'Администратор е Тихомир Гърменлиев (физическо лице), създател на BulTrain. За всякакви въпроси относно данните: <a href="mailto:bultrain.app@gmail.com">bultrain.app@gmail.com</a>.',
         },
         {
-          title: '2. Данни за местоположение',
+          title: '2. Събиране на данни',
+          body: 'BulTrain е разработено с мисъл за сигурността. Ние <strong>НЕ</strong> изискваме създаване на профил и <strong>НЕ</strong> събираме лични данни, които могат да Ви идентифицират директно (като имена, имейл адреси или телефонни номера). Всички данни в приложението се обработват локално на Вашето устройство.',
+        },
+        {
+          title: '3. Данни за местоположение',
           body: 'Функцията "Умна аларма" използва данните за Вашето текущо местоположение, за да Ви извести преди наближаване на Вашата гара. Тези данни се използват изцяло и само на Вашето устройство и <strong>не се изпращат към наши сървъри</strong> или към трети страни.',
         },
         {
-          title: '3. Споделяне на информация',
-          body: 'Тъй като ние не събираме лични данни, ние няма какво да споделяме, продаваме или предоставяме на маркетингови агенции или свързани лица.',
+          title: '4. Уебсайтът: бисквитки и локално съхранение',
+          body: 'Този уебсайт <strong>не използва бисквитки</strong> и не съдържа инструменти за проследяване, анализ или реклама. Когато смените езика или темата (светла или тъмна), сайтът записва този избор в локалната памет на Вашия браузър (localStorage, ключове „bultrain-lang“ и „bultrain-theme“), за да го запомни при следващо посещение. Тази информация остава във Вашето устройство, не се изпраща към нас и не Ви идентифицира. Можете да я изтриете по всяко време от настройките на браузъра. Затова не показваме банер за съгласие.',
         },
         {
-          title: '4. Промени в тази Политика',
-          body: 'Можем периодично да обновяваме тази Политика за поверителност. Препоръчваме да преглеждате тази страница за евентуални промени. Вашето продължително използване на приложението ще се счита за Ваше съгласие с тях.',
+          title: '5. Данни, обработвани при посещение',
+          body: 'Секцията „На живо“ зарежда публични данни за влаковете от нашия сървър (api.bultrain.eu), който се предоставя чрез Cloudflare. Както при всяка интернет връзка, Вашият IP адрес и техническите данни на заявката се обработват от тези услуги и от хостинг доставчика на сайта, за да получите страницата и за сигурността ѝ. Ние не ги използваме за проследяване, профилиране или реклама.',
         },
         {
-          title: '5. Свържете се с нас',
+          title: '6. Споделяне на информация',
+          body: 'Ние не продаваме и не предоставяме данни на рекламодатели или маркетингови агенции. Единствените получатели на технически данни са доставчиците, посочени по-горе, които ги обработват само за да работи услугата.',
+        },
+        {
+          title: '7. Връзки към други сайтове',
+          body: 'Сайтът съдържа връзки към App Store, Google Play, медии и социални мрежи. Те имат собствени политики за поверителност, за които не отговаряме.',
+        },
+        {
+          title: '8. Вашите права',
+          body: 'Имате право на достъп, коригиране, изтриване, ограничаване на обработването, преносимост и възражение. Можете да упражните правата си на имейла по-горе. Имате право и да подадете жалба до Комисията за защита на личните данни (<a href="https://cpdp.bg" target="_blank" rel="noopener noreferrer">cpdp.bg</a>).',
+        },
+        {
+          title: '9. Промени в тази Политика',
+          body: 'Можем периодично да обновяваме тази Политика за поверителност. Датата на последната актуализация е в началото на страницата. Вашето продължително използване на приложението ще се счита за Ваше съгласие с промените.',
+        },
+        {
+          title: '10. Свържете се с нас',
           body: 'Ако имате въпроси или притеснения относно нашата Политика за поверителност, моля, свържете се с нас на:',
         },
       ],
@@ -340,6 +368,10 @@ export const translations = {
           title: '5. Права над интелектуалната собственост',
           body: 'Графичните елементи, логата, дизайнът и сорс кодът, създадени за целите на BulTrain, са собственост на разработчика (Тихомир Гърменлиев). Копирането или разпространението им за комерсиални цели без писмено разрешение е строго забранено.',
         },
+        {
+          title: '6. Доброволна подкрепа',
+          body: 'Бутоните „Почерпи ме кафе“ и „Revolut“ водят към външни услуги за доброволни дарения. Подкрепата не е покупка на услуга и не дава допълнителни права. BulTrain остава безплатен.',
+        },
       ],
     },
   },
@@ -350,6 +382,7 @@ export const translations = {
       support: 'Support',
       cta: 'Download free',
       menu: 'Menu',
+      skip: 'Skip to content',
       live: 'Live',
       tour: 'The app',
       theme: 'Switch theme',
@@ -418,24 +451,31 @@ export const translations = {
       title: 'Page not found.',
       text: 'The address may be wrong, or the page may have moved.',
     },
+    meta: {
+      title: 'BulTrain: every train in Bulgaria, live',
+      description: 'BulTrain shows delays and positions of trains in Bulgaria in real time, from the official data. Station boards, timetables and an arrival alarm. For iOS and Android.',
+      design: 'Design system',
+    },
+
     press: {
       title: 'BulTrain in the press and in the stores.',
       storesLabel: 'From the stores',
       dublinCaption: 'At the European competition for young innovators in Dublin.',
+      dublinAlt: 'Tihomir Garmenliev at the BulTrain stand at the competition in Dublin',
       ratingCount: '{n} ratings',
       outOf: 'out of 5',
       translated: 'Translated from Bulgarian',
       reviews: [
         {
           text: 'Bravo! At last a working app without ads. It is great that you can see the timetable for stops, not only for stations. I was surprised that it shows the waiting time for a connection when you have to change trains. It even shows the reason for the train’s delay! Bravo once again! THANK YOU for thinking of us, the passengers.',
-          name: 'Plamen Georgiev',
+          name: 'Plamen G.',
           store: 'Google Play',
           date: '2024-04-16',
           lang: 'bg',
         },
         {
           text: 'The app is great. Just an example of how apps SHOULD be made.',
-          name: 'Daniel Kuzmanov',
+          name: 'Daniel K.',
           store: 'Google Play',
           date: '2026-06-30',
           lang: 'bg',
@@ -631,23 +671,43 @@ export const translations = {
       intro: 'Welcome to BulTrain! We respect your privacy and are committed to protecting your data. Please read this Policy to understand how we collect, use and protect any information when you use our app and website.',
       sections: [
         {
-          title: '1. Data Collection',
-          body: 'BulTrain is built with security in mind. We do <strong>NOT</strong> require you to create an account and we do <strong>NOT</strong> collect personal data that can identify you directly (such as names, email addresses or phone numbers). All data is processed locally on your device.',
+          title: '1. Who is responsible for the data',
+          body: 'The controller is Tihomir Garmenliev (an individual), creator of BulTrain. For any question about data: <a href="mailto:bultrain.app@gmail.com">bultrain.app@gmail.com</a>.',
         },
         {
-          title: '2. Location Data',
+          title: '2. Data Collection',
+          body: 'BulTrain is built with security in mind. We do <strong>NOT</strong> require you to create an account and we do <strong>NOT</strong> collect personal data that can identify you directly (such as names, email addresses or phone numbers). All data in the app is processed locally on your device.',
+        },
+        {
+          title: '3. Location Data',
           body: 'The “Smart Alarm” feature uses your current location data to alert you as you approach your station. This data is used entirely and only on your device and is <strong>never sent to our servers</strong> or to any third parties.',
         },
         {
-          title: '3. Sharing of Information',
-          body: 'Since we do not collect personal data, there is nothing for us to share, sell or provide to marketing agencies or affiliated parties.',
+          title: '4. The website: cookies and local storage',
+          body: 'This website <strong>does not use cookies</strong> and contains no tracking, analytics or advertising tools. When you change the language or the theme (light or dark), the site saves that choice in your browser’s local storage (localStorage, keys “bultrain-lang” and “bultrain-theme”) so it can remember it on your next visit. That information stays on your device, is not sent to us and does not identify you. You can delete it at any time from your browser settings. For this reason we do not show a consent banner.',
         },
         {
-          title: '4. Changes to This Policy',
-          body: 'We may update this Privacy Policy from time to time. We recommend reviewing this page for any changes. Your continued use of the app will be considered your acceptance of them.',
+          title: '5. Data processed when you visit',
+          body: 'The “Live” section loads public train data from our server (api.bultrain.eu), which is delivered through Cloudflare. As with any internet connection, your IP address and the technical details of the request are processed by those services and by the site’s hosting provider so that you receive the page and to keep it secure. We do not use them for tracking, profiling or advertising.',
         },
         {
-          title: '5. Contact Us',
+          title: '6. Sharing of Information',
+          body: 'We do not sell or provide data to advertisers or marketing agencies. The only recipients of technical data are the providers named above, who process it solely to make the service work.',
+        },
+        {
+          title: '7. Links to other sites',
+          body: 'The site contains links to the App Store, Google Play, news outlets and social networks. They have their own privacy policies, for which we are not responsible.',
+        },
+        {
+          title: '8. Your rights',
+          body: 'You have the right of access, rectification, erasure, restriction of processing, portability and objection. You can exercise your rights at the email above. You also have the right to lodge a complaint with the Bulgarian Commission for Personal Data Protection (<a href="https://cpdp.bg" target="_blank" rel="noopener noreferrer">cpdp.bg</a>).',
+        },
+        {
+          title: '9. Changes to This Policy',
+          body: 'We may update this Privacy Policy from time to time. The date of the last update is at the top of the page. Your continued use of the app will be considered your acceptance of the changes.',
+        },
+        {
+          title: '10. Contact Us',
           body: 'If you have any questions or concerns about our Privacy Policy, please contact us at:',
         },
       ],
@@ -675,6 +735,10 @@ export const translations = {
         {
           title: '5. Intellectual Property Rights',
           body: 'The graphic elements, logos, design and source code created for BulTrain are the property of the developer (Tihomir Garmenliev). Copying or distributing them for commercial purposes without written permission is strictly prohibited.',
+        },
+        {
+          title: '6. Voluntary support',
+          body: 'The “Buy me a coffee” and “Revolut” buttons lead to external services for voluntary donations. Support is not the purchase of a service and gives no additional rights. BulTrain remains free.',
         },
       ],
     },

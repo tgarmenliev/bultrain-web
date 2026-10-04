@@ -26,7 +26,7 @@ export default function Press() {
           <article className="press__lead">
             {lead.photo && (
               <figure className="press__photo">
-                <img src={`${lead.photo}-700.webp`} srcSet={`${lead.photo}-700.webp 700w, ${lead.photo}-1400.webp 1400w`} sizes="(min-width: 900px) 420px, 100vw" alt="" width="700" height="933" loading="lazy" />
+                <img src={`${lead.photo}-700.webp`} srcSet={`${lead.photo}-700.webp 700w, ${lead.photo}-1400.webp 1400w`} sizes="(min-width: 900px) 420px, 100vw" alt={p.dublinAlt} width="700" height="933" loading="lazy" />
                 <figcaption>{p.dublinCaption}</figcaption>
               </figure>
             )}

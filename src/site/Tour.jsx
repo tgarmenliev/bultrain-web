@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useTheme } from '../theme/ThemeContext'
-import { appScreen } from '../data/screens'
+import { appScreen, screenProps } from '../data/screens'
 import './tour.css'
 
 const APP_STORE = 'https://apps.apple.com/bg/app/bultrain-train-schedules-bg/id6759790703'
@@ -46,7 +46,7 @@ export default function Tour() {
 
                 {/* phones stack under each step on small screens; the sticky phone is for wide ones */}
                 {shots[i] && (
-                  <div className="tour__inline"><div className="ds-device"><img src={shots[i]} alt={s.alt} width="900" height="1948" loading="lazy" /></div></div>
+                  <div className="tour__inline"><div className="ds-device"><img {...screenProps(shots[i])} sizes="250px" alt={s.alt} width="900" height="1948" loading="lazy" /></div></div>
                 )}
 
                 {i === tour.steps.length - 1 && (
@@ -65,7 +65,7 @@ export default function Tour() {
               <div className="ds-device">
                 <div className="tour__screens">
                   {shots.map((src, i) => src && (
-                    <img key={i} src={src} alt="" width="900" height="1948" data-on={active === i} loading={i === 0 ? 'eager' : 'lazy'} />
+                    <img key={i} {...screenProps(src)} sizes="300px" alt="" width="900" height="1948" data-on={active === i} loading={i === 0 ? 'eager' : 'lazy'} />
                   ))}
                 </div>
               </div>

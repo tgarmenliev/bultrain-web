@@ -8,7 +8,7 @@ import './legal.css'
 export default function LegalPage({ title, updated, lede, wide, children }) {
   const { lang, t } = useLanguage()
   return (
-    <main className="legal">
+    <main className="legal" id="main" tabIndex={-1}>
       <div className={`wrap legal__inner${wide ? ' is-wide' : ''}`}>
         <Link to="/" className="legal__back"><ArrowLeft size={16} /> {t.common.backHome}</Link>
         <h1 className="display legal__title">{title}</h1>

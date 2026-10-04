@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="bg">
+<html lang="bg" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <script>
@@ -14,16 +14,53 @@
         document.documentElement.setAttribute('data-theme', t);
       })();
     </script>
-    <link rel="icon" type="image/png" href="/assets/logo-no-bg.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="BulTrain — Умният железопътен спътник за България. Табла и разписания на БДЖ в реално време, както и умни аларми по локация. Никога повече не изпускай влака си." />
-    <meta name="keywords" content="BulTrain, България, БДЖ, разписание на влаковете, железница, iOS приложение, умна аларма" />
-    <meta property="og:title" content="BulTrain — Твоят умен железопътен спътник" />
-    <meta property="og:description" content="Табла и разписания на БДЖ в реално време, умни аларми по локация. Никога повече не изпускай влака си." />
+
+    <title>BulTrain: влаковете в България на живо</title>
+    <meta name="description" content="BulTrain показва закъснения и позиции на влаковете в България в реално време от официалните данни. Табла на гари, разписание и аларма за пристигане. За iOS и Android." />
+    <link rel="canonical" href="https://bultrain.eu/" />
+
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="BulTrain" />
+    <meta property="og:title" content="BulTrain: влаковете в България на живо" />
+    <meta property="og:description" content="Закъснения и позиции на влаковете в реално време, табла на гари и аларма за пристигане. За iOS и Android." />
+    <meta property="og:url" content="https://bultrain.eu/" />
+    <meta property="og:image" content="https://bultrain.eu/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="bg_BG" />
+    <meta property="og:locale:alternate" content="en_GB" />
+    <meta name="twitter:card" content="summary_large_image" />
+
     <meta name="apple-itunes-app" content="app-id=6759790703" />
-    <meta name="theme-color" content="#09090C" />
-    <title>BulTrain</title>
+    <meta name="theme-color" content="#09090C" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F3F5FA" media="(prefers-color-scheme: light)" />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="preload" href="/fonts/manrope-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://api.bultrain.eu" crossorigin />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MobileApplication",
+        "name": "BulTrain",
+        "applicationCategory": "TravelApplication",
+        "operatingSystem": "iOS, Android",
+        "description": "Real-time delays, positions and station boards for trains in Bulgaria, from the official rail data.",
+        "url": "https://bultrain.eu/",
+        "image": "https://bultrain.eu/og.jpg",
+        "inLanguage": ["bg", "en"],
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "installUrl": "https://apps.apple.com/bg/app/bultrain-train-schedules-bg/id6759790703",
+        "author": { "@type": "Person", "name": "Tihomir Garmenliev", "url": "https://www.linkedin.com/in/tgarmenliev/" }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
