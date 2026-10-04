@@ -3,12 +3,11 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import Nav from './site/Nav'
 import Hero from './site/Hero'
 import LiveNetwork from './site/LiveNetwork'
+import Tour from './site/Tour'
+import Promises from './site/Promises'
 import Footer from './site/Footer'
 import DesignSystem from './site/DesignSystem'
-import Features from './components/Features'
-import WhatsNew from './components/WhatsNew'
 import MediaCoverage from './components/MediaCoverage'
-import Screenshots from './components/Screenshots'
 import About from './components/About'
 import Support from './components/Support'
 import ScrollProgress from './components/ScrollProgress'
@@ -30,11 +29,10 @@ function Home() {
       <main>
         <Hero />
         <LiveNetwork />
+        <Tour />
+        <Promises />
         <Legacy>
-          <Features />
-          <WhatsNew />
           <MediaCoverage />
-          <Screenshots />
           <About />
           <Support />
         </Legacy>

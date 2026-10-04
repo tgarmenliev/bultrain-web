@@ -16,8 +16,10 @@
   --nav-h: 68px;
 }
 
+/* `overflow-x: hidden` (set by the legacy stylesheet) turns html/body/#root into scroll containers and
+   silently breaks position: sticky. `clip` hides horizontal overflow WITHOUT creating a scroll container. */
+html, body, #root { overflow-x: clip; }
 html {
-  overflow-x: clip; /* full-bleed elements use 100vw */
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font);

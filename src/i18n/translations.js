@@ -20,6 +20,7 @@ export const translations = {
       cta: 'Свали безплатно',
       menu: 'Меню',
       live: 'На живо',
+      tour: 'Приложението',
       theme: 'Смени темата',
       language: 'Език',
     },
@@ -111,6 +112,30 @@ export const translations = {
             'Красиво проектиран за нощни пътувания. Всеки детайл е оптимизиран за комфорт при слаба светлина. Всичко е направено така, че да ти е удобно.',
         },
       },
+    },
+
+    tour: {
+      title: 'Едно пътуване, от търсенето до заключения екран.',
+      lead: 'Така изглежда пътуване с BulTrain, стъпка по стъпка, на истински екрани.',
+      steps: [
+        { title: 'Търсиш и виждаш закъснението веднага', text: 'Избираш откъде и докъде. Резултатите показват дали влакът закъснява, без допълнителна стъпка.', alt: 'Резултати от търсене със закъснения' },
+        { title: 'Табло на всяка гара', text: 'Заминаващи и пристигащи от 702 гари, със закъснението до всеки влак.', alt: 'Табло на гара' },
+        { title: 'Следиш конкретния влак', text: 'Виждаш на коя спирка е влакът и колко закъснява. Всичко е на един екран.', alt: 'Маршрут на влак със спирки и закъснения' },
+        { title: 'Влакът ти, на заключения екран', text: 'Закъснение, лента с прогреса и време до пристигане, без да отключваш телефона и без да отваряш приложението. Получаваш известие, когато закъснението се промени значително и когато влакът навакса.', tag: 'Live Activity', alt: 'Заключен екран с Live Activity на BulTrain' },
+      ],
+      ios: 'iOS',
+      iosStatus: 'Налично сега',
+      androidSoon: 'Скоро налично и за Android',
+      cta: 'Свали за iOS',
+    },
+
+    promises: {
+      statement: 'Ако няма данни на живо, казваме го. Закъснение никога не измисляме.',
+      sub: 'Закъсненията идват от официалния публичен поток на Министерството на транспорта и съобщенията. Ако той не е наличен, виждаш ясно обозначен час по разписание.',
+      items: [
+        { title: 'Алармата работи без интернет', text: 'Алармата за пристигане е изцяло на GPS, без сървър и без мобилно покритие. Работи и когато няма връзка.' },
+        { title: 'Без профил, без следене', text: 'Местоположението ти не напуска телефона. Не искаме профил и не събираме лични данни.' },
+      ],
     },
 
     network: {
@@ -451,6 +476,7 @@ export const translations = {
       cta: 'Download free',
       menu: 'Menu',
       live: 'Live',
+      tour: 'The app',
       theme: 'Switch theme',
       language: 'Language',
     },
@@ -542,6 +568,30 @@ export const translations = {
             'Beautifully designed for night-time journeys. Every detail is tuned for comfort in low light, so the app stays easy on the eyes from dusk till dawn.',
         },
       },
+    },
+
+    tour: {
+      title: 'One journey, from search to lock screen.',
+      lead: 'This is what a trip with BulTrain looks like, step by step, on real screens.',
+      steps: [
+        { title: 'Search and see the delay right away', text: 'Pick where from and where to. The results show whether the train is late, with no extra step.', alt: 'Search results showing delays' },
+        { title: 'A board for every station', text: 'Departures and arrivals from 702 stations, with the delay next to every train.', alt: 'Station board' },
+        { title: 'Follow one specific train', text: 'See which stop the train is at and how late it is. All on one screen.', alt: 'Train route with stops and delays' },
+        { title: 'Your train, on your lock screen', text: 'The delay, a progress bar and the time to arrival, without unlocking your phone or opening the app. You get a notification when the delay changes significantly and when the train makes up time.', tag: 'Live Activity', alt: 'BulTrain Live Activity on the lock screen' },
+      ],
+      ios: 'iOS',
+      iosStatus: 'Available now',
+      androidSoon: 'Coming soon to Android',
+      cta: 'Download for iOS',
+    },
+
+    promises: {
+      statement: 'If there is no live data, we say so. We never make up a delay.',
+      sub: 'Delays come from the official public feed of the Ministry of Transport and Communications. If it is unavailable, you see a clearly labelled scheduled time.',
+      items: [
+        { title: 'The alarm works offline', text: 'The arrival alarm runs entirely on GPS, with no server and no mobile coverage. It works even with no connection.' },
+        { title: 'No account, no tracking', text: 'Your location never leaves your phone. We do not ask for an account and we do not collect personal data.' },
+      ],
     },
 
     network: {

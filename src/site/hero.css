@@ -1,4 +1,4 @@
-.hero { padding: calc(var(--nav-h) + clamp(28px, 5vw, 64px)) 0 clamp(48px, 6vw, 88px); }
+.hero { padding: calc(var(--nav-h) + clamp(28px, 5vw, 64px)) 0 clamp(16px, 2.4vw, 32px); }
 .hero__grid { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
 
 .hero__title { font-size: clamp(2.3rem, 4.5vw, 3.9rem); line-height: 1.06; }
