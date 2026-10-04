@@ -1,0 +1,46 @@
+.net { padding: clamp(64px, 9vw, 128px) 0; scroll-margin-top: var(--nav-h); }
+.net__head { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 18px 40px; }
+.net__title { font-size: clamp(2rem, 4.2vw, 3.4rem); max-width: 18ch; }
+.net__lead { margin: 16px 0 0; font-size: clamp(1.05rem, 1.6vw, 1.25rem); font-weight: 600; color: var(--ink2); }
+.net__fresh { display: inline-flex; align-items: center; gap: 10px; margin: 0; padding: 9px 14px; border-radius: 12px; background: var(--raised); font-size: 13.5px; font-weight: 700; color: var(--ink2); }
+.net__dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--ink3); flex-shrink: 0; }
+.net__fresh[data-tone='live'] .net__dot { background: var(--ok); }
+.net__fresh[data-tone='live'] .net__dot::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: var(--ok); animation: net-ping 2.4s var(--ease-out) infinite; }
+.net__fresh[data-tone='warn'] .net__dot { background: var(--warn); }
+.net__fresh[data-tone='bad'] .net__dot { background: var(--late); }
+@keyframes net-ping { 0% { transform: scale(1); opacity: 0.55; } 70%, 100% { transform: scale(3); opacity: 0; } }
+
+.net__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: clamp(32px, 5vw, 56px); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.net__stats--off { grid-template-columns: minmax(0, 1fr); }
+.net__stats--off .net__stat { padding-right: 0; }
+.net__stat { display: flex; flex-direction: column; gap: 6px; padding: 26px 28px 26px 0; }
+.net__stat + .net__stat { padding-left: 28px; border-left: 1px solid var(--line); }
+.net__stat b { font-size: clamp(2.6rem, 5vw, 4rem); font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: var(--ink); }
+.net__stat b small { font-size: 0.38em; font-weight: 700; letter-spacing: 0; color: var(--ink3); margin-left: 4px; }
+.net__stat b.net__none { font-size: clamp(1.2rem, 2vw, 1.6rem); letter-spacing: -0.02em; line-height: 1.2; color: var(--ink2); }
+.net__label { font-size: 15px; font-weight: 800; color: var(--ink); }
+.net__note { font-size: 13px; line-height: 1.5; font-weight: 500; color: var(--ink3); max-width: 34ch; }
+
+.net__boards { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); gap: clamp(24px, 5vw, 72px); align-items: center; margin-top: clamp(48px, 7vw, 96px); }
+.net__tabs { display: inline-flex; gap: 4px; padding: 4px; margin-bottom: 14px; border-radius: 14px; background: var(--raised); }
+.net__tabs button { min-height: 40px; padding: 0 18px; border: 0; border-radius: 10px; background: transparent; color: var(--ink3); font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; transition: background-color 180ms ease, color 180ms ease, transform 160ms var(--ease-out); }
+.net__tabs button:active { transform: scale(0.97); }
+.net__tabs button[aria-selected='true'] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), inset 0 0 0 1px var(--line); }
+.net__boardnote { margin: 14px 0 0; max-width: 52ch; font-size: 13px; line-height: 1.55; color: var(--ink3); }
+.net__skeleton { height: 420px; border-radius: 18px; background: linear-gradient(90deg, var(--raised) 25%, var(--line) 50%, var(--raised) 75%); background-size: 200% 100%; animation: net-shimmer 1.4s linear infinite; }
+@keyframes net-shimmer { to { background-position: -200% 0; } }
+
+.net__photo { margin: 0; }
+.net__photo img { display: block; width: 100%; height: auto; border-radius: var(--r-l); box-shadow: var(--shadow); }
+.net__photo figcaption { margin-top: 14px; max-width: 46ch; font-size: 14.5px; line-height: 1.55; font-weight: 600; color: var(--ink2); }
+
+.net__radar { margin-top: clamp(56px, 8vw, 112px); }
+.net__h3 { margin: 0 0 24px; font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 800; letter-spacing: -0.03em; }
+
+@media (max-width: 900px) {
+  .net__stats { grid-template-columns: minmax(0, 1fr); }
+  .net__stat, .net__stat + .net__stat { padding: 20px 0; border-left: 0; }
+  .net__stat + .net__stat { border-top: 1px solid var(--line); }
+  .net__boards { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) { .net__fresh[data-tone='live'] .net__dot::after, .net__skeleton { animation: none; } }

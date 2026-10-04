@@ -45,6 +45,7 @@ export default function Nav() {
   }, [])
 
   const links = [
+    ['live', '#live-network', t.nav.live],
     ['features', '#features', t.nav.features],
     ['whats-new', '#whats-new', t.nav.whatsNew],
     ['media', '#media-coverage', t.nav.media],

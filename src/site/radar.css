@@ -1,0 +1,39 @@
+.rad { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 56px); align-items: start; }
+.rad__map { position: relative; }
+.rad__map svg { display: block; width: 100%; height: auto; overflow: visible; touch-action: pan-y; }
+.rad__land { fill: var(--surface); stroke: var(--line-strong); stroke-width: 2; stroke-linejoin: round; }
+.rad__city circle { fill: var(--ink3); r: 4px; }
+.rad__city text { fill: var(--ink3); font-size: 21px; font-weight: 700; paint-order: stroke; stroke: var(--surface); stroke-width: 6px; stroke-linejoin: round; }
+
+.rad__dot { transition: transform 1.2s linear; cursor: pointer; }
+.rad__dot circle:first-child { stroke-width: 2.5; }
+.rad__dot--ok circle:first-child { fill: var(--ok); stroke: var(--surface); }
+.rad__dot--late circle:first-child { fill: var(--late); stroke: var(--surface); }
+.rad__dot--unknown circle:first-child { fill: var(--surface); stroke: var(--ink3); }
+.rad__hit { fill: transparent; stroke: none; }
+
+.rad__tip { position: absolute; z-index: 2; transform: translate(-50%, calc(-100% - 18px)); display: flex; flex-direction: column; gap: 2px; padding: 9px 12px; min-width: 150px; border-radius: 12px; background: var(--ink); color: var(--bg); font-size: 12.5px; font-weight: 600; box-shadow: var(--shadow); pointer-events: none; }
+.rad__tip b { font-size: 13.5px; font-weight: 800; }
+.rad__state { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; font-size: 14px; font-weight: 700; color: var(--ink2); text-align: center; padding: 20px; }
+
+.rad__legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.rad__legend li { display: flex; align-items: center; gap: 12px; font-size: 14.5px; font-weight: 600; color: var(--ink2); }
+.rad__sw { width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; box-sizing: border-box; }
+.rad__sw--ok { background: var(--ok); } .rad__sw--late { background: var(--late); width: 20px; height: 20px; margin: -2px; }
+.rad__sw--unknown { background: var(--surface); border: 2.5px solid var(--ink3); }
+.rad__count { margin: 20px 0 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; font-weight: 600; color: var(--ink2); }
+
+.rad__list { margin-top: 18px; border-top: 1px solid var(--line); }
+.rad__list summary { cursor: pointer; padding: 14px 0; font-size: 14px; font-weight: 800; color: var(--ink); list-style: none; }
+.rad__list summary::-webkit-details-marker { display: none; }
+.rad__list summary::after { content: '+'; float: right; color: var(--ink3); font-weight: 600; }
+.rad__list[open] summary::after { content: '–'; }
+.rad__list table { width: 100%; border-collapse: collapse; font-size: 13px; max-height: 360px; display: block; overflow: auto; }
+.rad__list th { text-align: left; padding: 6px 8px 8px 0; font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink3); position: sticky; top: 0; background: var(--bg); }
+.rad__list td { padding: 8px 8px 8px 0; border-top: 1px solid var(--line); vertical-align: top; color: var(--ink2); }
+.rad__list td b { display: block; color: var(--ink); font-weight: 800; }
+.rad__list td span { display: block; font-size: 12px; }
+.rad__d--late { color: var(--late); font-weight: 800; } .rad__d--ok { color: var(--ok); font-weight: 800; }
+
+@media (max-width: 900px) { .rad { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { .rad__dot { transition: none; } }

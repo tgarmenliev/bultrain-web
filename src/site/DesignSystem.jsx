@@ -1,5 +1,5 @@
 import { tokens } from '../design/tokens.mjs'
-import { appScreen } from '../data/board'
+import { appScreen } from '../data/screens'
 import { useLanguage } from '../i18n/LanguageContext'
 import './design-system.css'
 

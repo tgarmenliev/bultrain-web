@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Nav from './site/Nav'
 import Hero from './site/Hero'
+import LiveNetwork from './site/LiveNetwork'
 import Footer from './site/Footer'
 import DesignSystem from './site/DesignSystem'
 import Features from './components/Features'
@@ -28,6 +29,7 @@ function Home() {
       <Nav />
       <main>
         <Hero />
+        <LiveNetwork />
         <Legacy>
           <Features />
           <WhatsNew />
