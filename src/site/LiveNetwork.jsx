@@ -54,10 +54,12 @@ export default function LiveNetwork() {
         <header className="net__head">
           <div>
             <h2 className="display net__title" id="net-title">{n.title}</h2>
-            {d && (
+            {d ? (
               <p className="net__lead tnum">
                 {fill(available ? n.lead : n.leadNone, { running: s.running, withRealtime: s.withRealtime })}
               </p>
+            ) : (
+              <p className="net__lead is-ph" aria-hidden="true">00 00 00 00 00 00 00 00 00</p>
             )}
           </div>
           <p className="net__fresh" data-tone={fr.tone} role="status">
@@ -65,6 +67,13 @@ export default function LiveNetwork() {
             {fr.text}
           </p>
         </header>
+
+        {!d && (
+          // same markup as the loaded state, hidden, so the page does not jump when data arrives
+          <div className="net__stats is-ph" aria-hidden="true">
+            {[0, 1, 2].map((i) => <Stat key={i} label="00 00 00" value="00" unit=" 00" note="00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00" />)}
+          </div>
+        )}
 
         {d && !available && (
           <div className="net__stats net__stats--off">

@@ -1,7 +1,6 @@
 /* BulTrain design system: base layer. Tokens (colour) live in tokens.css (generated). */
 :root {
   --font: 'Manrope Variable', 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-family-sans: var(--font); /* legacy components read this name */
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -16,17 +15,19 @@
   --nav-h: 68px;
 }
 
-/* `overflow-x: hidden` (set by the legacy stylesheet) turns html/body/#root into scroll containers and
-   silently breaks position: sticky. `clip` hides horizontal overflow WITHOUT creating a scroll container. */
+/* `overflow-x: hidden` would turn html/body/#root into scroll containers and silently break position: sticky.
+   `clip` hides horizontal overflow WITHOUT creating a scroll container. */
 html, body, #root { overflow-x: clip; }
 html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) var(--bg);
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  scroll-padding-top: calc(var(--nav-h) + 16px);
 }
 body {
   background: var(--bg);
@@ -54,7 +55,6 @@ body {
 ::selection { background: var(--action); color: var(--on-action); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
 
-/* Scoped legacy blocks stay dark until each is migrated (see src/App.jsx). */
 
 
 /* ---- Buttons ----------------------------------------------------------- */

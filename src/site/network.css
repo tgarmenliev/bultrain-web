@@ -11,6 +11,8 @@
 @keyframes net-ping { 0% { transform: scale(1); opacity: 0.55; } 70%, 100% { transform: scale(3); opacity: 0; } }
 
 .net__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: clamp(32px, 5vw, 56px); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.net__lead.is-ph, .net__stats.is-ph { visibility: hidden; }
+.net__stats.is-ph .net__stat b { visibility: visible; color: transparent; border-radius: 10px; background: linear-gradient(90deg, var(--raised) 25%, var(--line) 50%, var(--raised) 75%); background-size: 200% 100%; animation: net-shimmer 1.4s linear infinite; width: 3ch; align-self: flex-start; }
 .net__stats--off { grid-template-columns: minmax(0, 1fr); }
 .net__stats--off .net__stat { padding-right: 0; }
 .net__stat { display: flex; flex-direction: column; gap: 6px; padding: 26px 28px 26px 0; }

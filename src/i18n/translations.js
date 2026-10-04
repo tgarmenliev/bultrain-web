@@ -1,20 +1,15 @@
 // ============================================================================
-// BulTrain — centralized translation dictionary
+// BulTrain: centralized translation dictionary
 // Two locales: 'bg' (Bulgarian, original) and 'en' (English).
-// Access via the useLanguage() hook: const { t } = useLanguage()
-// then read t.section.key. Keep the two trees structurally identical.
+// Access via the useLanguage() hook: const { t } = useLanguage(), then read t.section.key.
+// Keep the two trees structurally identical. Unused keys were pruned by measuring what the
+// site actually reads (every route, both languages, every data state).
 // ============================================================================
 
 export const translations = {
-  // ==========================================================================
-  // BULGARIAN
-  // ==========================================================================
   bg: {
     nav: {
-      features: 'Функции',
-      whatsNew: 'Ново',
       media: 'Отзвук',
-      gallery: 'Галерия',
       about: 'Зад проекта',
       support: 'Подкрепа',
       cta: 'Свали безплатно',
@@ -24,30 +19,12 @@ export const translations = {
       theme: 'Смени темата',
       language: 'Език',
     },
-
-    common: {
-      backHome: 'Назад към началната страница',
-      readMore: 'Прочети повече',
-      locale: 'bg-BG',
-    },
-
+    common: { backHome: 'Назад към началната страница', readMore: 'Прочети повече' },
     hero: {
-      badge: 'Всички влакове на едно място',
       headlineLine1: 'Пътувай умно.',
       headlineLine2: 'И не изпускай',
       headlineAccent: 'гарата си.',
-      subheading:
-        'Разписания и табла на БДЖ в реално време. Умни аларми по локация, които те известяват преди твоята спирка — създадено специално за теб.',
-      supportCta: 'Подкрепи проекта',
-      appStoreLine1: 'Свали от',
-      appStoreLine2: 'App Store',
-      googlePlayLine1: 'ПРЕДЛАГА СЕ В',
-      googlePlayLine2: 'Google Play',
-      stats: [
-        { value: 'Безплатно', label: 'за да пътуваш приятно' },
-        { value: 'Офлайн', label: 'за да пътуваш спокойно' },
-        { value: 'iOS & Android', label: 'за да пътуваш лесно' },
-      ],
+      subheading: 'Разписания и табла на БДЖ в реално време. Умни аларми по локация, които те известяват преди твоята спирка — създадено специално за теб.',
       facts: [
         { value: '702', label: 'гари' },
         { value: '550', label: 'влака' },
@@ -55,109 +32,87 @@ export const translations = {
       ],
       photoCredit: 'Снимка: Тихомир Гърменлиев',
       photoAlt: 'Червен локомотив на гара, на светлината преди залез',
-      mockup: {
-        city: 'С О Ф И Я',
-        departures: 'Заминаващи',
-        arrivals: 'Пристигащи',
-        colTime: 'ВРЕМЕ',
-        colFrom: 'От',
-        colStatus: 'СТАТУС',
-        onTime: 'НАВРЕМЕ',
-        delayed: '+21 МИН',
-        live: 'На живо',
-        notifTitle: 'Пристигане в Пловдив',
-        notifSubtitle: 'Умна аларма · след 2 спирки',
-        tabs: {
-          schedule: 'Разписание',
-          board: 'Табло',
-          trips: 'Пътувания',
-          guide: 'Наръчник',
-        },
-        trains: [
-          { dest: 'Волуяк' },
-          { dest: 'Пловдив' },
-          { dest: 'Варна' },
-          { dest: 'Костенец' },
-          { dest: 'Враца' },
-          { dest: 'Волуяк' },
-        ],
-      },
     },
-
-    features: {
-      tag: 'Функции',
-      headingLine1: 'Всичко, от което се нуждаеш при пътуване',
-      headingAccent: 'по релси.',
-      subheading:
-        'BulTrain обединява всички инструменти, от които се нуждае всеки пътуващ с влак в България — в едно красиво приложение.',
-      cards: {
-        smartAlarms: {
-          title: 'Умни аларми по локация',
-          description:
-            'Избери маршрут, запази пътуване и BulTrain ще ти изпрати известие преди да пристигнеш. Вече няма нужда да следиш всяка гара, просто можеш да се насладиш на пътуването, а за останалото ще ти помогне приложението.',
-        },
-        liveBoards: {
-          title: 'Електронни Табла на живо',
-          description:
-            'Заминаващи и пристигащи влакове в реално време от всяка гара в България с информация за закъснения — като истинско табло, но в джоба ти.',
-        },
-        offlineSchedules: {
-          title: 'Пълно разписание офлайн',
-          description:
-            'Достъп до разписанието без връзка с интернет за твоето запазено пътуване. Запази веднъж и пътувай спокойно.',
-        },
-        darkMode: {
-          title: 'Удобен тъмен режим',
-          description:
-            'Красиво проектиран за нощни пътувания. Всеки детайл е оптимизиран за комфорт при слаба светлина. Всичко е направено така, че да ти е удобно.',
-        },
-      },
-    },
-
     tour: {
       title: 'Едно пътуване, от търсенето до заключения екран.',
       lead: 'Така изглежда пътуване с BulTrain, стъпка по стъпка, на истински екрани.',
       steps: [
-        { title: 'Търсиш и виждаш закъснението веднага', text: 'Избираш откъде и докъде. Резултатите показват дали влакът закъснява, без допълнителна стъпка.', alt: 'Резултати от търсене със закъснения' },
-        { title: 'Табло на всяка гара', text: 'Заминаващи и пристигащи от 702 гари, със закъснението до всеки влак.', alt: 'Табло на гара' },
-        { title: 'Следиш конкретния влак', text: 'Виждаш на коя спирка е влакът и колко закъснява. Всичко е на един екран.', alt: 'Маршрут на влак със спирки и закъснения' },
-        { title: 'Влакът ти, на заключения екран', text: 'Закъснение, лента с прогреса и време до пристигане, без да отключваш телефона и без да отваряш приложението. Получаваш известие, когато закъснението се промени значително и когато влакът навакса.', tag: 'Live Activity', alt: 'Заключен екран с Live Activity на BulTrain' },
+        {
+          title: 'Търсиш и виждаш закъснението веднага',
+          text: 'Избираш откъде и докъде. Резултатите показват дали влакът закъснява, без допълнителна стъпка.',
+          alt: 'Резултати от търсене със закъснения',
+        },
+        {
+          title: 'Табло на всяка гара',
+          text: 'Заминаващи и пристигащи от 702 гари, със закъснението до всеки влак.',
+          alt: 'Табло на гара',
+        },
+        {
+          title: 'Следиш конкретния влак',
+          text: 'Виждаш на коя спирка е влакът и колко закъснява. Всичко е на един екран.',
+          alt: 'Маршрут на влак със спирки и закъснения',
+        },
+        {
+          title: 'Влакът ти, на заключения екран',
+          text: 'Закъснение, лента с прогреса и време до пристигане, без да отключваш телефона и без да отваряш приложението. Получаваш известие, когато закъснението се промени значително и когато влакът навакса.',
+          tag: 'Live Activity',
+          alt: 'Заключен екран с Live Activity на BulTrain',
+        },
       ],
       ios: 'iOS',
       iosStatus: 'Налично сега',
       androidSoon: 'Скоро налично и за Android',
       cta: 'Свали за iOS',
     },
-
     promises: {
       statement: 'Ако няма данни на живо, казваме го. Закъснение никога не измисляме.',
       sub: 'Закъсненията идват от официалния публичен поток на Министерството на транспорта и съобщенията. Ако той не е наличен, виждаш ясно обозначен час по разписание.',
       items: [
-        { title: 'Алармата работи без интернет', text: 'Алармата за пристигане е изцяло на GPS, без сървър и без мобилно покритие. Работи и когато няма връзка.' },
-        { title: 'Без профил, без следене', text: 'Местоположението ти не напуска телефона. Не искаме профил и не събираме лични данни.' },
+        {
+          title: 'Алармата работи без интернет',
+          text: 'Алармата за пристигане е изцяло на GPS, без сървър и без мобилно покритие. Работи и когато няма връзка.',
+        },
+        {
+          title: 'Без профил, без следене',
+          text: 'Местоположението ти не напуска телефона. Не искаме профил и не събираме лични данни.',
+        },
       ],
     },
-
     notFound: {
       title: 'Страницата не е намерена.',
       text: 'Адресът може да е грешен или страницата да е преместена.',
     },
-
     press: {
       title: 'За BulTrain в медиите и в магазините.',
-      pressLabel: 'В медиите',
       storesLabel: 'От магазините',
       dublinCaption: 'На европейското състезание за млади иноватори в Дъблин.',
       ratingCount: '{n} оценки',
       outOf: 'от 5',
       translated: 'Преведено от български',
       reviews: [
-        { text: 'Браво! Най-сетне работещо приложение без реклами. Похвално е, че може да се вижда разписанието и на спирките, а не само на гарите. Изненада ме, че се вижда времето за изчакване на връзка, когато има прекачване. Вижда се и причината за закъснението на влака! Още веднъж БРАВО! БЛАГОДАРЯ, че помислихте за нас, пътниците.', name: 'Пламен Георгиев', store: 'Google Play', date: '2024-04-16', lang: 'bg' },
-        { text: 'Приложението е супер. Просто пример как ТРЯБВА да се правят нещата и приложенията.', name: 'Даниел Кузманов', store: 'Google Play', date: '2026-06-30', lang: 'bg' },
-        { text: 'Exceptional design and usability! Traveling by train in Bulgaria has never been easier - this app makes everything smooth and convenient.', name: 'dellinex', store: 'App Store', date: '2026-04-12', lang: 'en' },
+        {
+          text: 'Браво! Най-сетне работещо приложение без реклами. Похвално е, че може да се вижда разписанието и на спирките, а не само на гарите. Изненада ме, че се вижда времето за изчакване на връзка, когато има прекачване. Вижда се и причината за закъснението на влака! Още веднъж БРАВО! БЛАГОДАРЯ, че помислихте за нас, пътниците.',
+          name: 'Пламен Георгиев',
+          store: 'Google Play',
+          date: '2024-04-16',
+          lang: 'bg',
+        },
+        {
+          text: 'Приложението е супер. Просто пример как ТРЯБВА да се правят нещата и приложенията.',
+          name: 'Даниел Кузманов',
+          store: 'Google Play',
+          date: '2026-06-30',
+          lang: 'bg',
+        },
+        {
+          text: 'Exceptional design and usability! Traveling by train in Bulgaria has never been easier - this app makes everything smooth and convenient.',
+          name: 'dellinex',
+          store: 'App Store',
+          date: '2026-04-12',
+          lang: 'en',
+        },
       ],
     },
-
     maker: {
       name: 'Тихомир Гърменлиев',
       role: 'Създател на BulTrain. Студент в Технически университет София.',
@@ -166,12 +121,14 @@ export const translations = {
       quoteBy: 'Тихомир Гърменлиев, за Economy.bg',
       awardsTitle: 'Отличия',
       educationTitle: 'Образование',
-      dublin: { label: 'Финал на европейско състезание за млади иноватори, Дъблин', detail: 'С BulTrain' },
+      dublin: {
+        label: 'Финал на европейско състезание за млади иноватори, Дъблин',
+        detail: 'С BulTrain',
+      },
       presidentCaption: 'С президента на България Илиана Йотова.',
       presidentAlt: 'Тихомир Гърменлиев с президента на България Илиана Йотова пред държавния герб',
       portraitAlt: 'Тихомир Гърменлиев на перон, пред червен влак',
     },
-
     network: {
       title: 'Влаковете в България, в този момент.',
       lead: '{running} влака в движение, за {withRealtime} има данни на живо.',
@@ -234,134 +191,44 @@ export const translations = {
         more: 'Виж на живо',
       },
     },
-
-    whatsNew: {
-      tag: 'Какво ново',
-      headingLine1: 'Влакът ти живее',
-      headingAccent: 'на заключения екран.',
-      subheading:
-        'Live Activity показва закъснението, прогреса и часа на пристигане в реално време. Без отключване, без отваряне на приложението.',
-      features: [
-        {
-          title: 'Live Activity на заключения екран',
-          description:
-            'Закъснението, лентата с прогреса и времето за пристигане се обновяват сами, докато ти гледаш през прозореца.',
-        },
-        {
-          title: 'Известия само когато има значение',
-          description:
-            'Получавай известия в реално време, когато влакът ти закъснява и когато навакса.',
-        },
-        {
-          title: 'Закъснението — още в търсенето',
-          description:
-            'Виждаш веднага дали влакът закъснява, директно в резултатите от разписанието. Без допълнителни стъпки.',
-        },
-      ],
-      availability: {
-        ios: 'iOS',
-        iosStatus: 'Налично сега',
-        androidSoon: 'Скоро налично и за Android',
-      },
-      cta: 'Свали за iOS',
-      honesty: {
-        label: 'Честни данни',
-        title: 'Само реални данни.',
-        text: 'Закъснението идва от официалния публичен поток на Министерството на транспорта. Ако той не е наличен, виждаш ясно обозначен час по разписание — а не измислено число.',
-      },
-      alarm: {
-        label: 'Отделна система',
-        title: 'Алармата остава офлайн.',
-        text: 'Алармата за пристигане работи само по GPS. Местоположението ти не напуска телефона.',
-        chips: ['GPS', 'Работи без интернет'],
-      },
-      mock: {
-        date: 'събота, 19 септември',
-        time: '18:31',
-        train: 'БВ 2611',
-        from: 'София',
-        to: 'Пловдив',
-        late: '+8 мин',
-        lateLabel: 'закъснение',
-        arrives: 'Пристига в',
-        arrivesAt: '19:14',
-        arrivesIn: 'след 43 мин',
-      },
-    },
-
     media: {
-      tag: 'Медиите за BulTrain',
-      headingLine1: 'Какво казват',
-      headingAccent: 'другите?',
-      subheading:
-        'Когато иновацията стъпи на релси, хората забелязват. Вижте отзвука за BulTrain в медийното пространство и защо технологичната общност заговори за бъдещето на пътуването.',
       articles: {
         'article-6': {
-          title:
-            'Целта ми винаги е била да реша свой или чужд проблем с помощта на технологиите',
-          snippet:
-            'След успеха на BulTrain и финала на европейското състезание за млади иноватори в Дъблин студентът от Техническия университет в София Тихомир Гърменлиев разказва как превръща ежедневните проблеми в технологични решения',
+          title: 'Целта ми винаги е била да реша свой или чужд проблем с помощта на технологиите',
+          snippet: 'След успеха на BulTrain и финала на европейското състезание за млади иноватори в Дъблин студентът от Техническия университет в София Тихомир Гърменлиев разказва как превръща ежедневните проблеми в технологични решения',
           source: 'Economy.bg',
         },
         'article-5': {
-          title:
-            'Тихомир Гърменлиев и BulTrain - за по-информиран железопътен транспорт',
-          snippet:
-            '20-годишният Тихомир Гърменлиев е амбициозен програмист. До момента има две разработени платформи зад гърба си - онлайн пътеводителя BullTrain - приложение, посветено на влаковете, което си поставя за цел по-качествено информиране на пътуващия...',
+          title: 'Тихомир Гърменлиев и BulTrain - за по-информиран железопътен транспорт',
+          snippet: '20-годишният Тихомир Гърменлиев е амбициозен програмист. До момента има две разработени платформи зад гърба си - онлайн пътеводителя BullTrain - приложение, посветено на влаковете, което си поставя за цел по-качествено информиране на пътуващия...',
           source: 'Българско национално радио',
         },
         'article-4': {
-          title:
-            'Програмистът Тихомир Гърменлиев, който иска да решава проблеми на градската среда',
-          snippet:
-            'Едва на 20 години, Тихомир вече има две платформи зад гърба си - с едната улеснява пътуването с влак из България, а с другата картографира опасните пешеходни участъци в столицата',
+          title: 'Програмистът Тихомир Гърменлиев, който иска да решава проблеми на градската среда',
+          snippet: 'Едва на 20 години, Тихомир вече има две платформи зад гърба си - с едната улеснява пътуването с влак из България, а с другата картографира опасните пешеходни участъци в столицата',
           source: 'Капитал',
         },
         'article-3': {
-          title:
-            '"Как се пътува умно с БДЖ": Тихомир Гърменлиев в подкаста "Дума на седмицата"',
-          snippet:
-            'В специалната рубрика на подкаста "Дума на седмицата" с Ива Дойчинова, гостува 20-годишният Тихомир Гърменлиев, създател на BulTrain, мобилно приложение, което улеснява значително пътуването с влак из България',
+          title: '"Как се пътува умно с БДЖ": Тихомир Гърменлиев в подкаста "Дума на седмицата"',
+          snippet: 'В специалната рубрика на подкаста "Дума на седмицата" с Ива Дойчинова, гостува 20-годишният Тихомир Гърменлиев, създател на BulTrain, мобилно приложение, което улеснява значително пътуването с влак из България',
           source: 'Дневник',
         },
         'article-2': {
-          title:
-            'Мобилно приложение предлага всичко за пътуването с влак у нас на едно място',
-          snippet:
-            '„Пътуването с влак може да бъде наистина много приятно и много красиво“, казва Тихомир Гърменлиев, дванадесетокласник в ТУЕС и създател на приложението BulTrain',
+          title: 'Мобилно приложение предлага всичко за пътуването с влак у нас на едно място',
+          snippet: '„Пътуването с влак може да бъде наистина много приятно и много красиво“, казва Тихомир Гърменлиев, дванадесетокласник в ТУЕС и създател на приложението BulTrain',
           source: 'Economy.bg',
         },
         'article-1': {
-          title:
-            'Ученик създава приложение, следящо маршрути и разписания на българските влакове',
-          snippet:
-            'Тихомир Гърменлиев, създател на приложението BulTrain, в "Бизнес старт" 14.06.2024 г.',
+          title: 'Ученик създава приложение, следящо маршрути и разписания на българските влакове',
+          snippet: 'Тихомир Гърменлиев, създател на приложението BulTrain, в "Бизнес старт" 14.06.2024 г.',
           source: 'Bloomberg TV',
         },
       },
     },
-
     screenshots: {
-      tag: 'Галерия',
-      headingLine1: 'Създадено с мисъл',
-      headingAccent: 'за всеки пътуващ.',
-      subheading:
-        'Всеки екран е проектиран с мисъл за удобство и яснота — от късните нощни пътувания до ранните сутрешни преходи.',
-      labels: {
-        schedule: 'Разписание',
-        station: 'Табло на живо',
-        alarm: 'Умна аларма',
-        journey: 'Детайли за пътуване',
-        search: 'Търсене на гара',
-      },
+      labels: { station: 'Табло на живо' },
     },
-
     about: {
-      tag: 'Зад проекта',
-      headingLine1: 'Направено от',
-      headingAccent: 'студент. За всички.',
-      name: 'Тихомир Гърменлиев',
-      bio: 'BulTrain не е просто поредното приложение, а лична мисия за модернизиране на железопътния транспорт в България. Проектът започна като смела идея и прерасна в цялостна екосистема – от мобилно приложение до собственоръчно разработен хардуерен e-ink дисплей за гарите. Всичко това, създадено с една цел: по-добро изживяване за всеки пътуващ.',
       achievements: {
         tues: {
           label: 'Завършил ТУЕС',
@@ -377,13 +244,11 @@ export const translations = {
         },
         teenovator: {
           label: 'Доброволец на Тийноватор',
-          detail:
-            'Инициатива, която дава първи стъпки в предприемачеството на ученици',
+          detail: 'Инициатива, която дава първи стъпки в предприемачеството на ученици',
         },
         '20under20': {
           label: '"20 под 20" випуск 2025',
-          detail:
-            'Съвместна инициатива на "Капитал" и Младежкия съвет към американския посланик',
+          detail: 'Съвместна инициатива на "Капитал" и Младежкия съвет към американския посланик',
         },
         bait: {
           label: 'Номинация за наградите на БАИТ',
@@ -395,52 +260,39 @@ export const translations = {
         },
       },
     },
-
     support: {
-      tag: 'Подкрепи проекта',
       headingLine1: 'BulTrain е безплатен.',
       headingAccent: 'Твоята подкрепа го поддържа.',
-      subheading:
-        'Това е проект, създаден със страст, не с цел печалба. Ако BulTrain те е спасил от изпуснат влак или спирка, или е направил пътуването ти по-приятно, можеш да подкрепиш развитието му. Благодаря!',
+      subheading: 'Това е проект, създаден със страст, не с цел печалба. Ако BulTrain те е спасил от изпуснат влак или спирка, или е направил пътуването ти по-приятно, можеш да подкрепиш развитието му. Благодаря!',
       coffee: 'Почерпи ме кафе',
       revolut: 'Подкрепи чрез Revolut',
       contactLabel: 'Свържи се с мен',
     },
-
     footer: {
       privacy: 'Политика за поверителност',
       privacyApp: 'Политика за поверителност на приложението',
       terms: 'Условия за ползване',
       contact: 'Контакти',
       madeBy: 'Направено от Тихомир Гърменлиев.',
-      disclaimer:
-        'BulTrain е независим проект и не е свързан с, нито е официално одобрен от БДЖ (Български държавни железници).',
+      disclaimer: 'BulTrain е независим проект и не е свързан с, нито е официално одобрен от БДЖ (Български държавни железници).',
     },
-
     contact: {
       heading: 'Свържете се с нас',
-      subheading:
-        'Имате въпрос или просто искате да ни поздравите? Изберете най-удобния за Вас начин за връзка с екипа на BulTrain.',
+      subheading: 'Имате въпрос или просто искате да ни поздравите? Изберете най-удобния за Вас начин за връзка с екипа на BulTrain.',
       methods: {
         email: {
           label: 'Имейл',
           description: 'За въпроси, предложения и техническа поддръжка.',
         },
-        linkedin: {
-          label: 'LinkedIn',
-          description: 'Професионална мрежа и бизнес контакти.',
-        },
+        linkedin: { label: 'LinkedIn', description: 'Професионална мрежа и бизнес контакти.' },
       },
       ctaTitle: 'Очакваме Ви!',
-      ctaText:
-        'Ние ценим всяка обратна връзка. Вашите мнения ни помагат да направим BulTrain още по-добър за всички пътуващи в България.',
+      ctaText: 'Ние ценим всяка обратна връзка. Вашите мнения ни помагат да направим BulTrain още по-добър за всички пътуващи в България.',
     },
-
     privacy: {
       heading: 'Политика за поверителност',
       lastUpdated: 'Последна актуализация',
-      intro:
-        'Добре дошли в BulTrain! Ние уважаваме Вашата поверителност и се ангажираме да защитаваме Вашите данни. Моля, прочетете тази Политика, за да разберете как събираме, използваме и защитаваме всяка информация, когато използвате нашето приложение и уебсайт.',
+      intro: 'Добре дошли в BulTrain! Ние уважаваме Вашата поверителност и се ангажираме да защитаваме Вашите данни. Моля, прочетете тази Политика, за да разберете как събираме, използваме и защитаваме всяка информация, когато използвате нашето приложение и уебсайт.',
       sections: [
         {
           title: '1. Събиране на данни',
@@ -464,12 +316,9 @@ export const translations = {
         },
       ],
     },
-
     terms: {
       heading: 'Условия за ползване',
-      lastUpdated: 'Последна актуализация',
-      intro:
-        'С използването на приложението и уебсайта на BulTrain Вие се съгласявате да спазвате настоящите Условия за ползване. Ако не сте съгласни с тези условия, моля, преустановете употребата на услугата.',
+      intro: 'С използването на приложението и уебсайта на BulTrain Вие се съгласявате да спазвате настоящите Условия за ползване. Ако не сте съгласни с тези условия, моля, преустановете употребата на услугата.',
       sections: [
         {
           title: '1. Описание на услугата',
@@ -494,17 +343,9 @@ export const translations = {
       ],
     },
   },
-
-  // ==========================================================================
-  // ENGLISH — professional, conversion-focused copy for a premium
-  // European transit-tech product.
-  // ==========================================================================
   en: {
     nav: {
-      features: 'Features',
-      whatsNew: 'What’s new',
       media: 'Coverage',
-      gallery: 'Gallery',
       about: 'The Story',
       support: 'Support',
       cta: 'Download free',
@@ -514,30 +355,12 @@ export const translations = {
       theme: 'Switch theme',
       language: 'Language',
     },
-
-    common: {
-      backHome: 'Back to home',
-      readMore: 'Read more',
-      locale: 'en-GB',
-    },
-
+    common: { backHome: 'Back to home', readMore: 'Read more' },
     hero: {
-      badge: 'Every train, in one place',
       headlineLine1: 'Travel smarter.',
       headlineLine2: 'Never miss',
       headlineAccent: 'your stop again.',
-      subheading:
-        'Live BDZ timetables and departure boards in real time. Location-aware smart alarms that wake you before your stop — built around the way you actually travel.',
-      supportCta: 'Support the project',
-      appStoreLine1: 'Download on the',
-      appStoreLine2: 'App Store',
-      googlePlayLine1: 'GET IT ON',
-      googlePlayLine2: 'Google Play',
-      stats: [
-        { value: 'Free', label: 'so every journey is a pleasure' },
-        { value: 'Offline', label: 'so you can travel with peace of mind' },
-        { value: 'iOS & Android', label: 'so getting around is effortless' },
-      ],
+      subheading: 'Live BDZ timetables and departure boards in real time. Location-aware smart alarms that wake you before your stop — built around the way you actually travel.',
       facts: [
         { value: '702', label: 'stations' },
         { value: '550', label: 'trains' },
@@ -545,123 +368,103 @@ export const translations = {
       ],
       photoCredit: 'Photo: Tihomir Garmenliev',
       photoAlt: 'A red locomotive at a station in the light before sunset',
-      mockup: {
-        city: 'S O F I A',
-        departures: 'Departures',
-        arrivals: 'Arrivals',
-        colTime: 'TIME',
-        colFrom: 'From',
-        colStatus: 'STATUS',
-        onTime: 'ON TIME',
-        delayed: '+21 MIN',
-        live: 'Live',
-        notifTitle: 'Arriving in Plovdiv',
-        notifSubtitle: 'Smart alarm · 2 stops away',
-        tabs: {
-          schedule: 'Schedule',
-          board: 'Board',
-          trips: 'Trips',
-          guide: 'Guide',
-        },
-        trains: [
-          { dest: 'Voluyak' },
-          { dest: 'Plovdiv' },
-          { dest: 'Varna' },
-          { dest: 'Kostenets' },
-          { dest: 'Vratsa' },
-          { dest: 'Voluyak' },
-        ],
-      },
     },
-
-    features: {
-      tag: 'Features',
-      headingLine1: 'Everything you need for travelling',
-      headingAccent: 'by rail.',
-      subheading:
-        'BulTrain brings together every tool a rail traveller in Bulgaria needs — in one beautifully crafted app.',
-      cards: {
-        smartAlarms: {
-          title: 'Location-based smart alarms',
-          description:
-            'Pick a route, save your trip, and BulTrain alerts you before you arrive. No more watching every station — just sit back and enjoy the ride while the app handles the rest.',
-        },
-        liveBoards: {
-          title: 'Live departure boards',
-          description:
-            'Real-time departures and arrivals from every station in Bulgaria, complete with delay information — like a real station board, right in your pocket.',
-        },
-        offlineSchedules: {
-          title: 'Full timetable, offline',
-          description:
-            'Access the timetable for your saved trip without an internet connection. Save it once and travel with total confidence.',
-        },
-        darkMode: {
-          title: 'Effortless dark mode',
-          description:
-            'Beautifully designed for night-time journeys. Every detail is tuned for comfort in low light, so the app stays easy on the eyes from dusk till dawn.',
-        },
-      },
-    },
-
     tour: {
       title: 'One journey, from search to lock screen.',
       lead: 'This is what a trip with BulTrain looks like, step by step, on real screens.',
       steps: [
-        { title: 'Search and see the delay right away', text: 'Pick where from and where to. The results show whether the train is late, with no extra step.', alt: 'Search results showing delays' },
-        { title: 'A board for every station', text: 'Departures and arrivals from 702 stations, with the delay next to every train.', alt: 'Station board' },
-        { title: 'Follow one specific train', text: 'See which stop the train is at and how late it is. All on one screen.', alt: 'Train route with stops and delays' },
-        { title: 'Your train, on your lock screen', text: 'The delay, a progress bar and the time to arrival, without unlocking your phone or opening the app. You get a notification when the delay changes significantly and when the train makes up time.', tag: 'Live Activity', alt: 'BulTrain Live Activity on the lock screen' },
+        {
+          title: 'Search and see the delay right away',
+          text: 'Pick where from and where to. The results show whether the train is late, with no extra step.',
+          alt: 'Search results showing delays',
+        },
+        {
+          title: 'A board for every station',
+          text: 'Departures and arrivals from 702 stations, with the delay next to every train.',
+          alt: 'Station board',
+        },
+        {
+          title: 'Follow one specific train',
+          text: 'See which stop the train is at and how late it is. All on one screen.',
+          alt: 'Train route with stops and delays',
+        },
+        {
+          title: 'Your train, on your lock screen',
+          text: 'The delay, a progress bar and the time to arrival, without unlocking your phone or opening the app. You get a notification when the delay changes significantly and when the train makes up time.',
+          tag: 'Live Activity',
+          alt: 'BulTrain Live Activity on the lock screen',
+        },
       ],
       ios: 'iOS',
       iosStatus: 'Available now',
       androidSoon: 'Coming soon to Android',
       cta: 'Download for iOS',
     },
-
     promises: {
       statement: 'If there is no live data, we say so. We never make up a delay.',
       sub: 'Delays come from the official public feed of the Ministry of Transport and Communications. If it is unavailable, you see a clearly labelled scheduled time.',
       items: [
-        { title: 'The alarm works offline', text: 'The arrival alarm runs entirely on GPS, with no server and no mobile coverage. It works even with no connection.' },
-        { title: 'No account, no tracking', text: 'Your location never leaves your phone. We do not ask for an account and we do not collect personal data.' },
+        {
+          title: 'The alarm works offline',
+          text: 'The arrival alarm runs entirely on GPS, with no server and no mobile coverage. It works even with no connection.',
+        },
+        {
+          title: 'No account, no tracking',
+          text: 'Your location never leaves your phone. We do not ask for an account and we do not collect personal data.',
+        },
       ],
     },
-
     notFound: {
       title: 'Page not found.',
       text: 'The address may be wrong, or the page may have moved.',
     },
-
     press: {
       title: 'BulTrain in the press and in the stores.',
-      pressLabel: 'In the press',
       storesLabel: 'From the stores',
       dublinCaption: 'At the European competition for young innovators in Dublin.',
       ratingCount: '{n} ratings',
       outOf: 'out of 5',
       translated: 'Translated from Bulgarian',
       reviews: [
-        { text: 'Bravo! At last a working app without ads. It is great that you can see the timetable for stops, not only for stations. I was surprised that it shows the waiting time for a connection when you have to change trains. It even shows the reason for the train\u2019s delay! Bravo once again! THANK YOU for thinking of us, the passengers.', name: 'Plamen Georgiev', store: 'Google Play', date: '2024-04-16', lang: 'bg' },
-        { text: 'The app is great. Just an example of how apps SHOULD be made.', name: 'Daniel Kuzmanov', store: 'Google Play', date: '2026-06-30', lang: 'bg' },
-        { text: 'Exceptional design and usability! Traveling by train in Bulgaria has never been easier - this app makes everything smooth and convenient.', name: 'dellinex', store: 'App Store', date: '2026-04-12', lang: 'en' },
+        {
+          text: 'Bravo! At last a working app without ads. It is great that you can see the timetable for stops, not only for stations. I was surprised that it shows the waiting time for a connection when you have to change trains. It even shows the reason for the train’s delay! Bravo once again! THANK YOU for thinking of us, the passengers.',
+          name: 'Plamen Georgiev',
+          store: 'Google Play',
+          date: '2024-04-16',
+          lang: 'bg',
+        },
+        {
+          text: 'The app is great. Just an example of how apps SHOULD be made.',
+          name: 'Daniel Kuzmanov',
+          store: 'Google Play',
+          date: '2026-06-30',
+          lang: 'bg',
+        },
+        {
+          text: 'Exceptional design and usability! Traveling by train in Bulgaria has never been easier - this app makes everything smooth and convenient.',
+          name: 'dellinex',
+          store: 'App Store',
+          date: '2026-04-12',
+          lang: 'en',
+        },
       ],
     },
-
     maker: {
       name: 'Tihomir Garmenliev',
       role: 'Creator of BulTrain. Student at the Technical University of Sofia.',
-      intro: 'BulTrain started as a school project at TUES. Today it is an iOS and Android app that shows train delays and positions from the rail network\u2019s official data. I also built my own e-ink display for stations.',
-      quote: 'My goal has always been to solve my own or someone else\u2019s problem with technology.',
+      intro: 'BulTrain started as a school project at TUES. Today it is an iOS and Android app that shows train delays and positions from the rail network’s official data. I also built my own e-ink display for stations.',
+      quote: 'My goal has always been to solve my own or someone else’s problem with technology.',
       quoteBy: 'Tihomir Garmenliev, to Economy.bg',
       awardsTitle: 'Awards',
       educationTitle: 'Education',
-      dublin: { label: 'Final of a European competition for young innovators, Dublin', detail: 'With BulTrain' },
+      dublin: {
+        label: 'Final of a European competition for young innovators, Dublin',
+        detail: 'With BulTrain',
+      },
       presidentCaption: 'With the President of Bulgaria, Iliana Iotova.',
       presidentAlt: 'Tihomir Garmenliev with the President of Bulgaria, Iliana Iotova, in front of the national coat of arms',
       portraitAlt: 'Tihomir Garmenliev on a platform in front of a red train',
     },
-
     network: {
       title: 'Every train in Bulgaria, right now.',
       lead: '{running} trains running, {withRealtime} with live data.',
@@ -724,139 +527,46 @@ export const translations = {
         more: 'See it live',
       },
     },
-
-    whatsNew: {
-      tag: 'What’s new',
-      headingLine1: 'Your train lives',
-      headingAccent: 'on your lock screen.',
-      subheading:
-        'Live Activity shows your delay, trip progress and arrival time in real time. No unlocking, no opening the app.',
-      features: [
-        {
-          title: 'Live Activity on your lock screen',
-          description:
-            'The delay, progress bar and arrival time update on their own while you watch the world go by.',
-        },
-        {
-          title: 'Alerts only when it matters',
-          description:
-            'Get real-time alerts when your train runs late, and when it makes up time.',
-        },
-        {
-          title: 'Delays right in search',
-          description:
-            'See at a glance whether a train is running late, straight in the timetable results. No extra taps.',
-        },
-      ],
-      availability: {
-        ios: 'iOS',
-        iosStatus: 'Available now',
-        androidSoon: 'Coming soon to Android',
-      },
-      cta: 'Download for iOS',
-      honesty: {
-        label: 'Honest data',
-        title: 'Real data only.',
-        text: 'Delays come straight from the official public feed of the Ministry of Transport. If it’s unavailable, you’ll see a clearly labelled scheduled time, never a made-up number.',
-      },
-      alarm: {
-        label: 'Separate system',
-        title: 'The alarm stays offline.',
-        text: 'The arrival alarm runs on GPS alone. Your location never leaves your phone.',
-        chips: ['GPS', 'Works offline'],
-      },
-      mock: {
-        date: 'Saturday, 19 September',
-        time: '18:31',
-        train: 'БВ 2611',
-        from: 'Sofia',
-        to: 'Plovdiv',
-        late: '+8 min',
-        lateLabel: 'late',
-        arrives: 'Arrives at',
-        arrivesAt: '19:14',
-        arrivesIn: 'in 43 min',
-      },
-    },
-
     media: {
-      tag: 'BulTrain in the press',
-      headingLine1: 'What others are',
-      headingAccent: 'saying.',
-      subheading:
-        'When innovation hits the rails, people notice. See how BulTrain is making headlines and why the tech community is talking about the future of travel.',
       articles: {
         'article-6': {
-          title:
-            'My goal has always been to solve my own or someone else’s problem with technology',
-          snippet:
-            'After the success of BulTrain and the final of the European competition for young innovators in Dublin, Tihomir Garmenliev, a student at the Technical University of Sofia, talks about how he turns everyday problems into technological solutions',
+          title: 'My goal has always been to solve my own or someone else’s problem with technology',
+          snippet: 'After the success of BulTrain and the final of the European competition for young innovators in Dublin, Tihomir Garmenliev, a student at the Technical University of Sofia, talks about how he turns everyday problems into technological solutions',
           source: 'Economy.bg',
         },
         'article-5': {
-          title:
-            'Tihomir Garmenliev and BulTrain — for a more informed railway transport',
-          snippet:
-            'The 20-year-old Tihomir Garmenliev is an ambitious programmer. So far, he has two developed platforms behind him — the online guide BullTrain, an app dedicated to trains, which aims to provide better information for travellers...',
+          title: 'Tihomir Garmenliev and BulTrain — for a more informed railway transport',
+          snippet: 'The 20-year-old Tihomir Garmenliev is an ambitious programmer. So far, he has two developed platforms behind him — the online guide BullTrain, an app dedicated to trains, which aims to provide better information for travellers...',
           source: 'Bulgarian National Radio',
         },
         'article-4': {
-          title:
-            'Developer Tihomir Garmenliev, on a mission to fix the problems of the urban environment',
-          snippet:
-            'At just 20, Tihomir already has two platforms behind him — one makes rail travel across Bulgaria easier, the other maps out the most dangerous pedestrian crossings in the capital.',
+          title: 'Developer Tihomir Garmenliev, on a mission to fix the problems of the urban environment',
+          snippet: 'At just 20, Tihomir already has two platforms behind him — one makes rail travel across Bulgaria easier, the other maps out the most dangerous pedestrian crossings in the capital.',
           source: 'Capital',
         },
         'article-3': {
-          title:
-            '“Travelling smart with BDZ”: Tihomir Garmenliev on the “Word of the Week” podcast',
-          snippet:
-            'In a special segment of the “Word of the Week” podcast with Iva Doychinova, 20-year-old Tihomir Garmenliev — creator of BulTrain — joins to discuss the app that dramatically simplifies rail travel across Bulgaria.',
+          title: '“Travelling smart with BDZ”: Tihomir Garmenliev on the “Word of the Week” podcast',
+          snippet: 'In a special segment of the “Word of the Week” podcast with Iva Doychinova, 20-year-old Tihomir Garmenliev — creator of BulTrain — joins to discuss the app that dramatically simplifies rail travel across Bulgaria.',
           source: 'Dnevnik',
         },
         'article-2': {
-          title:
-            'A mobile app brings everything about rail travel in Bulgaria into one place',
-          snippet:
-            '“Travelling by train can be truly enjoyable and truly beautiful,” says Tihomir Garmenliev, a senior at TUES and the creator of the BulTrain app.',
+          title: 'A mobile app brings everything about rail travel in Bulgaria into one place',
+          snippet: '“Travelling by train can be truly enjoyable and truly beautiful,” says Tihomir Garmenliev, a senior at TUES and the creator of the BulTrain app.',
           source: 'Economy.bg',
         },
         'article-1': {
-          title:
-            'Student builds an app that tracks routes and timetables of Bulgarian trains',
-          snippet:
-            'Tihomir Garmenliev, creator of the BulTrain app, on “Business Start”, 14 June 2024.',
+          title: 'Student builds an app that tracks routes and timetables of Bulgarian trains',
+          snippet: 'Tihomir Garmenliev, creator of the BulTrain app, on “Business Start”, 14 June 2024.',
           source: 'Bloomberg TV',
         },
       },
     },
-
     screenshots: {
-      tag: 'Gallery',
-      headingLine1: 'Crafted with care',
-      headingAccent: 'for every traveller.',
-      subheading:
-        'Every screen is designed for comfort and clarity — from late-night journeys to early-morning connections.',
-      labels: {
-        schedule: 'Schedule',
-        station: 'Live board',
-        alarm: 'Smart alarm',
-        journey: 'Journey details',
-        search: 'Station search',
-      },
+      labels: { station: 'Live board' },
     },
-
     about: {
-      tag: 'The Story',
-      headingLine1: 'Built by a',
-      headingAccent: 'student. For everyone.',
-      name: 'Tihomir Garmenliev',
-      bio: 'BulTrain isn’t just another app — it’s a personal mission to modernise rail travel in Bulgaria. The project started as a bold idea and grew into a complete ecosystem, from a mobile app to a self-built e-ink hardware display for stations. All of it created with a single goal: a better experience for every traveller.',
       achievements: {
-        tues: {
-          label: 'TUES graduate',
-          detail: 'Technology School “Electronic Systems”',
-        },
+        tues: { label: 'TUES graduate', detail: 'Technology School “Electronic Systems”' },
         tu: {
           label: 'Student at the Technical University of Sofia',
           detail: 'Faculty of Applied Mathematics and Informatics',
@@ -867,13 +577,11 @@ export const translations = {
         },
         teenovator: {
           label: 'Teenovator volunteer',
-          detail:
-            'An initiative giving students their first steps into entrepreneurship',
+          detail: 'An initiative giving students their first steps into entrepreneurship',
         },
         '20under20': {
           label: '“20 under 20”, class of 2025',
-          detail:
-            'A joint initiative by Capital and the Youth Council to the US Ambassador',
+          detail: 'A joint initiative by Capital and the Youth Council to the US Ambassador',
         },
         bait: {
           label: 'Nominee for the BAIT Awards',
@@ -885,32 +593,25 @@ export const translations = {
         },
       },
     },
-
     support: {
-      tag: 'Support the project',
       headingLine1: 'BulTrain is free.',
       headingAccent: 'Your support keeps it running.',
-      subheading:
-        'This is a project built out of passion, not for profit. If BulTrain has saved you from a missed train or stop, or simply made your journey more enjoyable, you can support its development. Thank you!',
+      subheading: 'This is a project built out of passion, not for profit. If BulTrain has saved you from a missed train or stop, or simply made your journey more enjoyable, you can support its development. Thank you!',
       coffee: 'Buy me a coffee',
       revolut: 'Support via Revolut',
       contactLabel: 'Get in touch',
     },
-
     footer: {
       privacy: 'Privacy Policy',
       privacyApp: 'App Privacy Policy',
       terms: 'Terms of Use',
       contact: 'Contact',
       madeBy: 'Built by Tihomir Garmenliev.',
-      disclaimer:
-        'BulTrain is an independent project and is not affiliated with, nor officially endorsed by, BDZ (Bulgarian State Railways).',
+      disclaimer: 'BulTrain is an independent project and is not affiliated with, nor officially endorsed by, BDZ (Bulgarian State Railways).',
     },
-
     contact: {
       heading: 'Get in touch',
-      subheading:
-        'Have a question, or just want to say hello? Choose whichever way works best for you to reach the BulTrain team.',
+      subheading: 'Have a question, or just want to say hello? Choose whichever way works best for you to reach the BulTrain team.',
       methods: {
         email: {
           label: 'Email',
@@ -922,15 +623,12 @@ export const translations = {
         },
       },
       ctaTitle: 'We’d love to hear from you!',
-      ctaText:
-        'We value every piece of feedback. Your thoughts help us make BulTrain even better for everyone travelling across Bulgaria.',
+      ctaText: 'We value every piece of feedback. Your thoughts help us make BulTrain even better for everyone travelling across Bulgaria.',
     },
-
     privacy: {
       heading: 'Privacy Policy',
       lastUpdated: 'Last updated',
-      intro:
-        'Welcome to BulTrain! We respect your privacy and are committed to protecting your data. Please read this Policy to understand how we collect, use and protect any information when you use our app and website.',
+      intro: 'Welcome to BulTrain! We respect your privacy and are committed to protecting your data. Please read this Policy to understand how we collect, use and protect any information when you use our app and website.',
       sections: [
         {
           title: '1. Data Collection',
@@ -954,12 +652,9 @@ export const translations = {
         },
       ],
     },
-
     terms: {
       heading: 'Terms of Use',
-      lastUpdated: 'Last updated',
-      intro:
-        'By using the BulTrain app and website, you agree to comply with these Terms of Use. If you do not agree to these terms, please discontinue your use of the service.',
+      intro: 'By using the BulTrain app and website, you agree to comply with these Terms of Use. If you do not agree to these terms, please discontinue your use of the service.',
       sections: [
         {
           title: '1. Description of the Service',
