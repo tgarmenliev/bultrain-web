@@ -1,4 +1,4 @@
-.net { padding: clamp(40px, 5vw, 72px) 0 clamp(64px, 8vw, 112px); scroll-margin-top: var(--nav-h); }
+.net { padding: clamp(32px, 4vw, 56px) 0 clamp(40px, 5vw, 72px); scroll-margin-top: var(--nav-h); }
 .net__head { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 18px 40px; }
 .net__title { font-size: clamp(2rem, 4.2vw, 3.4rem); max-width: 18ch; }
 .net__lead { margin: 16px 0 0; font-size: clamp(1.05rem, 1.6vw, 1.25rem); font-weight: 600; color: var(--ink2); }

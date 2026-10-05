@@ -1,4 +1,4 @@
-.support { padding: clamp(64px, 9vw, 128px) 0; scroll-margin-top: var(--nav-h); border-top: 1px solid var(--line); }
+.support { padding: clamp(48px, 5vw, 76px) 0; scroll-margin-top: var(--nav-h); border-top: 1px solid var(--line); }
 .support__grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(28px, 6vw, 96px); align-items: center; }
 .support__title { font-size: clamp(1.9rem, 3.8vw, 3.1rem); max-width: 18ch; }
 .support__text { margin: 20px 0 0; max-width: 54ch; font-size: clamp(1rem, 1.3vw, 1.1rem); line-height: 1.65; color: var(--ink2); text-wrap: pretty; }

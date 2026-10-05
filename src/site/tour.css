@@ -1,12 +1,13 @@
-.tour { padding: clamp(40px, 6vw, 88px) 0 0; scroll-margin-top: var(--nav-h); }
+.tour { padding: clamp(24px, 3vw, 40px) 0 0; scroll-margin-top: var(--nav-h); }
 .tour__head { max-width: 760px; }
 .tour__title { font-size: clamp(2rem, 4.2vw, 3.4rem); }
 .tour__lead { margin: 16px 0 0; font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--ink2); max-width: 52ch; }
 
 .tour__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: clamp(32px, 6vw, 96px); margin-top: clamp(24px, 4vw, 48px); }
 
-.tour__step { min-height: 82vh; min-height: 82svh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 14px; max-width: 480px; }
+.tour__step { min-height: 62vh; min-height: 62svh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 14px; max-width: 480px; }
 /* The active step is marked by colour (never by dimming text: that cannot pass contrast). */
+.tour__step:first-child { min-height: 46vh; min-height: 46svh; }
 .tour__n { font-size: 14px; font-weight: 800; letter-spacing: 0.06em; color: var(--ink3); transition: color 320ms ease; }
 .tour__step[data-active='true'] .tour__n { color: var(--accent); }
 .tour__tag { padding: 4px 10px; border-radius: 7px; background: var(--raised); font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink2); }

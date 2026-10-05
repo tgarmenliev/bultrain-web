@@ -1,4 +1,4 @@
-.maker { padding: clamp(64px, 9vw, 128px) 0; scroll-margin-top: var(--nav-h); }
+.maker { padding: clamp(48px, 5vw, 76px) 0; scroll-margin-top: var(--nav-h); }
 .maker__grid { display: grid; grid-template-columns: minmax(0, 440px) minmax(0, 1fr); gap: clamp(32px, 7vw, 112px); align-items: start; }
 .maker__portrait { margin: 0; position: sticky; top: calc(var(--nav-h) + 24px); }
 .maker__portrait img { display: block; width: 100%; height: auto; border-radius: var(--r-l); box-shadow: var(--shadow); }

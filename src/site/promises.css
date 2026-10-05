@@ -1,4 +1,4 @@
-.promises { padding: clamp(72px, 10vw, 144px) 0; }
+.promises { padding: clamp(48px, 5vw, 76px) 0; }
 .promises__grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(32px, 7vw, 112px); align-items: start; }
 .promises__statement { font-size: clamp(1.9rem, 3.8vw, 3.1rem); line-height: 1.1; max-width: 20ch; }
 .promises__sub { margin: 22px 0 0; max-width: 52ch; font-size: clamp(1rem, 1.3vw, 1.1rem); line-height: 1.65; color: var(--ink2); text-wrap: pretty; }

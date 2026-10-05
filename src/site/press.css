@@ -1,4 +1,4 @@
-.press { padding: clamp(64px, 9vw, 128px) 0; scroll-margin-top: var(--nav-h); }
+.press { padding: clamp(48px, 5vw, 76px) 0; scroll-margin-top: var(--nav-h); }
 .press__title { font-size: clamp(2rem, 4.2vw, 3.4rem); max-width: 20ch; }
 
 .press__lead { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: clamp(28px, 5vw, 80px); align-items: center; margin-top: clamp(32px, 5vw, 64px); }
