@@ -40,7 +40,7 @@ const S = 'screens/ios'
 // Only the screens the site actually shows (hero: board/results/route, tour: results/board/route/lock).
 const screens = {
   dark: {
-    bg: { results: '9742', board: '9744', route: '9745', trip: '9743', lock: '9778' },
+    bg: { results: '9742', board: '9744', route: '9745', trip: '9743', lock: '9778', alarm: 'R:IMG_7639.PNG', live: 'R:IMG_7514.PNG' },
     en: { results: '9770', board: 'F:Screenshot 2026-10-04 at 20.57.18.png', route: '9772', trip: '9771' },
   },
   light: {
@@ -54,7 +54,8 @@ for (const [theme, langs] of Object.entries(screens)) {
   for (const [lang, names] of Object.entries(langs)) {
     manifest[theme][lang] = {}
     for (const [name, n] of Object.entries(names)) {
-      const src = join(IN, S, theme, lang, n.startsWith('F:') ? n.slice(2) : `IMG_${n}.PNG`)
+      // 'F:name' = a file in this theme/language folder; 'R:name' = a file directly in screens/ios; otherwise IMG_<n>.PNG
+      const src = n.startsWith('R:') ? join(IN, S, n.slice(2)) : join(IN, S, theme, lang, n.startsWith('F:') ? n.slice(2) : `IMG_${n}.PNG`)
       if (!existsSync(src)) { console.log('MISSING', src); continue }
       const out = `${OUT}/app/${theme}-${lang}-${name}.webp`
       run('magick', [src, '-alpha', 'off', '-strip', '-resize', '900x', '-quality', '82', out])

@@ -87,7 +87,8 @@ export const translations = {
       note: 'Алармата ползва GPS на телефона, затова може да изразходва повече батерия.',
       altTrip: 'Детайли за маршрута с бутон „Запази пътуване“',
       altRoute: 'Маршрут на влак със спирки и закъснения',
-      altAlarm: 'Умна аларма за пристигане',
+      altAlarm: 'Известие от умната аларма: „Приближавате вашата гара!“',
+      altLive: 'Live Activity на заключения екран и известие, че влакът е навакса закъснението',
     },
     promises: {
       statement: 'Данните са официални.',
@@ -484,7 +485,8 @@ export const translations = {
       note: 'The alarm uses your phone’s GPS, so it can use more battery.',
       altTrip: 'Route details with the “Save Journey” button',
       altRoute: 'Train route with stops and delays',
-      altAlarm: 'Smart arrival alarm',
+      altAlarm: 'Smart alarm notification: “You are approaching your station!”',
+      altLive: 'Live Activity on the lock screen and a notification that the train is making up time',
     },
     promises: {
       statement: 'The data is official.',

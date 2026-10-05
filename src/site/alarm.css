@@ -1,7 +1,7 @@
 .alarm { padding: clamp(48px, 5vw, 76px) 0; scroll-margin-top: var(--nav-h); border-top: 1px solid var(--line); }
-.alarm__grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+.alarm__grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
 .alarm__tag { display: inline-block; margin: 0 0 18px; padding: 4px 10px; border-radius: 7px; background: var(--raised); font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink2); }
-.alarm__title { font-size: clamp(2rem, 4.2vw, 3.4rem); max-width: 18ch; }
+.alarm__title { font-size: clamp(2rem, 3.5vw, 3rem); max-width: 20ch; }
 .alarm__lead { margin: 18px 0 0; max-width: 54ch; font-size: clamp(1.05rem, 1.5vw, 1.2rem); line-height: 1.65; color: var(--ink2); text-wrap: pretty; }
 
 .alarm__points { list-style: none; margin: clamp(28px, 4vw, 48px) 0 0; padding: 0; }
@@ -12,13 +12,18 @@
 .alarm__points p { margin: 0; max-width: 50ch; font-size: 15px; line-height: 1.65; color: var(--ink2); }
 .alarm__note { margin: 16px 0 0; font-size: 13.5px; line-height: 1.55; font-weight: 600; color: var(--ink3); }
 
-.alarm__phones { display: flex; justify-content: center; gap: clamp(14px, 2.4vw, 32px); }
-.alarm__phone { width: min(250px, 44%); }
-.alarm__phones[data-count='1'] .alarm__phone { width: min(280px, 60%); }
-.alarm__phone:nth-child(even) { margin-top: clamp(32px, 6vw, 72px); }
+.alarm__phones { position: sticky; top: calc(var(--nav-h) + 32px); display: flex; justify-content: center; gap: clamp(14px, 2.4vw, 32px); }
+.alarm__phone { flex: 0 1 250px; min-width: 0; }
+.alarm__phones[data-count='1'] .alarm__phone { flex-basis: 280px; }
+.alarm__phone:nth-child(even) { margin-top: clamp(24px, 4vw, 48px); }
 .alarm__phone .ds-device { width: 100%; }
 
 @media (max-width: 900px) {
   .alarm__grid { grid-template-columns: minmax(0, 1fr); }
   .alarm__title { max-width: 22ch; }
+  /* phones become a swipeable row, each one big enough to read the notification */
+  .alarm__phones { position: static; justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; margin: 0 calc(-1 * var(--gutter)); padding: 4px var(--gutter) 12px; scrollbar-width: none; }
+  .alarm__phones::-webkit-scrollbar { display: none; }
+  .alarm__phone, .alarm__phones[data-count='1'] .alarm__phone { flex: 0 0 min(62vw, 250px); scroll-snap-align: center; margin-top: 0; }
+  .alarm__phones[data-count='1'] { justify-content: center; }
 }

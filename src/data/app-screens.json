@@ -5,7 +5,9 @@
    "board": "/img/app/dark-bg-board.webp",
    "route": "/img/app/dark-bg-route.webp",
    "trip": "/img/app/dark-bg-trip.webp",
-   "lock": "/img/app/dark-bg-lock.webp"
+   "lock": "/img/app/dark-bg-lock.webp",
+   "alarm": "/img/app/dark-bg-alarm.webp",
+   "live": "/img/app/dark-bg-live.webp"
   },
   "en": {
    "results": "/img/app/dark-en-results.webp",

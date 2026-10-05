@@ -1,22 +1,27 @@
 import { useLanguage } from '../i18n/LanguageContext'
 import { useTheme } from '../theme/ThemeContext'
-import { appScreen, screenProps } from '../data/screens'
+import { appScreen, appScreenInLang, screenProps } from '../data/screens'
 import './alarm.css'
 
 /**
  * The alarm and trip tracking, as its own section: it is one of the most important parts of the app.
- * Screens come from the real app; an "alarm" screenshot is picked up automatically once it exists in
- * src/data/app-screens.json (see scripts/build-assets.mjs).
+ * Screens come from the real app (scripts/build-assets.mjs). An English alarm screenshot is picked up
+ * automatically once it is added there.
  */
 export default function Alarm() {
   const { lang, t } = useLanguage()
   const { theme } = useTheme()
   const a = t.alarm
+  // Save the trip -> the alarm -> the lock screen. Notification screens exist only in the languages they were
+  // captured in; where they are missing, the route screen fills in.
+  const alarm = appScreenInLang(theme, lang, ['alarm'])
+  const live = appScreenInLang(theme, lang, ['live'])
   const shots = [
     [appScreen(theme, lang, ['trip']), a.altTrip],
-    [appScreen(theme, lang, ['route']), a.altRoute],
-    [appScreen(theme, lang, ['alarm']), a.altAlarm],
-  ].filter(([src]) => src)
+    [alarm, a.altAlarm],
+    [live, a.altLive],
+    !alarm && [appScreen(theme, lang, ['route']), a.altRoute],
+  ].filter((s) => s && s[0])
 
   return (
     <section className="alarm" id="alarm" aria-labelledby="alarm-title">
@@ -36,7 +41,7 @@ export default function Alarm() {
           <p className="alarm__note">{a.note}</p>
         </div>
 
-        <div className="alarm__phones" data-count={shots.length}>
+        <div className="alarm__phones" data-count={shots.length} role="group" aria-label={a.tag} tabIndex={0}>
           {shots.map(([src, alt]) => (
             <div className="alarm__phone" key={src}>
               <div className="ds-device">

@@ -18,3 +18,14 @@ export function appScreen(theme, lang, names) {
   }
   return null
 }
+
+/** Like appScreen, but only a screenshot in the visitor's own language (either theme); null if there is none.
+ *  Used for screens that are mostly text (notifications), which must not appear in the wrong language. */
+export function appScreenInLang(theme, lang, names) {
+  const list = Array.isArray(names) ? names : [names]
+  const other = theme === 'dark' ? 'light' : 'dark'
+  for (const th of [theme, other]) {
+    for (const n of list) if (screens[th]?.[lang]?.[n]) return screens[th][lang][n]
+  }
+  return null
+}
