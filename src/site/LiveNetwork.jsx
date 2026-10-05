@@ -139,6 +139,7 @@ export default function LiveNetwork() {
 
         <div className="net__radar">
           <h3 className="net__h3">{n.radar.title}</h3>
+          <p className="net__radardesc">{n.radar.description}</p>
           <Suspense fallback={<div style={{ aspectRatio: '1072 / 722', maxWidth: '62%' }} aria-hidden="true" />}>
             <Radar lang={lang} t={t} />
           </Suspense>

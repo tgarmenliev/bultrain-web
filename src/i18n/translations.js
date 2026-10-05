@@ -29,23 +29,23 @@ export const translations = {
       facts: [
         { value: '702', label: 'гари' },
         { value: '550', label: 'влака' },
-        { value: '4,8', label: 'в Google Play' },
+        { value: '4,8★', label: 'в Google Play' },
       ],
       photoCredit: 'Снимка: Тихомир Гърменлиев',
-      photoAlt: 'Червен локомотив на гара, на светлината преди залез',
+      photoAlt: 'Червен локомотив на гара',
     },
     tour: {
       title: 'Едно пътуване, от търсенето до заключения екран.',
-      lead: 'Така изглежда пътуване с BulTrain, стъпка по стъпка, на истински екрани.',
+      lead: 'Така изглежда пътуване с BulTrain, стъпка по стъпка и направено с грижа за твоето преживяване.',
       steps: [
         {
           title: 'Търсиш и виждаш закъснението веднага',
-          text: 'Избираш откъде и докъде. Резултатите показват дали влакът закъснява, без допълнителна стъпка.',
+          text: 'Избираш откъде и докъде. И веднага виждаш дали влакът закъснява.',
           alt: 'Резултати от търсене със закъснения',
         },
         {
           title: 'Табло на всяка гара',
-          text: 'Заминаващи и пристигащи от 702 гари, със закъснението до всеки влак.',
+          text: 'Заминаващи и пристигащи влакове на всяка една от 702 гари в България.',
           alt: 'Табло на гара',
         },
         {
@@ -55,7 +55,7 @@ export const translations = {
         },
         {
           title: 'Влакът ти, на заключения екран',
-          text: 'Закъснение, лента с прогреса и време до пристигане, без да отключваш телефона и без да отваряш приложението. Получаваш известие, когато закъснението се промени значително и когато влакът навакса.',
+          text: 'Закъснение, лента с прогреса и време до пристигане, без да отключваш телефона и без да отваряш приложението. Получаваш известие, когато закъснението се промени и точно преди да пристигнеш.',
           tag: 'Live Activity',
           alt: 'Заключен екран с Live Activity на BulTrain',
         },
@@ -66,12 +66,12 @@ export const translations = {
       cta: 'Свали за iOS',
     },
     promises: {
-      statement: 'Ако няма данни на живо, казваме го. Закъснение никога не измисляме.',
+      statement: 'Данните са официални.',
       sub: 'Закъсненията идват от официалния публичен поток на Министерството на транспорта и съобщенията. Ако той не е наличен, виждаш ясно обозначен час по разписание.',
       items: [
         {
           title: 'Алармата работи без интернет',
-          text: 'Алармата за пристигане е изцяло на GPS, без сървър и без мобилно покритие. Работи и когато няма връзка.',
+          text: 'Алармата за пристигане работи изцяло с GPS и без мобилно покритие. Работи и когато няма връзка.',
         },
         {
           title: 'Без профил, без следене',
@@ -90,8 +90,8 @@ export const translations = {
     },
 
     press: {
-      title: 'За BulTrain в медиите и в магазините.',
-      storesLabel: 'От магазините',
+      title: 'За BulTrain в медиите и оценката за него.',
+      storesLabel: 'Оценките',
       dublinCaption: 'На европейското състезание за млади иноватори в Дъблин.',
       dublinAlt: 'Тихомир Гърменлиев до щанда на BulTrain на състезанието в Дъблин',
       ratingCount: '{n} оценки',
@@ -139,7 +139,7 @@ export const translations = {
       },
       presidentCaption: 'Грамота „Джон Атанасов“ – Проект с висок обществен принос, точно за проекта BulTrain, връчена от Президента на Република България Илияна Йотова. Снимка: Президентство на Република България.',
       presidentAlt: 'Тихомир Гърменлиев с Президента на Република България Илияна Йотова при връчването на грамотата му, пред държавния герб',
-      portraitAlt: 'Тихомир Гърменлиев на перон, пред червен влак',
+      portraitAlt: 'Тихомир Гърменлиев на перон, пред влак',
     },
     network: {
       title: 'Влаковете в България, в този момент.',
@@ -148,17 +148,17 @@ export const translations = {
       justNow: 'току-що',
       minAgo: 'преди {n} мин',
       updated: 'Обновено {age}',
-      stale: 'Данните са стари {n} мин.',
-      offline: 'Връзката е прекъсната. Показани са последните получени данни, стари {age}.',
+      stale: 'Данните са стари: преди {n} мин.',
+      offline: 'Връзката е прекъсната. Показани са последните получени данни, от {age}.',
       starting: 'Данните се зареждат.',
       rateLimited: 'Твърде много заявки. Опитваме отново след малко.',
       unavailable: 'Данните не са достъпни в момента.',
       noRealtime: 'Няма данни на живо',
-      noRealtimeNote: 'Източникът в момента не дава актуални данни. Не показваме оценки.',
+      noRealtimeNote: 'Източникът в момента не дава актуални данни.',
       onTime: 'навреме',
-      onTimeNote: 'Под 5 мин закъснение, само влаковете с данни на живо ({n} от {total}).',
+      onTimeNote: 'С под 5 мин закъснение, само влаковете с данни на живо ({n} от {total}).',
       avg: 'средно закъснение',
-      avgNote: 'Само влаковете с данни на живо. Ранните се броят за 0.',
+      avgNote: 'Само влаковете с данни на живо.',
       unit: 'мин',
       max: 'най-голямо закъснение',
       noDelayed: 'Няма закъсняващ влак',
@@ -172,14 +172,15 @@ export const translations = {
         unavailable: 'Таблото не е достъпно',
         unavailableNote: 'Няма данни от повече от 15 минути.',
         empty: 'Няма влакове в този списък.',
-        note: 'Закъснение се показва само когато има данни на живо. Останалите са по разписание.',
+        note: 'Таблото показва заминаващите влакове в реално време от избраната гара.',
       },
       device: {
-        caption: 'Направих такова табло и за гара: e-ink екран с тези данни.',
+        caption: 'Направих такова табло за всяка гара: e-ink екран с информация за влаковете.',
         alt: 'E-ink табло с пристигащи влакове в София, със закъснения и „On time“',
       },
       radar: {
         title: 'Всеки влак е точка',
+        description: 'Тази карта показва местоположението на всички влакове в реално време.',
         onMap: '{shown} от {total} влака са на картата, за {missing} няма позиция.',
         allOnMap: 'Всички {total} влака са на картата.',
         legendOk: 'под 5 мин закъснение',
@@ -248,11 +249,11 @@ export const translations = {
         },
         tu: {
           label: 'Студент в Технически университет - София',
-          detail: 'Факултет по приложна математика и информатика',
+          detail: 'Специалност: Информатика и софтуерни науки, Факултет по приложна математика и информатика',
         },
         hacktues: {
           label: 'Победител в HackTUES 10',
-          detail: 'Най-големият ученически хакатон на Балканите',
+          detail: 'Най-големият ученически хакатон в България',
         },
         teenovator: {
           label: 'Доброволец на Тийноватор',
@@ -290,21 +291,21 @@ export const translations = {
     },
     contact: {
       heading: 'Свържете се с нас',
-      subheading: 'Имате въпрос или просто искате да ни поздравите? Изберете най-удобния за Вас начин за връзка с екипа на BulTrain.',
+      subheading: 'Имаш въпрос или предложение? Избери най-удобния за теб начин за връзка с мен.',
       methods: {
         email: {
           label: 'Имейл',
           description: 'За въпроси, предложения и техническа поддръжка.',
         },
-        linkedin: { label: 'LinkedIn', description: 'Професионална мрежа и бизнес контакти.' },
+        linkedin: { label: 'LinkedIn', description: 'Прочети историите зад проекта.' },
       },
-      ctaTitle: 'Очакваме Ви!',
-      ctaText: 'Ние ценим всяка обратна връзка. Вашите мнения ни помагат да направим BulTrain още по-добър за всички пътуващи в България.',
+      ctaTitle: 'Ще се радвам да чуя мнението ти.',
+      ctaText: 'Всяка обратна връзка е ценна и помага за подобряване на BulTrain.',
     },
     privacy: {
       heading: 'Политика за поверителност',
       lastUpdated: 'Последна актуализация',
-      intro: 'Добре дошли в BulTrain! Ние уважаваме Вашата поверителност и се ангажираме да защитаваме Вашите данни. Моля, прочетете тази Политика, за да разберете как събираме, използваме и защитаваме всяка информация, когато използвате нашето приложение и уебсайт.',
+      intro: 'Добре дошли в политиката за поверителност на BulTrain! Ние уважаваме Вашата поверителност и се ангажираме да защитаваме Вашите данни. Моля, прочетете тази Политика, за да разберете как събираме, използваме и защитаваме всяка информация, когато използвате нашето приложение и уебсайт.',
       sections: [
         {
           title: '1. Кой отговаря за данните',
@@ -401,23 +402,23 @@ export const translations = {
       facts: [
         { value: '702', label: 'stations' },
         { value: '550', label: 'trains' },
-        { value: '4.8', label: 'on Google Play' },
+        { value: '4.8★', label: 'on Google Play' },
       ],
       photoCredit: 'Photo: Tihomir Garmenliev',
-      photoAlt: 'A red locomotive at a station in the light before sunset',
+      photoAlt: 'A red locomotive at a station',
     },
     tour: {
       title: 'One journey, from search to lock screen.',
-      lead: 'This is what a trip with BulTrain looks like, step by step, on real screens.',
+      lead: 'Here is what a trip with BulTrain looks like, step by step, designed with your experience in mind.',
       steps: [
         {
           title: 'Search and see the delay right away',
-          text: 'Pick where from and where to. The results show whether the train is late, with no extra step.',
+          text: 'Pick where from and where to, and see right away whether the train is running late.',
           alt: 'Search results showing delays',
         },
         {
           title: 'A board for every station',
-          text: 'Departures and arrivals from 702 stations, with the delay next to every train.',
+          text: 'Departures and arrivals at every one of the 702 stations in Bulgaria.',
           alt: 'Station board',
         },
         {
@@ -427,7 +428,7 @@ export const translations = {
         },
         {
           title: 'Your train, on your lock screen',
-          text: 'The delay, a progress bar and the time to arrival, without unlocking your phone or opening the app. You get a notification when the delay changes significantly and when the train makes up time.',
+          text: 'The delay, a progress bar and the time to arrival, without unlocking your phone or opening the app. You get a notification when the delay changes and just before you arrive.',
           tag: 'Live Activity',
           alt: 'BulTrain Live Activity on the lock screen',
         },
@@ -438,12 +439,12 @@ export const translations = {
       cta: 'Download for iOS',
     },
     promises: {
-      statement: 'If there is no live data, we say so. We never make up a delay.',
+      statement: 'The data is official.',
       sub: 'Delays come from the official public feed of the Ministry of Transport and Communications. If it is unavailable, you see a clearly labelled scheduled time.',
       items: [
         {
           title: 'The alarm works offline',
-          text: 'The arrival alarm runs entirely on GPS, with no server and no mobile coverage. It works even with no connection.',
+          text: 'The arrival alarm runs entirely on GPS and needs no mobile coverage. It works even with no connection.',
         },
         {
           title: 'No account, no tracking',
@@ -462,8 +463,8 @@ export const translations = {
     },
 
     press: {
-      title: 'BulTrain in the press and in the stores.',
-      storesLabel: 'From the stores',
+      title: 'BulTrain in the press, and how people rate it.',
+      storesLabel: 'Ratings',
       dublinCaption: 'At the European competition for young innovators in Dublin.',
       dublinAlt: 'Tihomir Garmenliev at the BulTrain stand at the competition in Dublin',
       ratingCount: '{n} ratings',
@@ -511,7 +512,7 @@ export const translations = {
       },
       presidentCaption: 'The John Atanasov Certificate – Project with High Public Impact, awarded specifically for the BulTrain project, presented by the President of the Republic of Bulgaria, Iliana Iotova. Photo: Presidency of the Republic of Bulgaria.',
       presidentAlt: 'Tihomir Garmenliev with the President of the Republic of Bulgaria, Iliana Iotova, at the presentation of his certificate, in front of the national coat of arms',
-      portraitAlt: 'Tihomir Garmenliev on a platform in front of a red train',
+      portraitAlt: 'Tihomir Garmenliev on a platform in front of a train',
     },
     network: {
       title: 'Every train in Bulgaria, right now.',
@@ -520,17 +521,17 @@ export const translations = {
       justNow: 'just now',
       minAgo: '{n} min ago',
       updated: 'Updated {age}',
-      stale: 'The data is {n} min old.',
-      offline: 'Connection lost. Showing the last data received, {age} old.',
+      stale: 'Data last updated {n} min ago.',
+      offline: 'Connection lost. Showing the last data received ({age}).',
       starting: 'Loading the data.',
       rateLimited: 'Too many requests. Trying again shortly.',
       unavailable: 'The data is unavailable right now.',
       noRealtime: 'No live data',
-      noRealtimeNote: 'The source is not providing current data right now. We show no estimates.',
+      noRealtimeNote: 'The source is not providing current data right now.',
       onTime: 'on time',
       onTimeNote: 'Under 5 min late, only trains with live data ({n} of {total}).',
       avg: 'average delay',
-      avgNote: 'Only trains with live data. Early trains count as 0.',
+      avgNote: 'Only trains with live data.',
       unit: 'min',
       max: 'longest delay',
       noDelayed: 'No train is late',
@@ -544,14 +545,15 @@ export const translations = {
         unavailable: 'The board is unavailable',
         unavailableNote: 'No data for more than 15 minutes.',
         empty: 'No trains on this list.',
-        note: 'Delays are shown only when live data exists. Everything else is the timetable.',
+        note: 'The board shows departing trains for the selected station in real time.',
       },
       device: {
-        caption: 'I built a board like this for stations too: an e-ink screen showing this data.',
+        caption: 'I built an e-ink board like this for stations: a screen with live train information.',
         alt: 'E-ink board showing arrivals in Sofia, with delays and “On time”',
       },
       radar: {
         title: 'Every train is a dot',
+        description: 'This map shows where every train is, in real time.',
         onMap: '{shown} of {total} trains are on the map, {missing} have no position.',
         allOnMap: 'All {total} trains are on the map.',
         legendOk: 'under 5 min late',
@@ -617,11 +619,11 @@ export const translations = {
         tues: { label: 'TUES graduate', detail: 'Technology School “Electronic Systems”' },
         tu: {
           label: 'Student at the Technical University of Sofia',
-          detail: 'Faculty of Applied Mathematics and Informatics',
+          detail: 'Major: Informatics and Software Sciences, Faculty of Applied Mathematics and Informatics',
         },
         hacktues: {
           label: 'Winner of HackTUES 10',
-          detail: 'The largest student hackathon in the Balkans',
+          detail: 'The largest student hackathon in Bulgaria',
         },
         teenovator: {
           label: 'Teenovator volunteer',
@@ -659,7 +661,7 @@ export const translations = {
     },
     contact: {
       heading: 'Get in touch',
-      subheading: 'Have a question, or just want to say hello? Choose whichever way works best for you to reach the BulTrain team.',
+      subheading: 'Have a question or a suggestion? Choose whichever way suits you best to reach me.',
       methods: {
         email: {
           label: 'Email',
@@ -667,16 +669,16 @@ export const translations = {
         },
         linkedin: {
           label: 'LinkedIn',
-          description: 'Professional network and business enquiries.',
+          description: 'Read the stories behind the project.',
         },
       },
-      ctaTitle: 'We’d love to hear from you!',
-      ctaText: 'We value every piece of feedback. Your thoughts help us make BulTrain even better for everyone travelling across Bulgaria.',
+      ctaTitle: 'I’d love to hear what you think.',
+      ctaText: 'Every piece of feedback is valuable and helps make BulTrain better.',
     },
     privacy: {
       heading: 'Privacy Policy',
       lastUpdated: 'Last updated',
-      intro: 'Welcome to BulTrain! We respect your privacy and are committed to protecting your data. Please read this Policy to understand how we collect, use and protect any information when you use our app and website.',
+      intro: 'Welcome to the BulTrain privacy policy! We respect your privacy and are committed to protecting your data. Please read this Policy to understand how we collect, use and protect any information when you use our app and website.',
       sections: [
         {
           title: '1. Who is responsible for the data',
