@@ -40,12 +40,12 @@ const S = 'screens/ios'
 // Only the screens the site actually shows (hero: board/results/route, tour: results/board/route/lock).
 const screens = {
   dark: {
-    bg: { results: '9742', board: '9744', route: '9745', lock: '9778' },
-    en: { results: '9770', board: 'F:Screenshot 2026-10-04 at 20.57.18.png', route: '9772' },
+    bg: { results: '9742', board: '9744', route: '9745', trip: '9743', lock: '9778' },
+    en: { results: '9770', board: 'F:Screenshot 2026-10-04 at 20.57.18.png', route: '9772', trip: '9771' },
   },
   light: {
-    bg: { results: '9751', board: '9753', route: '9754' },
-    en: { results: '9760', board: '9762', route: '9763', lock: '9768' },
+    bg: { results: '9751', board: '9753', route: '9754', trip: 'F:Screenshot 2026-10-04 at 19.58.29.png' },
+    en: { results: '9760', board: '9762', route: '9763', trip: '9761', lock: '9768' },
   },
 }
 const manifest = {}

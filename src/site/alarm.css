@@ -1,0 +1,24 @@
+.alarm { padding: clamp(72px, 10vw, 144px) 0; scroll-margin-top: var(--nav-h); border-top: 1px solid var(--line); }
+.alarm__grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+.alarm__tag { display: inline-block; margin: 0 0 18px; padding: 4px 10px; border-radius: 7px; background: var(--raised); font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink2); }
+.alarm__title { font-size: clamp(2rem, 4.2vw, 3.4rem); max-width: 18ch; }
+.alarm__lead { margin: 18px 0 0; max-width: 54ch; font-size: clamp(1.05rem, 1.5vw, 1.2rem); line-height: 1.65; color: var(--ink2); text-wrap: pretty; }
+
+.alarm__points { list-style: none; margin: clamp(28px, 4vw, 48px) 0 0; padding: 0; }
+.alarm__points li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 8px; padding: 22px 0; border-top: 1px solid var(--line-strong); }
+.alarm__points li:last-child { border-bottom: 1px solid var(--line-strong); }
+.alarm__n { font-size: 14px; font-weight: 800; letter-spacing: 0.06em; color: var(--accent); padding-top: 3px; }
+.alarm__points h3 { margin: 0 0 6px; font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; }
+.alarm__points p { margin: 0; max-width: 50ch; font-size: 15px; line-height: 1.65; color: var(--ink2); }
+.alarm__note { margin: 16px 0 0; font-size: 13.5px; line-height: 1.55; font-weight: 600; color: var(--ink3); }
+
+.alarm__phones { display: flex; justify-content: center; gap: clamp(14px, 2.4vw, 32px); }
+.alarm__phone { width: min(250px, 44%); }
+.alarm__phones[data-count='1'] .alarm__phone { width: min(280px, 60%); }
+.alarm__phone:nth-child(even) { margin-top: clamp(32px, 6vw, 72px); }
+.alarm__phone .ds-device { width: 100%; }
+
+@media (max-width: 900px) {
+  .alarm__grid { grid-template-columns: minmax(0, 1fr); }
+  .alarm__title { max-width: 22ch; }
+}

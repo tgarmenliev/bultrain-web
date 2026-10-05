@@ -17,6 +17,7 @@ export const translations = {
       skip: 'Към съдържанието',
       live: 'На живо',
       tour: 'Приложението',
+      alarm: 'Аларма',
       theme: 'Смени темата',
       language: 'Език',
     },
@@ -64,6 +65,29 @@ export const translations = {
       iosStatus: 'Налично сега',
       androidSoon: 'Скоро налично и за Android',
       cta: 'Свали за iOS',
+    },
+    alarm: {
+      tag: 'Умна аларма и следене на пътуването',
+      title: 'Запази пътуването. BulTrain ще го следи вместо теб.',
+      lead: 'След като запазиш пътуването си, приложението следи влака и те известява, преди да стигнеш твоята гара. Не е нужно да броиш спирките или да гледаш през прозореца.',
+      points: [
+        {
+          title: 'Алармата те известява преди гарата',
+          text: 'Умната аларма следи къде си по GPS и изпраща известие, преди да стигнеш гарата си. Работи и без интернет, а местоположението ти не напуска телефона.',
+        },
+        {
+          title: 'Виждаш пътуването на живо',
+          text: 'На коя спирка е влакът, коя е следващата и колко закъснява. Всички спирки с планиран и реален час са на един екран.',
+        },
+        {
+          title: 'Запазеното пътуване е винаги с теб',
+          text: 'Натискаш „Запази пътуване“ и разписанието му остава в телефона. Можеш да го отвориш и без връзка.',
+        },
+      ],
+      note: 'Алармата ползва GPS на телефона, затова може да изразходва повече батерия.',
+      altTrip: 'Детайли за маршрута с бутон „Запази пътуване“',
+      altRoute: 'Маршрут на влак със спирки и закъснения',
+      altAlarm: 'Умна аларма за пристигане',
     },
     promises: {
       statement: 'Данните са официални.',
@@ -172,10 +196,10 @@ export const translations = {
         unavailable: 'Таблото не е достъпно',
         unavailableNote: 'Няма данни от повече от 15 минути.',
         empty: 'Няма влакове в този списък.',
-        note: 'Таблото показва заминаващите влакове в реално време от избраната гара.',
+        note: 'Таблото показва заминаващите влакове от избраната гара. Закъснение се показва, когато има данни на живо.',
       },
       device: {
-        caption: 'Направих такова табло за всяка гара: e-ink екран с информация за влаковете.',
+        caption: 'Направих такова e-ink табло за гара.',
         alt: 'E-ink табло с пристигащи влакове в София, със закъснения и „On time“',
       },
       radar: {
@@ -390,6 +414,7 @@ export const translations = {
       skip: 'Skip to content',
       live: 'Live',
       tour: 'The app',
+      alarm: 'Alarm',
       theme: 'Switch theme',
       language: 'Language',
     },
@@ -437,6 +462,29 @@ export const translations = {
       iosStatus: 'Available now',
       androidSoon: 'Coming soon to Android',
       cta: 'Download for iOS',
+    },
+    alarm: {
+      tag: 'Smart alarm and trip tracking',
+      title: 'Save your trip. Let BulTrain keep an eye on it.',
+      lead: 'Once you save a trip, the app follows the train and alerts you before you reach your station. No counting stops, no staring out of the window.',
+      points: [
+        {
+          title: 'The alarm tells you before your station',
+          text: 'The smart alarm follows your position by GPS and sends a notification before you get to your station. It works without an internet connection, and your location never leaves your phone.',
+        },
+        {
+          title: 'Follow the journey live',
+          text: 'Which stop the train is at, which one is next and how late it is. Every stop, with planned and actual times, on one screen.',
+        },
+        {
+          title: 'Your saved trip is always with you',
+          text: 'Tap “Save Journey” and its timetable stays on your phone. You can open it even with no connection.',
+        },
+      ],
+      note: 'The alarm uses your phone’s GPS, so it can use more battery.',
+      altTrip: 'Route details with the “Save Journey” button',
+      altRoute: 'Train route with stops and delays',
+      altAlarm: 'Smart arrival alarm',
     },
     promises: {
       statement: 'The data is official.',
@@ -545,10 +593,10 @@ export const translations = {
         unavailable: 'The board is unavailable',
         unavailableNote: 'No data for more than 15 minutes.',
         empty: 'No trains on this list.',
-        note: 'The board shows departing trains for the selected station in real time.',
+        note: 'The board shows departing trains from the selected station. Delays appear when there is live data.',
       },
       device: {
-        caption: 'I built an e-ink board like this for stations: a screen with live train information.',
+        caption: 'I built an e-ink board like this for a station.',
         alt: 'E-ink board showing arrivals in Sofia, with delays and “On time”',
       },
       radar: {

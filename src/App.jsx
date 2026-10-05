@@ -5,6 +5,7 @@ import RouteMeta from './site/RouteMeta'
 import Hero from './site/Hero'
 import LiveNetwork from './site/LiveNetwork'
 import Tour from './site/Tour'
+import Alarm from './site/Alarm'
 import Promises from './site/Promises'
 import Press from './site/Press'
 import Maker from './site/Maker'
@@ -41,6 +42,7 @@ function Home() {
       <Hero />
       <LiveNetwork />
       <Tour />
+      <Alarm />
       <Promises />
       <Press />
       <Maker />

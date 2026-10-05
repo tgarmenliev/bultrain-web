@@ -4,24 +4,28 @@
    "results": "/img/app/dark-bg-results.webp",
    "board": "/img/app/dark-bg-board.webp",
    "route": "/img/app/dark-bg-route.webp",
+   "trip": "/img/app/dark-bg-trip.webp",
    "lock": "/img/app/dark-bg-lock.webp"
   },
   "en": {
    "results": "/img/app/dark-en-results.webp",
    "board": "/img/app/dark-en-board.webp",
-   "route": "/img/app/dark-en-route.webp"
+   "route": "/img/app/dark-en-route.webp",
+   "trip": "/img/app/dark-en-trip.webp"
   }
  },
  "light": {
   "bg": {
    "results": "/img/app/light-bg-results.webp",
    "board": "/img/app/light-bg-board.webp",
-   "route": "/img/app/light-bg-route.webp"
+   "route": "/img/app/light-bg-route.webp",
+   "trip": "/img/app/light-bg-trip.webp"
   },
   "en": {
    "results": "/img/app/light-en-results.webp",
    "board": "/img/app/light-en-board.webp",
    "route": "/img/app/light-en-route.webp",
+   "trip": "/img/app/light-en-trip.webp",
    "lock": "/img/app/light-en-lock.webp"
   }
  }
