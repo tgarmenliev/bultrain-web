@@ -131,14 +131,14 @@ export const translations = {
       educationTitle: 'Образование',
       johnAtanasov: {
         label: 'Грамота „Джон Атанасов“ – Проект с висок обществен принос',
-        detail: 'За проекта BulTrain',
+        detail: 'За проекта BulTrain. Връчена от Президента на Република България Илияна Йотова.',
       },
       dublin: {
         label: 'Финал на европейско състезание за млади иноватори, Дъблин',
         detail: 'С BulTrain',
       },
-      presidentCaption: 'Награждаване с Грамота „Джон Атанасов“ – Проект с висок обществен принос, точно за проекта BulTrain. Снимка: Президентство на Република България.',
-      presidentAlt: 'Тихомир Гърменлиев с президента на България Илиана Йотова при награждаването му с грамота, пред държавния герб',
+      presidentCaption: 'Грамота „Джон Атанасов“ – Проект с висок обществен принос, точно за проекта BulTrain, връчена от Президента на Република България Илияна Йотова. Снимка: Президентство на Република България.',
+      presidentAlt: 'Тихомир Гърменлиев с Президента на Република България Илияна Йотова при връчването на грамотата му, пред държавния герб',
       portraitAlt: 'Тихомир Гърменлиев на перон, пред червен влак',
     },
     network: {
@@ -503,14 +503,14 @@ export const translations = {
       educationTitle: 'Education',
       johnAtanasov: {
         label: 'John Atanasov Certificate – Project with High Public Impact',
-        detail: 'For the BulTrain project',
+        detail: 'For the BulTrain project. Presented by the President of the Republic of Bulgaria, Iliana Iotova.',
       },
       dublin: {
         label: 'Final of a European competition for young innovators, Dublin',
         detail: 'With BulTrain',
       },
-      presidentCaption: 'Receiving the John Atanasov Certificate – Project with High Public Impact, awarded specifically for the BulTrain project. Photo: Presidency of the Republic of Bulgaria.',
-      presidentAlt: 'Tihomir Garmenliev with the President of Bulgaria, Iliana Iotova, at the presentation of his certificate, in front of the national coat of arms',
+      presidentCaption: 'The John Atanasov Certificate – Project with High Public Impact, awarded specifically for the BulTrain project, presented by the President of the Republic of Bulgaria, Iliana Iotova. Photo: Presidency of the Republic of Bulgaria.',
+      presidentAlt: 'Tihomir Garmenliev with the President of the Republic of Bulgaria, Iliana Iotova, at the presentation of his certificate, in front of the national coat of arms',
       portraitAlt: 'Tihomir Garmenliev on a platform in front of a red train',
     },
     network: {
