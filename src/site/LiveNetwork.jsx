@@ -132,7 +132,7 @@ export default function LiveNetwork() {
 
           <figure className="net__photo">
             <img src="/img/photo/eink-1-900.webp" srcSet="/img/photo/eink-1-900.webp 900w, /img/photo/eink-1-1800.webp 1800w"
-              sizes="(min-width: 960px) 600px, 100vw" alt={n.device.alt} width="900" height="1200" loading="lazy" />
+              sizes="(min-width: 960px) 600px, 100vw" alt={n.device.alt} width="900" height="1125" loading="lazy" />
             <figcaption>{n.device.caption}</figcaption>
           </figure>
         </div>

@@ -20,16 +20,16 @@ const run = (cmd, args) => execFileSync(cmd, args, { stdio: 'pipe' })
 // --- photos: [source, name, widths]
 const photos = [
   ['photos/trains/IMG_4721_edited.JPG', 'loco-evening', [2000, 1000, 800]],
-  ['photos/eink-display/IMG_5830.HEIC', 'eink-1', [1800, 900]],
+  ['photos/eink-display/IMG_5831.HEIC', 'eink-1', [1800, 900], '2160x2700+637+1112'], // cropped around the display, 4:5
   ['photos/me/IMG_7708.heic', 'me-platform', [1400, 700]],
   ['photos/events/IMG_6085.HEIC', 'event-dublin', [1400, 700]],
   ['photos/events/N97A6470.jpg', 'event-president', [1600, 800]],
 ]
-for (const [src, name, widths] of photos) {
+for (const [src, name, widths, crop] of photos) {
   const full = join(TMP, `${name}.jpg`)
   run('sips', ['-s', 'format', 'jpeg', '-s', 'formatOptions', '95', join(IN, src), '--out', full]) // also applies EXIF orientation
   for (const w of widths) {
-    run('magick', [full, '-auto-orient', '-strip', '-resize', `${w}x`, '-quality', '80', `${OUT}/photo/${name}-${w}.webp`])
+    run('magick', [full, '-auto-orient', ...(crop ? ['-crop', crop, '+repage'] : []), '-strip', '-resize', `${w}x`, '-quality', '80', `${OUT}/photo/${name}-${w}.webp`])
   }
   console.log('photo', name, widths.join('/'))
 }

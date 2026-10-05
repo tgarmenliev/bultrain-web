@@ -176,7 +176,7 @@ export const translations = {
       },
       device: {
         caption: 'Направих такова табло и за гара: e-ink екран с тези данни.',
-        alt: 'E-ink табло със заминаващи влакове от София',
+        alt: 'E-ink табло с пристигащи влакове в София, със закъснения и „On time“',
       },
       radar: {
         title: 'Всеки влак е точка',
@@ -548,7 +548,7 @@ export const translations = {
       },
       device: {
         caption: 'I built a board like this for stations too: an e-ink screen showing this data.',
-        alt: 'E-ink board showing departures from Sofia',
+        alt: 'E-ink board showing arrivals in Sofia, with delays and “On time”',
       },
       radar: {
         title: 'Every train is a dot',
