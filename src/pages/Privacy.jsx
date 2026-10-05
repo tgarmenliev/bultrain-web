@@ -9,7 +9,7 @@ export default function Privacy() {
     <LegalPage title={t.privacy.heading} updated={LEGAL_UPDATED} lede={t.privacy.intro}>
       {t.privacy.sections.map((s, i) => (
         <section key={i}>
-          <h3>{s.title}</h3>
+          <h2 className="legal__sec">{s.title}</h2>
           <p>
             {/* our own static translation strings (contain <strong>), never user input */}
             <span dangerouslySetInnerHTML={{ __html: s.body }} />

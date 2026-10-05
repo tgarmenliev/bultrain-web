@@ -1,70 +1,50 @@
-import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import { createContext, useContext, useEffect, useCallback, useMemo } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { translations } from './translations'
-
-const STORAGE_KEY = 'bultrain-lang'
-const SUPPORTED = ['bg', 'en']
-
-// ----------------------------------------------------------------------------
-// Zero-API locale detection.
-// Priority: saved preference > browser language / timezone > English default.
-// ----------------------------------------------------------------------------
-function detectLanguage() {
-  // 1. A manual choice in localStorage always wins on subsequent visits.
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY)
-    if (SUPPORTED.includes(saved)) return saved
-  } catch {
-    // localStorage may be unavailable (private mode / SSR) — fall through.
-  }
-
-  // 2. Automatic detection from the browser environment.
-  try {
-    const langs = [navigator.language, ...(navigator.languages || [])]
-    const isBgLang = langs.some((l) => l && l.toLowerCase().startsWith('bg'))
-
-    let isSofiaTz = false
-    try {
-      isSofiaTz =
-        Intl.DateTimeFormat().resolvedOptions().timeZone === 'Europe/Sofia'
-    } catch {
-      // Intl/timezone unavailable — ignore.
-    }
-
-    if (isBgLang || isSofiaTz) return 'bg'
-  } catch {
-    // navigator unavailable — fall through.
-  }
-
-  // 3. Everywhere else in the world defaults to English.
-  return 'en'
-}
+import { langOf, stripLang, localize } from './routes'
+import { STORAGE_KEY, SUPPORTED, savedLanguage } from './browser'
 
 const LanguageContext = createContext(null)
 
+// The language is part of the address ("/" Bulgarian, "/en" English), so search engines and shared links
+// always get the same language. This provider only reads it, and moves between the two versions.
 export function LanguageProvider({ children }) {
-  const [lang, setLang] = useState(detectLanguage)
+  const { pathname, search, hash } = useLocation()
+  const navigate = useNavigate()
+  const lang = langOf(pathname)
 
   // Keep <html lang> in sync for accessibility and SEO.
   useEffect(() => {
     document.documentElement.lang = lang
   }, [lang])
 
+  // A visitor who once chose English with the switcher gets English when they open a Bulgarian address.
+  useEffect(() => {
+    if (lang === 'bg' && savedLanguage() === 'en') {
+      navigate(localize(pathname, 'en') + search + hash, { replace: true })
+    }
+    // only on first load of this page view
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const setLanguage = useCallback((next) => {
-    if (!SUPPORTED.includes(next)) return
+    if (!SUPPORTED.includes(next) || next === lang) return
     try {
       localStorage.setItem(STORAGE_KEY, next)
     } catch {
-      // Persisting is best-effort; the in-memory state still updates.
+      // Persisting is best-effort; the address still changes.
     }
-    setLang(next)
-  }, [])
+    navigate(localize(stripLang(pathname), next) + search + hash)
+  }, [lang, pathname, search, hash, navigate])
 
-  const value = {
+  const value = useMemo(() => ({
     lang,
     setLanguage,
     toggleLanguage: () => setLanguage(lang === 'bg' ? 'en' : 'bg'),
     t: translations[lang],
-  }
+    /** Link target for an internal page in the current language: to('/privacy') -> "/en/privacy" on the English site. */
+    to: (path) => localize(path, lang),
+  }), [lang, setLanguage])
 
   return (
     <LanguageContext.Provider value={value}>

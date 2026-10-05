@@ -47,7 +47,7 @@ export default function Hero() {
             <figure className="hero__photo">
               <img
                 src="/img/photo/loco-evening-1000.webp"
-                srcSet="/img/photo/loco-evening-1000.webp 1000w, /img/photo/loco-evening-2000.webp 2000w"
+                srcSet="/img/photo/loco-evening-800.webp 800w, /img/photo/loco-evening-1000.webp 1000w, /img/photo/loco-evening-2000.webp 2000w"
                 sizes="(min-width: 960px) 560px, 100vw"
                 alt={h.photoAlt}
                 width="1000" height="750"
@@ -58,7 +58,7 @@ export default function Hero() {
             {screen && (
               <div className="hero__phone" data-rise style={{ '--i': 4 }}>
                 <div className="ds-device">
-                  <img {...screenProps(screen)} sizes="(min-width: 960px) 320px, 220px" alt={`BulTrain, ${t.screenshots.labels.station}`} width="900" height="1948" />
+                  <img className="themed" fetchPriority="low" {...screenProps(screen)} sizes="(min-width: 960px) 320px, 220px" alt={`BulTrain, ${t.screenshots.labels.station}`} width="900" height="1948" />
                 </div>
               </div>
             )}

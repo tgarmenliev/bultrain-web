@@ -6,11 +6,11 @@ import './legal.css'
 
 /** Shared shell for text-heavy pages: back link, title, optional date, lede, then the body. */
 export default function LegalPage({ title, updated, lede, wide, children }) {
-  const { lang, t } = useLanguage()
+  const { lang, t, to } = useLanguage()
   return (
     <main className="legal" id="main" tabIndex={-1}>
       <div className={`wrap legal__inner${wide ? ' is-wide' : ''}`}>
-        <Link to="/" className="legal__back"><ArrowLeft size={16} /> {t.common.backHome}</Link>
+        <Link to={to('/')} className="legal__back"><ArrowLeft size={16} /> {t.common.backHome}</Link>
         <h1 className="display legal__title">{title}</h1>
         {updated && <p className="legal__meta tnum">{t.privacy.lastUpdated}: {formatLegalDate(updated, lang)}</p>}
         {lede && <p className="legal__lede">{lede}</p>}

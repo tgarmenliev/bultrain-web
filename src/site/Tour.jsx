@@ -46,7 +46,7 @@ export default function Tour() {
 
                 {/* phones stack under each step on small screens; the sticky phone is for wide ones */}
                 {shots[i] && (
-                  <div className="tour__inline"><div className="ds-device"><img {...screenProps(shots[i])} sizes="250px" alt={s.alt} width="900" height="1948" loading="lazy" /></div></div>
+                  <div className="tour__inline"><div className="ds-device"><img className="themed" {...screenProps(shots[i])} sizes="250px" alt={s.alt} width="900" height="1948" loading="lazy" /></div></div>
                 )}
 
                 {i === tour.steps.length - 1 && (
@@ -65,7 +65,7 @@ export default function Tour() {
               <div className="ds-device">
                 <div className="tour__screens">
                   {shots.map((src, i) => src && (
-                    <img key={i} {...screenProps(src)} sizes="300px" alt="" width="900" height="1948" data-on={active === i} loading={i === 0 ? 'eager' : 'lazy'} />
+                    <img key={i} className="themed" {...screenProps(src)} sizes="300px" alt="" width="900" height="1948" data-on={active === i} loading={i === 0 ? 'eager' : 'lazy'} />
                   ))}
                 </div>
               </div>

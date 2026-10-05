@@ -1,8 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage } from '../i18n/LanguageContext'
-
-const ORIGIN = 'https://bultrain.eu'
+import { pageMeta } from './seo'
 
 function setMeta(selector, attr, name, content) {
   let el = document.head.querySelector(selector)
@@ -10,41 +8,41 @@ function setMeta(selector, attr, name, content) {
   el.setAttribute('content', content)
 }
 
-/** Keeps <title>, description, canonical and Open Graph in step with the page and the language. */
+/**
+ * Keeps <title>, description, canonical, language alternates and Open Graph in step when the visitor
+ * navigates inside the app. The first load already has the right values (written at build time).
+ */
 export default function RouteMeta() {
   const { pathname } = useLocation()
-  const { lang, t } = useLanguage()
 
   useEffect(() => {
-    const pages = {
-      '/': [t.meta.title, t.meta.description],
-      '/privacy': [`${t.privacy.heading} · BulTrain`, t.privacy.intro],
-      '/terms': [`${t.terms.heading} · BulTrain`, t.terms.intro],
-      '/contact': [`${t.contact.heading} · BulTrain`, t.contact.subheading],
-      '/privacy-app': ['BulTrain App Privacy Policy', t.meta.description],
-      '/design': [`${t.meta.design} · BulTrain`, t.meta.description],
-    }
-    const known = pathname in pages
-    const [title, description] = pages[pathname] ?? [`${t.notFound.title} · BulTrain`, t.meta.description]
-
-    document.title = title
-    setMeta('meta[name="description"]', 'name', 'description', description)
-    setMeta('meta[property="og:title"]', 'property', 'og:title', title)
-    setMeta('meta[property="og:description"]', 'property', 'og:description', description)
-    setMeta('meta[property="og:url"]', 'property', 'og:url', ORIGIN + pathname)
-    setMeta('meta[property="og:locale"]', 'property', 'og:locale', lang === 'bg' ? 'bg_BG' : 'en_GB')
+    const m = pageMeta(pathname)
+    document.title = m.title
+    setMeta('meta[name="description"]', 'name', 'description', m.description)
+    setMeta('meta[property="og:title"]', 'property', 'og:title', m.title)
+    setMeta('meta[property="og:description"]', 'property', 'og:description', m.description)
+    setMeta('meta[property="og:url"]', 'property', 'og:url', m.url)
+    setMeta('meta[property="og:locale"]', 'property', 'og:locale', m.locale)
+    setMeta('meta[property="og:locale:alternate"]', 'property', 'og:locale:alternate', m.localeAlt)
 
     const canonical = document.head.querySelector('link[rel="canonical"]')
-    if (canonical) canonical.setAttribute('href', ORIGIN + (known ? pathname : '/'))
+    if (canonical) canonical.setAttribute('href', m.canonical)
 
-    // internal pages and unknown addresses must not be indexed
-    const noindex = pathname === '/design' || !known
+    document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach((el) => el.remove())
+    for (const a of m.alternates) {
+      const link = document.createElement('link')
+      link.rel = 'alternate'
+      link.hreflang = a.hreflang
+      link.href = a.href
+      document.head.appendChild(link)
+    }
+
     let robots = document.head.querySelector('meta[name="robots"]')
-    if (noindex) {
+    if (m.noindex) {
       if (!robots) { robots = document.createElement('meta'); robots.setAttribute('name', 'robots'); document.head.appendChild(robots) }
       robots.setAttribute('content', 'noindex')
     } else if (robots) robots.remove()
-  }, [pathname, lang, t])
+  }, [pathname])
 
   return null
 }

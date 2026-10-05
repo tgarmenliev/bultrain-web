@@ -1,6 +1,6 @@
 // Runs after `vite build` (npm "postbuild"): writes the host config files into dist/.
 //  - _headers   : security + caching headers (Netlify and Cloudflare Pages read this file)
-//  - _redirects : single-page-app fallback so /privacy, /terms ... work on a direct visit
+//  (no _redirects: every page is prerendered to its own file, and unknown addresses get dist/404.html)
 // The Content-Security-Policy needs the SHA-256 of the inline theme script in index.html, so it is
 // computed here from the built file and can never go stale.
 import { readFileSync, writeFileSync } from 'node:fs'
@@ -42,9 +42,11 @@ const headers = `/*
 /img/*
   Cache-Control: public, max-age=604800
 
-/index.html
+/*.html
+  Cache-Control: no-cache
+
+/
   Cache-Control: no-cache
 `
 writeFileSync('dist/_headers', headers)
-writeFileSync('dist/_redirects', '/*  /index.html  200\n')
-console.log('post-build: _headers (CSP script hash sha256-' + hash.slice(0, 10) + '...) and _redirects written')
+console.log('post-build: _headers written (CSP script hash sha256-' + hash.slice(0, 10) + '...)')

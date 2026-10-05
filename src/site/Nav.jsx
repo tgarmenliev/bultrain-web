@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { stripLang } from '../i18n/routes'
 import { Menu, X, Sun, Moon } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useTheme } from '../theme/ThemeContext'
@@ -32,12 +33,13 @@ function ThemeToggle() {
 
 // On the home page a hash link scrolls; elsewhere it goes home first, then scrolls.
 function Anchor({ hash, home, children, ...rest }) {
-  return home ? <a href={hash} {...rest}>{children}</a> : <Link to={`/${hash}`} {...rest}>{children}</Link>
+  const { to } = useLanguage()
+  return home ? <a href={hash} {...rest}>{children}</a> : <Link to={`${to('/')}${hash}`} {...rest}>{children}</Link>
 }
 
 export default function Nav() {
   const { t } = useLanguage()
-  const home = useLocation().pathname === '/'
+  const home = stripLang(useLocation().pathname) === '/'
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const sentinel = useRef(null)

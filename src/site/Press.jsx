@@ -34,7 +34,7 @@ export default function Press() {
               <p className="press__outlet">{leadCopy.source}</p>
               <h3><a href={lead.url} target="_blank" rel="noopener noreferrer">{leadCopy.title}</a></h3>
               <p className="press__snippet">{leadCopy.snippet}</p>
-              <a className="press__more" href={lead.url} target="_blank" rel="noopener noreferrer">{t.common.readMore} <ArrowUpRight size={16} /></a>
+              <a className="press__more" href={lead.url} target="_blank" rel="noopener noreferrer">{t.common.readMore}<span className="sr-only">: {leadCopy.title}</span> <ArrowUpRight size={16} /></a>
             </div>
           </article>
         )}

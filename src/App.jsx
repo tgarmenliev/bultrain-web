@@ -11,12 +11,29 @@ import Maker from './site/Maker'
 import SupportSection from './site/SupportSection'
 import Footer from './site/Footer'
 import ScrollProgress from './components/ScrollProgress'
-const DesignSystem = lazy(() => import('./site/DesignSystem'))
-const Privacy = lazy(() => import('./pages/Privacy'))
-const PrivacyApp = lazy(() => import('./pages/PrivacyApp'))
-const Terms = lazy(() => import('./pages/Terms'))
-const Contact = lazy(() => import('./pages/Contact'))
-const NotFound = lazy(() => import('./pages/NotFound'))
+import LangSuggest from './site/LangSuggest'
+import { stripLang } from './i18n/routes'
+// Pages other than the home page load on demand. `loaders` lets the entry point fetch the right one *before*
+// hydrating, so a prerendered page is never swapped for a loading placeholder.
+const loaders = {
+  '/design': () => import('./site/DesignSystem'),
+  '/privacy': () => import('./pages/Privacy'),
+  '/privacy-app': () => import('./pages/PrivacyApp'),
+  '/terms': () => import('./pages/Terms'),
+  '/contact': () => import('./pages/Contact'),
+  '*': () => import('./pages/NotFound'),
+}
+const page = (path) => lazy(loaders[path])
+const DesignSystem = page('/design')
+const Privacy = page('/privacy')
+const PrivacyApp = page('/privacy-app')
+const Terms = page('/terms')
+const Contact = page('/contact')
+const NotFound = page('*')
+
+/** Start loading the code for a language-less path (e.g. "/privacy"); resolves when it is ready. The home page's lazy part is the radar map. */
+// eslint-disable-next-line react-refresh/only-export-components
+export const preloadRoute = (path) => (path === '/' ? import('./site/Radar') : (loaders[path] ?? loaders['*'])())
 
 function Home() {
   return (
@@ -34,24 +51,31 @@ function Home() {
 
 // New page -> top. A hash link (also from another page) -> that section.
 function ScrollToTop() {
-  const { pathname, hash } = useLocation()
+  const location = useLocation()
+  const path = stripLang(location.pathname) // switching language keeps the scroll position
+  const { hash } = location
   useEffect(() => {
     const target = hash.length > 1 ? document.getElementById(hash.slice(1)) : null
-    if (target) target.scrollIntoView()
-    else window.scrollTo(0, 0)
-  }, [pathname, hash])
+    // jump, don't glide: this runs on arrival at a page, where a long animated scroll would be disorienting
+    if (target) target.scrollIntoView({ behavior: 'instant' })
+    else window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [path, hash])
   return null
 }
 
 export default function App() {
+  // routes are written without the language prefix: "/en/privacy" is matched as "/privacy"
+  const location = useLocation()
+  const routed = { ...location, pathname: stripLang(location.pathname) }
   return (
     <div style={{ position: 'relative' }}>
       <ScrollProgress />
       <ScrollToTop />
       <RouteMeta />
+      <LangSuggest />
       <Nav />
       <Suspense fallback={<div style={{ minHeight: '70vh' }} />}>
-      <Routes>
+      <Routes location={routed}>
         <Route path="/" element={<Home />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/privacy-app" element={<PrivacyApp />} />

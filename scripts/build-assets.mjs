@@ -19,7 +19,7 @@ const run = (cmd, args) => execFileSync(cmd, args, { stdio: 'pipe' })
 
 // --- photos: [source, name, widths]
 const photos = [
-  ['photos/trains/IMG_4721_edited.JPG', 'loco-evening', [2000, 1000]],
+  ['photos/trains/IMG_4721_edited.JPG', 'loco-evening', [2000, 1000, 800]],
   ['photos/eink-display/IMG_5830.HEIC', 'eink-1', [1800, 900]],
   ['photos/me/IMG_7708.heic', 'me-platform', [1400, 700]],
   ['photos/events/IMG_6085.HEIC', 'event-dublin', [1400, 700]],

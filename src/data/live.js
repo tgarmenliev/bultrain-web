@@ -85,7 +85,7 @@ export const radarResource = createResource('/api/network/radar', 60_000)
 
 /** Subscribe to a resource; `active=false` reads the last snapshot without polling. */
 export function useResource(resource, active = true) {
-  const snap = useSyncExternalStore(resource.subscribe, resource.getSnapshot)
+  const snap = useSyncExternalStore(resource.subscribe, resource.getSnapshot, resource.getSnapshot)
   useEffect(() => (active ? resource.retain() : undefined), [resource, active])
   return snap
 }

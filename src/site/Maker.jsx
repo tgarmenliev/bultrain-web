@@ -33,7 +33,8 @@ export default function Maker() {
             <section>
               <h3>{m.awardsTitle}</h3>
               <ul>
-                <li className="is-major"><b>{m.dublin.label}</b><span>{m.dublin.detail}</span></li>
+                <li className="is-major"><b>{m.johnAtanasov.label}</b><span>{m.johnAtanasov.detail}</span></li>
+                <li><b>{m.dublin.label}</b><span>{m.dublin.detail}</span></li>
                 {AWARDS.map((id) => <li key={id}><b>{ach[id].label}</b><span>{ach[id].detail}</span></li>)}
               </ul>
             </section>

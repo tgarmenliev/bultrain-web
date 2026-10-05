@@ -129,12 +129,16 @@ export const translations = {
       quoteBy: 'Тихомир Гърменлиев, за Economy.bg',
       awardsTitle: 'Отличия',
       educationTitle: 'Образование',
+      johnAtanasov: {
+        label: 'Грамота „Джон Атанасов“ – Проект с висок обществен принос',
+        detail: 'За проекта BulTrain',
+      },
       dublin: {
         label: 'Финал на европейско състезание за млади иноватори, Дъблин',
         detail: 'С BulTrain',
       },
-      presidentCaption: 'С президента на България Илиана Йотова.',
-      presidentAlt: 'Тихомир Гърменлиев с президента на България Илиана Йотова пред държавния герб',
+      presidentCaption: 'Награждаване с Грамота „Джон Атанасов“ – Проект с висок обществен принос, точно за проекта BulTrain. Снимка: Президентство на Република България.',
+      presidentAlt: 'Тихомир Гърменлиев с президента на България Илиана Йотова при награждаването му с грамота, пред държавния герб',
       portraitAlt: 'Тихомир Гърменлиев на перон, пред червен влак',
     },
     network: {
@@ -497,12 +501,16 @@ export const translations = {
       quoteBy: 'Tihomir Garmenliev, to Economy.bg',
       awardsTitle: 'Awards',
       educationTitle: 'Education',
+      johnAtanasov: {
+        label: 'John Atanasov Certificate – Project with High Public Impact',
+        detail: 'For the BulTrain project',
+      },
       dublin: {
         label: 'Final of a European competition for young innovators, Dublin',
         detail: 'With BulTrain',
       },
-      presidentCaption: 'With the President of Bulgaria, Iliana Iotova.',
-      presidentAlt: 'Tihomir Garmenliev with the President of Bulgaria, Iliana Iotova, in front of the national coat of arms',
+      presidentCaption: 'Receiving the John Atanasov Certificate – Project with High Public Impact, awarded specifically for the BulTrain project. Photo: Presidency of the Republic of Bulgaria.',
+      presidentAlt: 'Tihomir Garmenliev with the President of Bulgaria, Iliana Iotova, at the presentation of his certificate, in front of the national coat of arms',
       portraitAlt: 'Tihomir Garmenliev on a platform in front of a red train',
     },
     network: {

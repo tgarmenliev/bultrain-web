@@ -3,7 +3,7 @@ import { useLanguage } from '../i18n/LanguageContext'
 import './footer.css'
 
 export default function Footer() {
-  const { t } = useLanguage()
+  const { t, to: localTo } = useLanguage()
   const f = t.footer
   const links = [
     ['link-privacy', '/privacy', f.privacy],
@@ -15,13 +15,13 @@ export default function Footer() {
     <footer className="foot">
       <div className="wrap">
         <div className="foot__row">
-          <Link to="/" className="foot__brand" aria-label="BulTrain">
+          <Link to={localTo('/')} className="foot__brand" aria-label="BulTrain">
             <img src="/img/logo-128.webp" alt="" width="28" height="28" />
             <span>BulTrain</span>
           </Link>
           <nav className="foot__links" aria-label="Legal">
             {links.map(([id, to, label]) => (
-              <Link key={id} id={id} to={to}>{label}</Link>
+              <Link key={id} id={id} to={localTo(to)}>{label}</Link>
             ))}
           </nav>
         </div>
