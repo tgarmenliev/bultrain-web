@@ -121,7 +121,7 @@ export const translations = {
       dublinAlt: 'Тихомир Гърменлиев до щанда на BulTrain на състезанието в Дъблин',
       ratingCount: '{n} оценки',
       outOf: 'от 5',
-      translated: 'Преведено от български',
+      translated: 'Преведено от английски',
       reviews: [
         {
           text: 'Браво! Най-сетне работещо приложение без реклами. Похвално е, че може да се вижда разписанието и на спирките, а не само на гарите. Изненада ме, че се вижда времето за изчакване на връзка, когато има прекачване. Вижда се и причината за закъснението на влака! Още веднъж БРАВО! БЛАГОДАРЯ, че помислихте за нас, пътниците.',
@@ -138,7 +138,7 @@ export const translations = {
           lang: 'bg',
         },
         {
-          text: 'Exceptional design and usability! Traveling by train in Bulgaria has never been easier - this app makes everything smooth and convenient.',
+          text: 'Изключителен дизайн и лесна употреба! Пътуването с влак в България никога не е било по-лесно – приложението прави всичко плавно и удобно.',
           name: 'dellinex',
           store: 'App Store',
           date: '2026-04-12',

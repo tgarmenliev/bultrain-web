@@ -12,16 +12,14 @@ export default function Alarm() {
   const { lang, t } = useLanguage()
   const { theme } = useTheme()
   const a = t.alarm
-  // Save the trip -> the alarm -> the lock screen. Notification screens exist only in the languages they were
-  // captured in; where they are missing, the route screen fills in.
+  // Two phones. The alarm notification and the Live Activity are the point, but those screens exist only in the
+  // languages they were captured in (Bulgarian so far); in other languages the save-trip and route screens fill in.
   const alarm = appScreenInLang(theme, lang, ['alarm'])
   const live = appScreenInLang(theme, lang, ['live'])
-  const shots = [
-    [appScreen(theme, lang, ['trip']), a.altTrip],
-    [alarm, a.altAlarm],
-    [live, a.altLive],
-    !alarm && [appScreen(theme, lang, ['route']), a.altRoute],
-  ].filter((s) => s && s[0])
+  const shots = (alarm && live
+    ? [[alarm, a.altAlarm], [live, a.altLive]]
+    : [[appScreen(theme, lang, ['trip']), a.altTrip], [appScreen(theme, lang, ['route']), a.altRoute]]
+  ).filter(([src]) => src)
 
   return (
     <section className="alarm" id="alarm" aria-labelledby="alarm-title">
