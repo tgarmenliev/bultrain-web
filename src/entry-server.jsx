@@ -5,6 +5,7 @@ import App from './App.jsx'
 import { LanguageProvider } from './i18n/LanguageContext.jsx'
 import { ThemeProvider } from './theme/ThemeContext.jsx'
 export { pageMeta } from './site/seo.js'
+export { ratings } from './data/press.js'
 
 /** Build-time only: renders one address to an HTML string (see scripts/prerender.mjs). */
 export async function render(url) {

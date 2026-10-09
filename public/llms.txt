@@ -1,0 +1,24 @@
+# BulTrain
+
+> BulTrain is a free app for iOS and Android that shows train delays, live positions and station boards for trains in Bulgaria, in real time, from the official public rail data. It also has a smart arrival alarm that works by GPS (the location never leaves the phone), saved trips with offline timetables, and Live Activities on the iPhone lock screen. It is an independent project by Tihomir Garmenliev and is not affiliated with BDZ or the National Railway Infrastructure Company (NRIC).
+
+BulTrain (БулТрейн) е безплатно приложение за iOS и Android, което показва закъсненията и позициите на влаковете в България в реално време, табла на гарите, умна аларма за пристигане и запазени пътувания. Независим проект на Тихомир Гърменлиев, не е свързан с БДЖ и НКЖИ.
+
+## Pages
+- [Home, English](https://bultrain.eu/en): what the app does, the live network view, the product tour, the alarm, press coverage and ratings
+- [Начало, български](https://bultrain.eu/): същото на български
+- [Privacy Policy](https://bultrain.eu/en/privacy): what data is (and is not) collected
+- [Terms of Use](https://bultrain.eu/en/terms)
+- [App Privacy Policy](https://bultrain.eu/privacy-app): the policy for the mobile app (Bulgarian and English)
+- [Contact](https://bultrain.eu/en/contact)
+
+## Get the app
+- [App Store (iOS)](https://apps.apple.com/bg/app/bultrain-train-schedules-bg/id6759790703)
+- [Google Play (Android)](https://play.google.com/store/apps/details?id=com.bultrain.vlak_app_test)
+
+## Facts
+- Covers 702 stations and 550 trains in Bulgaria.
+- Ratings: 4.8 on Google Play, 5 on the App Store.
+- Delays come from the official public feed of the Ministry of Transport and Communications; when there is no live data the app shows the timetable and says so.
+- No account and no tracking.
+- Creator: Tihomir Garmenliev, student at the Technical University of Sofia. Recognitions include the John Atanasov Certificate "Project with High Public Impact" (presented for BulTrain by the President of Bulgaria) and first place at Softuniada 2024. LinkedIn: https://www.linkedin.com/in/tgarmenliev/

@@ -11,7 +11,7 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
-const { render, pageMeta } = await import(pathToFileURL(join(process.cwd(), '.ssr/entry-server.js')).href)
+const { render, pageMeta, ratings } = await import(pathToFileURL(join(process.cwd(), '.ssr/entry-server.js')).href)
 
 const template = readFileSync('dist/index.html', 'utf8')
 
@@ -42,6 +42,40 @@ function once(html, re, replacement) {
   return html.replace(re, replacement)
 }
 
+// Structured data (schema.org), the part search engines and AI assistants read most reliably.
+// Ratings come from src/data/press.js - the same numbers the page shows.
+const STORE_APPLE = 'https://apps.apple.com/bg/app/bultrain-train-schedules-bg/id6759790703'
+const STORE_PLAY = 'https://play.google.com/store/apps/details?id=com.bultrain.vlak_app_test'
+const rated = ratings.reduce((n, r) => n + r.count, 0)
+const ratingAvg = Math.round((ratings.reduce((s, r) => s + r.value * r.count, 0) / rated) * 10) / 10
+const person = {
+  '@type': 'Person', '@id': 'https://bultrain.eu/#creator', name: 'Tihomir Garmenliev', alternateName: 'Тихомир Гърменлиев',
+  url: 'https://www.linkedin.com/in/tgarmenliev/',
+  sameAs: ['https://www.linkedin.com/in/tgarmenliev/', 'https://www.facebook.com/tgarmenliev'],
+  jobTitle: 'Creator of BulTrain', alumniOf: 'Technical University of Sofia',
+  award: ['John Atanasov Certificate – Project with High Public Impact (for BulTrain)', 'First place, Softuniada 2024 (Software Projects)', 'Winner, HackTUES 10'],
+}
+const jsonLd = (m) => JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebSite', '@id': 'https://bultrain.eu/#website', url: 'https://bultrain.eu/', name: 'BulTrain', inLanguage: ['bg', 'en'], publisher: { '@id': 'https://bultrain.eu/#creator' } },
+    person,
+    {
+      '@type': 'MobileApplication', '@id': 'https://bultrain.eu/#app', name: 'BulTrain', url: 'https://bultrain.eu/',
+      alternateName: 'БулТрейн', applicationCategory: 'TravelApplication', operatingSystem: 'iOS, Android',
+      description: m.lang === 'bg'
+        ? 'BulTrain показва закъснения и позиции на влаковете в България в реално време, табла на гари, умна аларма за пристигане и запазени пътувания.'
+        : 'Real-time delays, positions and station boards for trains in Bulgaria, a smart arrival alarm and saved trips.',
+      image: 'https://bultrain.eu/og.jpg', inLanguage: ['bg', 'en'],
+      screenshot: ['https://bultrain.eu/img/app/dark-bg-board.webp', 'https://bultrain.eu/img/app/dark-bg-route.webp', 'https://bultrain.eu/img/app/dark-bg-alarm.webp'],
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+      installUrl: [STORE_APPLE, STORE_PLAY], downloadUrl: [STORE_APPLE, STORE_PLAY], sameAs: [STORE_APPLE, STORE_PLAY],
+      aggregateRating: { '@type': 'AggregateRating', ratingValue: ratingAvg, ratingCount: rated, bestRating: 5, worstRating: 1 },
+      author: { '@id': 'https://bultrain.eu/#creator' }, publisher: { '@id': 'https://bultrain.eu/#creator' },
+    },
+  ],
+})
+
 function page(url, body) {
   const m = pageMeta(url)
   const path = url.replace(/^\/en(?=\/|$)/, '') || '/'
@@ -59,6 +93,7 @@ function page(url, body) {
   html = once(html, /<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${escapeAttr(m.title)}" />`)
   html = once(html, /<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${escapeAttr(m.description)}" />`)
   html = once(html, /<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${m.url}" />`)
+  html = once(html, /<script type="application\/ld\+json" data-generated="prerender"><\/script>/, `<script type="application/ld+json">${jsonLd(m)}</script>`)
   html = once(html, /<meta property="og:locale" content="[^"]*" \/>/, `<meta property="og:locale" content="${m.locale}" />`)
   html = once(html, /<meta property="og:locale:alternate" content="[^"]*" \/>/, `<meta property="og:locale:alternate" content="${m.localeAlt}" />`)
   if (m.noindex) html = once(html, /<\/title>/, '</title>\n    <meta name="robots" content="noindex" />')

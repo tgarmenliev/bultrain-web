@@ -1,5 +1,41 @@
+# bultrain.eu is a public marketing site: every crawler, search engine and AI assistant is welcome.
+# (The internal design page is the only exception.)
 User-agent: *
 Allow: /
 Disallow: /design
+
+# Search engines and the bots behind AI search / assistants - named explicitly so the intent is unambiguous.
+User-agent: Googlebot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: Applebot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+User-agent: meta-externalagent
+Allow: /
+User-agent: facebookexternalhit
+Allow: /
+User-agent: DuckDuckBot
+Allow: /
 
 Sitemap: https://bultrain.eu/sitemap.xml
