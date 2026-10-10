@@ -40,9 +40,9 @@ function Home() {
   return (
     <main id="main" tabIndex={-1}>
       <Hero />
-      <LiveNetwork />
       <Tour />
       <Alarm />
+      <LiveNetwork />
       <Promises />
       <Press />
       <Maker />
