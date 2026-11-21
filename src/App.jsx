@@ -5,6 +5,7 @@ import RouteMeta from './site/RouteMeta'
 import Hero from './site/Hero'
 import LiveNetwork from './site/LiveNetwork'
 import Tour from './site/Tour'
+import LiveMap from './site/LiveMap'
 import Alarm from './site/Alarm'
 import Promises from './site/Promises'
 import Press from './site/Press'
@@ -41,6 +42,7 @@ function Home() {
     <main id="main" tabIndex={-1}>
       <Hero />
       <Tour />
+      <LiveMap />
       <Alarm />
       <LiveNetwork />
       <Promises />

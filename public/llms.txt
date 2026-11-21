@@ -20,5 +20,7 @@ BulTrain (БулТрейн) е безплатно приложение за iOS 
 - Covers 702 stations and 550 trains in Bulgaria.
 - Ratings: 4.8 on Google Play, 5 on the App Store.
 - Delays come from the official public feed of the Ministry of Transport and Communications; when there is no live data the app shows the timetable and says so.
+- A live map shows every running train and refreshes every 10 seconds; tap a train for its stops and delay, tap a station for what is leaving and arriving.
+- Journey tracking is available on iPhone (Live Activity), Android (an ongoing notification with a progress bar) and Apple Watch (a journey card).
 - No account and no tracking.
 - Creator: Tihomir Garmenliev, student at the Technical University of Sofia. Recognitions include the John Atanasov Certificate "Project with High Public Impact" (presented for BulTrain by the President of Bulgaria) and first place at Softuniada 2024. LinkedIn: https://www.linkedin.com/in/tgarmenliev/

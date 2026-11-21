@@ -12,7 +12,22 @@
 .alarm__points p { margin: 0; max-width: 50ch; font-size: 15px; line-height: 1.65; color: var(--ink2); }
 .alarm__note { margin: 16px 0 0; font-size: 13.5px; line-height: 1.55; font-weight: 600; color: var(--ink3); }
 
-.alarm__phones { position: sticky; top: calc(var(--nav-h) + 32px); display: flex; justify-content: center; gap: clamp(14px, 2.4vw, 32px); }
+.alarm__stage { position: sticky; top: calc(var(--nav-h) + 24px); }
+.alarm__tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 14px; background: var(--raised); }
+.alarm__tabs button { min-height: 40px; padding: 0 16px; border: 0; border-radius: 10px; background: transparent; color: var(--ink2); font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; transition: background-color 160ms ease, color 160ms ease; }
+.alarm__tabs button[aria-selected='true'] { background: var(--bg); color: var(--ink); box-shadow: var(--shadow); }
+.alarm__platnote { min-height: 4.8em; margin: 14px 0 20px; max-width: 46ch; font-size: 14.5px; line-height: 1.6; font-weight: 600; color: var(--ink2); }
+.alarm__phones { display: flex; justify-content: center; gap: clamp(14px, 2.4vw, 32px); }
+
+/* Android: the real ongoing notification at its three moments, stacked like the notification shade */
+.alarm__android ol { list-style: none; margin: 0 auto; padding: 0; max-width: 420px; display: grid; gap: 14px; }
+.alarm__step { display: block; margin: 0 0 6px 4px; font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink3); }
+.alarm__android img { display: block; width: 100%; height: auto; border-radius: 5.2%; box-shadow: var(--shadow); }
+.alarm__shotnote { margin: 14px 0 0; text-align: center; font-size: 12.5px; font-weight: 600; color: var(--ink3); }
+
+/* Apple Watch: the journey card in the Smart Stack */
+.alarm__watch { display: grid; place-items: center; }
+.alarm__watch img { display: block; width: min(300px, 70%); height: auto; border-radius: 20%; box-shadow: var(--shadow); }
 .alarm__phone { flex: 0 1 250px; min-width: 0; }
 .alarm__phones[data-count='1'] .alarm__phone { flex-basis: 280px; }
 .alarm__phone:nth-child(even) { margin-top: clamp(24px, 4vw, 48px); }
@@ -22,7 +37,8 @@
   .alarm__grid { grid-template-columns: minmax(0, 1fr); }
   .alarm__title { max-width: 22ch; }
   /* phones become a swipeable row, each one big enough to read the notification */
-  .alarm__phones { position: static; justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; margin: 0 calc(-1 * var(--gutter)); padding: 4px var(--gutter) 12px; scrollbar-width: none; }
+  .alarm__stage { position: static; }
+  .alarm__phones { justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; margin: 0 calc(-1 * var(--gutter)); padding: 4px var(--gutter) 12px; scrollbar-width: none; }
   .alarm__phones::-webkit-scrollbar { display: none; }
   .alarm__phone, .alarm__phones[data-count='1'] .alarm__phone { flex: 0 0 min(62vw, 250px); scroll-snap-align: center; margin-top: 0; }
   .alarm__phones[data-count='1'] { justify-content: center; }
