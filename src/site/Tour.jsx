@@ -5,6 +5,7 @@ import { appScreen, screenProps } from '../data/screens'
 import './tour.css'
 
 const APP_STORE = 'https://apps.apple.com/bg/app/bultrain-train-schedules-bg/id6759790703'
+const GOOGLE_PLAY = 'https://play.google.com/store/apps/details?id=com.bultrain.vlak_app_test'
 // Which real screenshot belongs to each step (first one found for the current theme/language wins).
 const SCREENS = [['results'], ['board', 'results'], ['route'], ['lock']]
 
@@ -53,7 +54,8 @@ export default function Tour() {
                   <div className="tour__avail">
                     <a className="ds-btn ds-btn--primary" href={APP_STORE} target="_blank" rel="noopener noreferrer">{tour.cta}</a>
                     <span className="tour__pill is-live"><i />{tour.ios} <em>{tour.iosStatus}</em></span>
-                    <span className="tour__pill">{tour.androidSoon}</span>
+                    <span className="tour__pill is-live"><i />{tour.androidNow} <em>{tour.androidStatus}</em></span>
+                    <a className="ds-btn ds-btn--ghost" href={GOOGLE_PLAY} target="_blank" rel="noopener noreferrer">{tour.playCta}</a>
                   </div>
                 )}
               </li>
