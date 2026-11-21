@@ -55,8 +55,6 @@ export default function Nav() {
 
   const links = [
     ['tour', '#tour', t.nav.tour],
-    ['map', '#map', t.nav.map],
-    ['alarm', '#alarm', t.nav.alarm],
     ['live', '#live-network', t.nav.live],
     ['media', '#media-coverage', t.nav.media],
     ['about', '#about', t.nav.about],

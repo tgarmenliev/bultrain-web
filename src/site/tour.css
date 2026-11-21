@@ -9,33 +9,53 @@
 /* The active step is marked by colour (never by dimming text: that cannot pass contrast). */
 .tour__n { font-size: 14px; font-weight: 800; letter-spacing: 0.06em; color: var(--ink3); transition: color 320ms ease; }
 .tour__step[data-active='true'] .tour__n { color: var(--accent); }
-.tour__tag { padding: 4px 10px; border-radius: 7px; background: var(--raised); font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink2); }
 .tour__step h3 { color: var(--ink2); transition: color 320ms ease; margin: 0; font-size: clamp(1.6rem, 2.6vw, 2.3rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.12; text-wrap: balance; }
 .tour__step[data-active='true'] h3 { color: var(--ink); }
 .tour__step[data-active='true'] p { color: var(--ink2); }
 .tour__step p { color: var(--ink3); transition: color 320ms ease; margin: 0; font-size: clamp(1.02rem, 1.3vw, 1.15rem); line-height: 1.65; color: var(--ink2); text-wrap: pretty; }
 
-.tour__stage { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; place-items: center; }
-.tour__phone { width: min(300px, 34vh); width: min(300px, 34svh); }
-.tour__screens { position: relative; width: 100%; height: 100%; border-radius: 11% / 5.1%; overflow: hidden; background: var(--raised); }
-.tour__screens img { position: absolute; inset: 0; opacity: 0; filter: blur(3px); transform: scale(1.015); transition: opacity 340ms ease, filter 340ms ease, transform 420ms var(--ease-out); }
-.tour__screens img[data-on='true'] { opacity: 1; filter: none; transform: none; }
+.tour__stage { position: sticky; top: var(--nav-h); height: calc(100vh - var(--nav-h)); height: calc(100svh - var(--nav-h)); display: grid; place-items: center; }
+.tour__step:last-child { margin-bottom: 8vh; margin-bottom: 8svh; }
+.tour__phone { position: relative; width: min(300px, 34vh); width: min(300px, 34svh); aspect-ratio: 1170 / 2532; }
+/* every scene sits in the same spot; the active one fades in, so the device itself seems to change */
+.tour__scene { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; filter: blur(4px); transform: scale(0.96); transition: opacity 340ms ease, filter 340ms ease, transform 420ms var(--ease-out); pointer-events: none; }
+.tour__scene[data-on='true'] { opacity: 1; filter: none; transform: none; }
+.tour__scene .ds-device { width: 100%; }
+.tour__scene.is-watch .ds-watch { width: 84%; }
+.ds-device video, .tour__shade { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 11% / 5.1%; background: var(--raised); }
 .tour__dots { position: absolute; right: 0; top: 50%; transform: translateY(-50%); list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .tour__dots li { width: 6px; height: 6px; border-radius: 50%; background: var(--line-strong); transition: background-color 240ms ease, transform 240ms var(--ease-out); }
 .tour__dots li[data-on='true'] { background: var(--accent); transform: scale(1.5); }
 
-.tour__avail { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 12px; }
-.tour__pill { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border-radius: 12px; background: var(--raised); font-size: 13.5px; font-weight: 700; color: var(--ink2); }
-.tour__pill em { font-style: normal; color: var(--ok); }
-.tour__pill i { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); }
 
 .tour__inline { display: none; }
+
+/* the device picker (iPhone / Android / Apple Watch) */
+.tour__devices { display: inline-flex; gap: 4px; padding: 4px; margin-top: 6px; border-radius: 14px; background: var(--raised); }
+.tour__devices button { min-height: 40px; padding: 0 16px; border: 0; border-radius: 10px; background: transparent; color: var(--ink2); font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; transition: background-color 160ms ease, color 160ms ease; }
+.tour__devices button[aria-checked='true'] { background: var(--bg); color: var(--ink); box-shadow: var(--shadow); }
+.tour__devnote { min-height: 4.8em; max-width: 44ch; font-size: 15px !important; font-weight: 600; }
+
+/* the phone's own store comes first */
+.tour__avail { display: flex; flex-wrap: wrap; gap: 12px; }
+.tour__avail[data-first='android'] .tour__store--android { order: -1; }
+.tour__avail .tour__store { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.tour__avail .tour__store:first-child { background: var(--action); color: var(--on-action); border-color: transparent; }
+.tour__avail[data-first='android'] .tour__store--android { background: var(--action); color: var(--on-action); border-color: transparent; }
+.tour__avail[data-first='android'] .tour__store--ios { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+
+/* Android: the shade, built from real notifications when there is no full capture in the language */
+.tour__shade { display: flex; flex-direction: column; gap: 3%; padding: 16% 5% 5%; overflow: hidden; background: linear-gradient(160deg, #9aa0ac, #6e7480 60%, #59606c); }
+.ds-device .tour__shade img { width: 100%; height: auto; object-fit: contain; border-radius: 5%; flex: none; }
 
 @media (max-width: 900px) {
   .tour__grid { grid-template-columns: minmax(0, 1fr); }
   .tour__stage { display: none; }
   .tour__step h3 { color: var(--ink); } .tour__step p { color: var(--ink2); } .tour__n { color: var(--accent); }
   .tour__step { min-height: 0; max-width: none; padding: 40px 0; border-top: 1px solid var(--line); }
+  .tour__step:last-child { margin-bottom: 0; }
   .tour__inline { display: block; width: min(250px, 62vw); margin: 14px auto 0; }
+  .tour__inline.is-watch { width: min(210px, 56vw); }
+  .tour__devnote { min-height: 0; }
 }
-@media (prefers-reduced-motion: reduce) { .tour__screens img, .tour__n, .tour__step h3, .tour__step p, .tour__dots li { transition: none; } .tour__screens img { filter: none; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .tour__scene, .tour__n, .tour__step h3, .tour__step p, .tour__dots li { transition: none; } .tour__scene { filter: none; transform: none; } }

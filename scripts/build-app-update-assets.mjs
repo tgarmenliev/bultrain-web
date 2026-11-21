@@ -1,4 +1,4 @@
-// Assets for the November 2026 app update (live map, Android tracking notification, Apple Watch card).
+// Assets for the November 2026 app update (live map video, Android tracking notification, Apple Watch card).
 // Sources are in design-source/inbox (not in git). Run: node scripts/build-app-update-assets.mjs
 // Android notifications are cropped from a screen recording of the Android app (set ANDROID_VIDEO to its path).
 import { execFileSync } from 'node:child_process'
@@ -17,12 +17,11 @@ run('ffmpeg', ['-y', '-ss', '4', '-t', '22', '-i', REC, '-an', '-vf', 'crop=1170
 run('ffmpeg', ['-y', '-i', 'public/video/map-live.mp4', '-frames:v', '1', '/tmp/map-poster.png'])
 run('magick', ['/tmp/map-poster.png', '-strip', '-quality', '82', 'public/video/map-live-poster.webp'])
 
-// 2) iPhone map stills (raw screenshots) at 480/640/900 px.
-for (const [file, name] of [['IMG_0728 2.PNG', 'map-overview'], ['IMG_0727 2.PNG', 'map-train']]) {
-  for (const w of [480, 640, 900]) {
-    run('magick', [`${IN}/${file}`, '-strip', '-resize', `${w}x`, '-quality', '82', `public/img/app/light-bg-${name}${w === 900 ? '' : `-${w}`}.webp`])
-  }
+// 2) Real Android screenshot (Samsung, Bulgarian): the active-tracking notification in the shade.
+for (const w of [480, 640]) {
+  run('magick', [`${IN}/viber_image_2026-11-21_16-28-34-876.jpg`, '-strip', '-resize', `${w}x`, '-quality', '84', `public/img/app/android-bg-shade-${w}.webp`])
 }
+run('magick', [`${IN}/viber_image_2026-11-21_16-28-34-876.jpg`, '-strip', '-quality', '84', 'public/img/app/android-bg-shade.webp'])
 
 // 3) Apple Watch card.
 run('magick', [`${IN}/incoming-6182C332-C56F-46B7-938F-7FEE051FC620.PNG`, '-strip', '-quality', '88', 'public/img/app/watch-bg-stack.webp'])
