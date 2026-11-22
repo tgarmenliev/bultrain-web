@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from 'react'
+import { lazy, Suspense, useEffect, useRef } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Nav from './site/Nav'
 import RouteMeta from './site/RouteMeta'
@@ -56,9 +56,15 @@ function ScrollToTop() {
   const location = useLocation()
   const path = stripLang(location.pathname) // switching language keeps the scroll position
   const { hash } = location
+  const lastPath = useRef(null)
   useEffect(() => {
+    // Only the hash changed (a link to a section of the page we are already on): the browser scrolls there by itself,
+    // smoothly. Doing it here too would cancel that animation and make the page jump.
+    const samePage = lastPath.current === path
+    lastPath.current = path
+    if (samePage) return
+    // Arriving (first load, or another page): jump, don't glide, where a long animated scroll would be disorienting.
     const target = hash.length > 1 ? document.getElementById(hash.slice(1)) : null
-    // jump, don't glide: this runs on arrival at a page, where a long animated scroll would be disorienting
     if (target) target.scrollIntoView({ behavior: 'instant' })
     else window.scrollTo({ top: 0, behavior: 'instant' })
   }, [path, hash])
