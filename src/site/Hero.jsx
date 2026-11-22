@@ -1,7 +1,7 @@
 import { useLanguage } from '../i18n/LanguageContext'
 import { useTheme } from '../theme/ThemeContext'
 import { appScreen, screenProps } from '../data/screens'
-import LiveLine from './LiveLine'
+import HeroBoard from './HeroBoard'
 import './hero.css'
 
 const APP_STORE = 'https://apps.apple.com/bg/app/bultrain-train-schedules-bg/id6759790703'
@@ -66,7 +66,7 @@ export default function Hero() {
         </div>
 
         <div data-rise style={{ '--i': 5 }}>
-          <LiveLine />
+          <HeroBoard />
         </div>
       </div>
     </section>

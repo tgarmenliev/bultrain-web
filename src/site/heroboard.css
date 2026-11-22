@@ -1,0 +1,64 @@
+/* A departure board, like the ones on the stations. Deliberately dark in both themes: it is an object, not a card. */
+.hb { padding: clamp(8px, 1.4vw, 20px) 0 clamp(16px, 2.4vw, 32px); }
+.hb__panel {
+  container-type: inline-size;
+  max-width: var(--wrap); margin: 0 auto; padding: clamp(16px, 2.2vw, 28px);
+  background: #101114; color: #f2f0e6; border-radius: var(--r-l);
+  box-shadow: var(--shadow), inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+}
+.hb__inner { --cw: clamp(13px, calc((100cqw - 20px) / 44), 26px); }
+.hb__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding-bottom: 16px; margin-bottom: 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+.hb__title { display: flex; align-items: baseline; gap: 14px; margin: 0; font-size: 1rem; font-weight: 800; letter-spacing: 0.08em; }
+.hb__title span { font-size: 12px; color: #9a998f; }
+.hb__title b { font-size: clamp(1.15rem, 2vw, 1.5rem); letter-spacing: 0.04em; color: #f2f0e6; }
+.hb__tools { display: flex; align-items: center; gap: 14px; }
+.hb__tabs { display: inline-flex; gap: 4px; padding: 3px; border-radius: 12px; background: rgba(255, 255, 255, 0.07); }
+.hb__tabs button { min-height: 34px; padding: 0 12px; border: 0; border-radius: 9px; background: transparent; color: #b9b8ad; font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+.hb__tabs button[aria-pressed='true'] { background: #f2f0e6; color: #101114; }
+.hb__live { display: inline-flex; align-items: center; gap: 8px; margin: 0; font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #b9b8ad; }
+.hb__live i { width: 8px; height: 8px; border-radius: 50%; background: #6b6a62; }
+.hb__live[data-tone='live'] i { background: #46d36b; box-shadow: 0 0 0 4px rgba(70, 211, 107, 0.2); animation: hb-pulse 2s ease-in-out infinite; }
+.hb__live[data-tone='off'] i { background: #ffb020; }
+.hb__live span { margin-left: 4px; color: #f2f0e6; }
+@keyframes hb-pulse { 50% { box-shadow: 0 0 0 7px rgba(70, 211, 107, 0); } }
+
+.hb__rows { list-style: none; margin: 0; padding: 0; display: grid; gap: calc(var(--cw) * 0.22); }
+.hb__row { display: grid; grid-template-columns: auto auto auto 1fr; align-items: center; column-gap: calc(var(--cw) * 1.1); }
+.hb__time { position: relative; display: inline-flex; flex-direction: column; }
+.hb__time s { position: absolute; left: 0; top: 100%; margin-top: 1px; font-size: calc(var(--cw) * 0.5); line-height: 1; color: #8f8e84; }
+.hb__row { padding-bottom: calc(var(--cw) * 0.3); }
+
+.hb__grp { display: inline-flex; gap: calc(var(--cw) * 0.1); perspective: 600px; }
+.hb__cell {
+  position: relative; display: inline-block; width: var(--cw); height: calc(var(--cw) * 1.5);
+  font-style: normal; font-weight: 800; font-size: calc(var(--cw) * 1.02); line-height: calc(var(--cw) * 1.5); text-align: center; font-variant-numeric: tabular-nums;
+  color: #f2f0e6; background: linear-gradient(#1d1e22 50%, #151619 50%); border-radius: calc(var(--cw) * 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+.hb__cell::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(0, 0, 0, 0.65); }
+.hb__cell.is-flip { animation: hb-flip 150ms ease-in-out; }
+@keyframes hb-flip { 0% { transform: rotateX(0); } 45% { transform: rotateX(-78deg); opacity: 0.55; } 100% { transform: rotateX(0); } }
+.hb__late .hb__cell { color: #ffb020; }
+.hb__train .hb__cell { color: #cfcdbf; }
+
+.hb__msg { margin: 8px 0 16px; font-size: 15px; font-weight: 600; color: #cfcdbf; }
+.hb__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.12); }
+.hb__foot p { margin: 0; max-width: 62ch; font-size: 13px; line-height: 1.5; font-weight: 600; color: #9a998f; }
+.hb__foot a { font-size: 13.5px; font-weight: 800; color: #8fb2ff; text-decoration: none; white-space: nowrap; }
+.hb__foot a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* narrow: the time and the train on one line, the destination below, the delay (when there is one) under it.
+   (A container query cannot restyle its own container, so --cw lives on .hb__inner.) */
+@container (max-width: 700px) {
+  .hb__inner { --cw: clamp(10px, calc(100cqw / 17.9), 19px); }
+  .hb__rows { gap: calc(var(--cw) * 0.7); }
+  .hb__row { grid-template-columns: auto 1fr; row-gap: calc(var(--cw) * 0.25); padding-bottom: calc(var(--cw) * 0.7); border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
+  .hb__row:last-child { border-bottom: 0; }
+  .hb__row .hb__train { grid-column: 2; grid-row: 1; justify-self: end; }
+  .hb__row .hb__dest { grid-column: 1 / -1; grid-row: 2; }
+  .hb__row .hb__late { grid-column: 1 / -1; grid-row: 3; justify-self: start; }
+  .hb__row .hb__late.is-empty { display: none; }
+  .hb__time s { top: auto; bottom: 100%; margin: 0 0 1px; }
+  .hb__row { margin-top: calc(var(--cw) * 0.3); }
+}
+@media (prefers-reduced-motion: reduce) { .hb__cell.is-flip, .hb__live i { animation: none; } }
