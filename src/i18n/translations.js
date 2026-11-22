@@ -62,8 +62,8 @@ export const translations = {
           alt: '',
         },
         {
-          title: 'Алармата те буди преди гарата',
-          text: 'Запазваш пътуването и спокойно си четеш. Умната аларма следи къде си по GPS и те известява, преди да стигнеш гарата. Работи и без интернет, а местоположението ти не напуска телефона.',
+          title: 'Алармата те буди, когато наближаваш гарата си',
+          text: 'Запазваш пътуването и спокойно си четеш. Умната аларма следи къде си по GPS и те предупреждава навреме, за да се приготвиш за слизане. Работи и без интернет, а местоположението ти не напуска телефона.',
           alt: 'Известие от умната аларма: „Приближавате вашата гара!“',
         },
       ],
@@ -416,8 +416,8 @@ export const translations = {
           alt: '',
         },
         {
-          title: 'The alarm wakes you before your station',
-          text: 'Save the trip and just relax. The smart alarm follows your position by GPS and notifies you before you reach your station. It works without an internet connection, and your location never leaves your phone.',
+          title: 'The alarm wakes you as you near your station',
+          text: 'Save the trip and just relax. The smart alarm follows your position by GPS and warns you in good time to get ready to get off. It works without an internet connection, and your location never leaves your phone.',
           alt: 'Smart alarm notification',
         },
       ],
