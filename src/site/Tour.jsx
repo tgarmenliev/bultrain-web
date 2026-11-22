@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
+import { TrainFront } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useTheme } from '../theme/ThemeContext'
 import { appScreen, appScreenInLang, screenProps } from '../data/screens'
@@ -6,7 +7,9 @@ import './tour.css'
 
 const APP_STORE = 'https://apps.apple.com/bg/app/bultrain-train-schedules-bg/id6759790703'
 const GOOGLE_PLAY = 'https://play.google.com/store/apps/details?id=com.bultrain.vlak_app_test'
-const KINDS = ['results', 'board', 'map', 'alarm', 'lock'] // what each step shows, in order
+const KINDS = ['results', 'board', 'map', 'lock', 'alarm'] // what each step shows, in order
+// The journey has four moments; each step belongs to one of them (the train on the stage rides to it).
+const PHASE = [0, 1, 2, 2, 3]
 const VIDEO = '/video/map-live.mp4'
 const POSTER = '/video/map-live-poster.webp'
 const WATCH = '/img/app/watch-bg-stack.webp' // Bulgarian card: the Watch is offered on the Bulgarian site only
@@ -117,7 +120,7 @@ export default function Tour() {
               const alt = isLock ? tour.platformAlt[platform] : s.alt
               return (
                 <li key={s.title} ref={(el) => (stepRefs.current[i] = el)} data-i={i} className="tour__step" data-active={active === i}>
-                  <span className="tour__n tnum">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="tour__n">{tour.phases[PHASE[i]]}</span>
                   <h3>{s.title}</h3>
                   <p>{s.text}</p>
 
@@ -138,7 +141,7 @@ export default function Tour() {
                     <div className={`tour__inline is-${scene.frame}`}><Frame kind={scene.frame}>{scene.node(alt, false, false)}</Frame></div>
                   )}
 
-                  {isLock && (
+                  {i === tour.steps.length - 1 && (
                     <div className="tour__avail" data-first={detected}>
                       <a className="ds-btn ds-btn--primary tour__store tour__store--ios" href={APP_STORE} target="_blank" rel="noopener noreferrer">{tour.ctaIos}</a>
                       <a className="ds-btn ds-btn--primary tour__store tour__store--android" href={GOOGLE_PLAY} target="_blank" rel="noopener noreferrer">{tour.ctaAndroid}</a>
@@ -162,9 +165,17 @@ export default function Tour() {
                 )
               })}
             </div>
-            <ol className="tour__dots">
-              {tour.steps.map((s, i) => <li key={s.title} data-on={active === i} />)}
-            </ol>
+            <div className="tour__rail" style={{ '--p': PHASE[active] / (tour.phases.length - 1) }}>
+              <div className="tour__track">
+                <i className="tour__fill" />
+                <span className="tour__loco"><TrainFront size={18} strokeWidth={2} /></span>
+              </div>
+              <ol className="tour__stations">
+                {tour.phases.map((p, i) => (
+                  <li key={p} data-state={i < PHASE[active] ? 'done' : i === PHASE[active] ? 'now' : 'next'}><i /><span>{p}</span></li>
+                ))}
+              </ol>
+            </div>
           </div>
         </div>
       </div>

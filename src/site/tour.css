@@ -7,7 +7,7 @@
 
 .tour__step { min-height: 82vh; min-height: 82svh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 14px; max-width: 480px; }
 /* The active step is marked by colour (never by dimming text: that cannot pass contrast). */
-.tour__n { font-size: 14px; font-weight: 800; letter-spacing: 0.06em; color: var(--ink3); transition: color 320ms ease; }
+.tour__n { font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink3); transition: color 320ms ease; }
 .tour__step[data-active='true'] .tour__n { color: var(--accent); }
 .tour__step h3 { color: var(--ink2); transition: color 320ms ease; margin: 0; font-size: clamp(1.6rem, 2.6vw, 2.3rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.12; text-wrap: balance; }
 .tour__step[data-active='true'] h3 { color: var(--ink); }
@@ -16,6 +16,21 @@
 
 .tour__stage { position: sticky; top: var(--nav-h); height: calc(100vh - var(--nav-h)); height: calc(100svh - var(--nav-h)); display: grid; place-items: center; }
 .tour__step:last-child { margin-bottom: 8vh; margin-bottom: 8svh; }
+
+/* The journey on the stage: a track with four stops; the train rides to the moment the visitor is reading. */
+.tour__stage { grid-template-rows: minmax(0, 1fr) auto; }
+.tour__phone { align-self: center; }
+.tour__rail { align-self: end; width: min(440px, 100%); padding: 0 0 clamp(14px, 3svh, 28px); position: relative; }
+.tour__track { position: absolute; left: 12.5%; right: 12.5%; top: 25px; height: 4px; border-radius: 2px; background: repeating-linear-gradient(90deg, var(--line-strong) 0 12px, transparent 12px 18px); }
+.tour__fill { position: absolute; inset: 0; border-radius: 2px; background: var(--accent); transform-origin: left center; transform: scaleX(var(--p)); transition: transform 700ms var(--ease-out); }
+.tour__loco { position: absolute; top: -17px; left: calc(var(--p) * 100%); width: 34px; height: 34px; margin-left: -17px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: #fff; box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 45%, transparent); transition: left 700ms var(--ease-out); z-index: 2; }
+.tour__stations { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.tour__stations li { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding-top: 18px; }
+.tour__stations i { width: 14px; height: 14px; border-radius: 50%; box-sizing: border-box; background: var(--bg); border: 3px solid var(--line-strong); transition: border-color 320ms ease, background-color 320ms ease; }
+.tour__stations li[data-state='done'] i { border-color: var(--accent); }
+.tour__stations li[data-state='now'] i { border-color: var(--accent); background: var(--accent); }
+.tour__stations span { font-size: 12px; font-weight: 700; line-height: 1.3; color: var(--ink3); max-width: 9ch; text-wrap: balance; transition: color 320ms ease; }
+.tour__stations li[data-state='now'] span { color: var(--ink); }
 .tour__phone { position: relative; width: min(300px, 34vh); width: min(300px, 34svh); aspect-ratio: 1170 / 2532; }
 /* every scene sits in the same spot; the active one fades in, so the device itself seems to change */
 .tour__scene { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; filter: blur(4px); transform: scale(0.96); transition: opacity 340ms ease, filter 340ms ease, transform 420ms var(--ease-out); pointer-events: none; }
@@ -23,9 +38,6 @@
 .tour__scene .ds-device { width: 100%; }
 .tour__scene.is-watch .ds-watch { width: 84%; }
 .ds-device video, .tour__shade { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 11% / 5.1%; background: var(--raised); }
-.tour__dots { position: absolute; right: 0; top: 50%; transform: translateY(-50%); list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.tour__dots li { width: 6px; height: 6px; border-radius: 50%; background: var(--line-strong); transition: background-color 240ms ease, transform 240ms var(--ease-out); }
-.tour__dots li[data-on='true'] { background: var(--accent); transform: scale(1.5); }
 
 
 .tour__inline { display: none; }
@@ -58,4 +70,4 @@
   .tour__inline.is-watch { width: min(210px, 56vw); }
   .tour__devnote { min-height: 0; }
 }
-@media (prefers-reduced-motion: reduce) { .tour__scene, .tour__n, .tour__step h3, .tour__step p, .tour__dots li { transition: none; } .tour__scene { filter: none; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .tour__scene, .tour__n, .tour__step h3, .tour__step p, .tour__fill, .tour__loco, .tour__stations i, .tour__stations span { transition: none; } .tour__scene { filter: none; transform: none; } }

@@ -37,7 +37,8 @@ export const translations = {
       photoAlt: 'Червен локомотив на гара',
     },
     tour: {
-      title: 'Едно пътуване, от търсенето до заключения екран.',
+      title: 'Едно пътуване, от първото търсене до твоята гара.',
+      phases: ['Преди пътуването', 'На гарата', 'Във влака', 'Преди твоята гара'],
       lead: 'Така изглежда пътуване с BulTrain, стъпка по стъпка и направено с грижа за твоето преживяване.',
       steps: [
         {
@@ -56,14 +57,14 @@ export const translations = {
           alt: 'Запис на екрана: влакът се движи по маршрута си на картата',
         },
         {
-          title: 'Алармата те буди преди гарата',
-          text: 'Запазваш пътуването и спокойно си четеш. Умната аларма следи къде си по GPS и те известява, преди да стигнеш гарата. Работи и без интернет, а местоположението ти не напуска телефона.',
-          alt: 'Известие от умната аларма: „Приближавате вашата гара!“',
-        },
-        {
           title: 'Влакът ти, на заключения екран',
           text: 'Закъснение, прогрес и време до пристигане, без да отключваш и без да отваряш приложението. Избери устройство и виж как изглежда.',
           alt: '',
+        },
+        {
+          title: 'Алармата те буди преди гарата',
+          text: 'Запазваш пътуването и спокойно си четеш. Умната аларма следи къде си по GPS и те известява, преди да стигнеш гарата. Работи и без интернет, а местоположението ти не напуска телефона.',
+          alt: 'Известие от умната аларма: „Приближавате вашата гара!“',
         },
       ],
       platformsLabel: 'Устройство',
@@ -390,7 +391,8 @@ export const translations = {
       photoAlt: 'A red locomotive at a station',
     },
     tour: {
-      title: 'One journey, from search to lock screen.',
+      title: 'One journey, from the first search to your station.',
+      phases: ['Before the trip', 'At the station', 'On the train', 'Before your stop'],
       lead: 'Here is what a trip with BulTrain looks like, step by step, designed with your experience in mind.',
       steps: [
         {
@@ -409,14 +411,14 @@ export const translations = {
           alt: 'Screen recording: a train moving along its route on the map',
         },
         {
-          title: 'The alarm wakes you before your station',
-          text: 'Save the trip and just relax. The smart alarm follows your position by GPS and notifies you before you reach your station. It works without an internet connection, and your location never leaves your phone.',
-          alt: 'Smart alarm notification',
-        },
-        {
           title: 'Your train, on your lock screen',
           text: 'The delay, progress and time to arrival, without unlocking your phone or opening the app. Pick a device and see how it looks.',
           alt: '',
+        },
+        {
+          title: 'The alarm wakes you before your station',
+          text: 'Save the trip and just relax. The smart alarm follows your position by GPS and notifies you before you reach your station. It works without an internet connection, and your location never leaves your phone.',
+          alt: 'Smart alarm notification',
         },
       ],
       platformsLabel: 'Device',
