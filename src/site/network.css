@@ -36,7 +36,7 @@
 .net__photo img { display: block; width: 100%; height: auto; border-radius: var(--r-l); box-shadow: var(--shadow); }
 .net__photo figcaption { margin-top: 14px; max-width: 46ch; font-size: 14.5px; line-height: 1.55; font-weight: 600; color: var(--ink2); }
 
-.net__radar { margin-top: clamp(56px, 8vw, 112px); }
+.net__radar { margin-top: clamp(40px, 5vw, 72px); }
 .net__radardesc { margin: -12px 0 24px; max-width: 60ch; font-size: 16px; line-height: 1.55; font-weight: 500; color: var(--ink2); }
 .net__h3 { margin: 0 0 24px; font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 800; letter-spacing: -0.03em; }
 
