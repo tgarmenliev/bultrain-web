@@ -315,7 +315,7 @@ export const translations = {
       terms: 'Условия за ползване',
       contact: 'Контакти',
       madeBy: 'Направено от Тихомир Гърменлиев.',
-      disclaimer: 'BulTrain е независим проект и не е свързан с, нито е официално одобрен от БДЖ (Български държавни железници).',
+      disclaimer: 'BulTrain е независим проект и не е свързан с БДЖ (Български държавни железници) и МТС (Министерство на транспорта и съобщенията).',
     },
     contact: {
       heading: 'Свържете се с нас',
@@ -665,7 +665,7 @@ export const translations = {
       terms: 'Terms of Use',
       contact: 'Contact',
       madeBy: 'Built by Tihomir Garmenliev.',
-      disclaimer: 'BulTrain is an independent project and is not affiliated with, nor officially endorsed by, BDZ (Bulgarian State Railways).',
+      disclaimer: 'BulTrain is an independent project and is not affiliated with BDZ (Bulgarian State Railways) or the MTC (Ministry of Transport and Communications of Bulgaria).',
     },
     contact: {
       heading: 'Get in touch',
