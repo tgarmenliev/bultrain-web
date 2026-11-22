@@ -41,6 +41,7 @@ npm run build      # изгражда dist/ и всички страници (т
 
 ## Какво е настроено извън кода (в панелите)
 - **Cloudflare:** DNS, пренасочване `www` → `bultrain.eu` (301), AI Crawl Control (всички ботове са разрешени).
+- **Cloudflare → Scrape Shield → Email Address Obfuscation трябва да е ИЗКЛЮЧЕНО.** Когато е включено, Cloudflare подменя имейла в HTML-а с „[email protected]“, страницата не съвпада с това, което очаква React (грешка #418 в конзолата), прерисува се наново и сайтът става по-бавен (на мобилно оценката пада от 100 към ~89). Имейлът е умишлено публичен.
 - **Google Search Console** и (по желание) **Bing Webmaster Tools**: sitemap `https://bultrain.eu/sitemap.xml`.
 - **Защитни заглавия (CSP, HSTS…):** пишат се автоматично при build (`scripts/post-build.mjs`).
 
