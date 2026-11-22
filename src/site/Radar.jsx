@@ -48,6 +48,8 @@ export default function Radar({ lang, t }) {
   const [picked, setPicked] = useState(null) // key chosen by the visitor
   const [hover, setHover] = useState(null)
   const [all, setAll] = useState(false)
+  const [reveal, setReveal] = useState(0)
+  const panelRef = useRef(null)
 
   const placed = useMemo(() => trains.filter((x) => x.lat !== null && x.lon !== null), [trains])
   const byDelay = useMemo(() => [...trains].sort((a, b) => (b.delayMin ?? -1) - (a.delayMin ?? -1)), [trains])
@@ -70,7 +72,20 @@ export default function Radar({ lang, t }) {
   const matches = q
     ? trains.filter((x) => [trainLabel(x.type, x.trainNum, lang), x.trainNum, x.from, x.to, stationName(x.from, lang), stationName(x.to, lang)].some((v) => (v ?? '').toLowerCase().includes(q)))
     : byDelay
+  const searching = q.length > 0
   const listed = all ? matches : matches.slice(0, LIST_SHORT)
+
+  // Choosing a train closes the search (and the phone's keyboard) and, on a phone, brings its card into view.
+  const choose = (key) => {
+    setPicked(key); setQuery(''); setAll(false)
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur()
+    setReveal((n) => n + 1)
+  }
+  useEffect(() => {
+    if (reveal === 0 || !window.matchMedia('(max-width: 900px)').matches) return
+    panelRef.current?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' })
+  }, [reveal])
+  const showOnMap = () => svgRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
 
   // The nearest dot to the pointer within about 28 px: easy to hit on a phone, where a dot is tiny.
   const nearest = (e) => {
@@ -101,7 +116,7 @@ export default function Radar({ lang, t }) {
           <svg ref={svgRef} viewBox={`${VB.x} ${VB.y} ${VB.w} ${VB.h}`} role="img" aria-label={r.map}
             onPointerMove={(e) => { if (e.pointerType === 'mouse') { const n = nearest(e); setHover(n ? keyOf(n) : null) } }}
             onPointerLeave={() => setHover(null)}
-            onClick={(e) => { const n = nearest(e); if (n) setPicked(keyOf(n)) }}>
+            onClick={(e) => { const n = nearest(e); if (n) choose(keyOf(n)) }}>
             <path d={BG_PATH} className="rad__land" />
             {BG_CITIES.map(([name, lon, lat]) => {
               const [x, y] = project(lon, lat)
@@ -150,14 +165,34 @@ export default function Radar({ lang, t }) {
       <div className="rad__side">
         <label className="rad__search">
           <Search size={18} aria-hidden="true" />
-          <input type="search" value={query} onChange={(e) => { setQuery(e.target.value); setAll(false) }} placeholder={r.search} aria-label={r.searchLabel} autoComplete="off" />
+          <input type="search" value={query} enterKeyHint="search" autoComplete="off" placeholder={r.search} aria-label={r.searchLabel}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => { if (e.key === 'Enter' && matches[0]) { e.preventDefault(); choose(keyOf(matches[0])) } else if (e.key === 'Escape') setQuery('') }} />
         </label>
-        <div className="rad__chips">
-          <button type="button" disabled={!mostLate} onClick={() => { setPicked(keyOf(mostLate)); setQuery('') }}>{r.quickLate}</button>
-          <button type="button" disabled={!placed.length} onClick={() => setPicked(keyOf(placed[Math.floor(Math.random() * placed.length)]))}>{r.quickRandom}</button>
+        <div className="rad__chips" hidden={searching}>
+          <button type="button" disabled={!mostLate} onClick={() => choose(keyOf(mostLate))}>{r.quickLate}</button>
+          <button type="button" disabled={!placed.length} onClick={() => choose(keyOf(placed[Math.floor(Math.random() * placed.length)]))}>{r.quickRandom}</button>
         </div>
 
-        <div className="rad__panel" aria-live="polite">
+        {searching && (
+          <div className="rad__results">
+            <p className="sr-only" role="status">{fill(r.resultsCount, { n: matches.length })}</p>
+            {matches.length === 0 && <p className="rad__small">{r.noResults}</p>}
+            <ul className="rad__list is-all">
+              {matches.map((x) => (
+                <li key={keyOf(x)}>
+                  <button type="button" aria-pressed={keyOf(x) === curKey} onClick={() => choose(keyOf(x))}>
+                    <b className="tnum">{trainLabel(x.type, x.trainNum, lang)}</b>
+                    <span>{stationName(x.from, lang)} → {stationName(x.to, lang)}</span>
+                    <em className={`tnum rad__delay--${kind(x.delayMin)}`}>{x.delayMin === null || x.delayMin === undefined ? '–' : `${x.delayMin}′`}</em>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <div className="rad__panel" aria-live="polite" ref={panelRef}>
           {current && (
             <>
               <p className="rad__type">{full(current) ?? trainLabel(current.type, '', lang)}</p>
@@ -180,6 +215,7 @@ export default function Radar({ lang, t }) {
                 <a className="ds-btn ds-btn--sm ds-btn--ghost" href={GOOGLE_PLAY} target="_blank" rel="noopener noreferrer">Google Play</a>
               </p>
               <p className="rad__small">{r.refresh}</p>
+              <button type="button" className="rad__tomap" onClick={showOnMap}>{r.showOnMap} ↑</button>
             </>
           )}
           {gone && (
@@ -191,21 +227,24 @@ export default function Radar({ lang, t }) {
           {!current && !gone && <p className="rad__small">{snap.data ? r.none : t.network.starting}</p>}
         </div>
 
-        <p className="rad__listhead">{q ? r.listResults : r.listLate}</p>
-        {q && matches.length === 0 && <p className="rad__small">{r.noResults}</p>}
-        <ul className={`rad__list${all ? ' is-all' : ''}`}>
-          {listed.map((x) => (
-            <li key={keyOf(x)}>
-              <button type="button" aria-pressed={keyOf(x) === curKey} onClick={() => setPicked(keyOf(x))}>
-                <b className="tnum">{trainLabel(x.type, x.trainNum, lang)}</b>
-                <span>{stationName(x.from, lang)} → {stationName(x.to, lang)}</span>
-                <em className={`tnum rad__delay--${kind(x.delayMin)}`}>{x.delayMin === null || x.delayMin === undefined ? '–' : `${x.delayMin}′`}</em>
-              </button>
-            </li>
-          ))}
-        </ul>
-        {matches.length > LIST_SHORT && (
-          <button type="button" className="rad__more" onClick={() => setAll((v) => !v)}>{all ? r.showLess : fill(r.showAll, { n: matches.length })}</button>
+        {!searching && (
+          <>
+          <p className="rad__listhead">{r.listLate}</p>
+            <ul className={`rad__list${all ? ' is-all' : ''}`}>
+            {listed.map((x) => (
+              <li key={keyOf(x)}>
+                <button type="button" aria-pressed={keyOf(x) === curKey} onClick={() => setPicked(keyOf(x))}>
+                  <b className="tnum">{trainLabel(x.type, x.trainNum, lang)}</b>
+                  <span>{stationName(x.from, lang)} → {stationName(x.to, lang)}</span>
+                  <em className={`tnum rad__delay--${kind(x.delayMin)}`}>{x.delayMin === null || x.delayMin === undefined ? '–' : `${x.delayMin}′`}</em>
+                </button>
+              </li>
+            ))}
+          </ul>
+          {matches.length > LIST_SHORT && (
+            <button type="button" className="rad__more" onClick={() => setAll((v) => !v)}>{all ? r.showLess : fill(r.showAll, { n: matches.length })}</button>
+          )}
+          </>
         )}
       </div>
     </div>

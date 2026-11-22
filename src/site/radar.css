@@ -32,12 +32,16 @@
 .rad__search:focus-within { border-color: var(--accent); }
 .rad__search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font: inherit; font-size: 16px; font-weight: 600; }
 .rad__search input::placeholder { color: var(--ink3); }
+.rad__chips[hidden] { display: none; }
 .rad__chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .rad__chips button { min-height: 38px; padding: 0 14px; border: 1px solid var(--line-strong); border-radius: 999px; background: transparent; color: var(--ink); font: inherit; font-size: 13.5px; font-weight: 800; cursor: pointer; }
 .rad__chips button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
 .rad__chips button:disabled { opacity: 0.45; cursor: default; }
 
-.rad__panel { min-height: 330px; padding: clamp(18px, 2.4vw, 26px); border-radius: var(--r-m); background: var(--raised); border: 1px solid var(--line); }
+.rad__results { max-height: 46vh; max-height: 46svh; overflow: auto; border: 1px solid var(--line); border-radius: var(--r-m); background: var(--bg); }
+.rad__results .rad__list { border-top: 0; max-height: none; }
+.rad__results .rad__small { padding: 14px 16px; margin: 0; }
+.rad__panel { scroll-margin-top: calc(var(--nav-h) + 12px); min-height: 330px; padding: clamp(18px, 2.4vw, 26px); border-radius: var(--r-m); background: var(--raised); border: 1px solid var(--line); }
 .rad__type { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink3); }
 .rad__num { margin: 4px 0 0; font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; }
 .rad__route { margin: 8px 0 0; font-size: 1.05rem; font-weight: 700; color: var(--ink); }
@@ -65,7 +69,8 @@
 .rad__list span { font-size: 13px; font-weight: 600; color: var(--ink2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .rad__list em { font-style: normal; font-size: 13px; font-weight: 800; color: var(--ink3); }
 .rad__list em.rad__delay--late { color: var(--late); background: none; } .rad__list em.rad__delay--ok { color: var(--ok); background: none; }
+.rad__tomap { display: none; margin: 14px 0 0; padding: 0; min-height: 40px; border: 0; background: transparent; color: var(--accent); font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
 .rad__more { justify-self: start; min-height: 40px; padding: 0 4px; border: 0; background: transparent; color: var(--accent); font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
 
-@media (max-width: 900px) { .rad { grid-template-columns: minmax(0, 1fr); } .rad__mapcol { position: static; } .rad__panel { min-height: 0; } }
+@media (max-width: 900px) { .rad { grid-template-columns: minmax(0, 1fr); } .rad__mapcol { position: static; } .rad__tomap { display: block; } .rad__panel { min-height: 0; } }
 @media (prefers-reduced-motion: reduce) { .rad__dot, .rad__bar i, .rad__bar b { transition: none; } .rad__ring { animation: none; opacity: 0.8; } }
