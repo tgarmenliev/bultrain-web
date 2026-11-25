@@ -60,14 +60,60 @@
 .tour__shade { display: flex; flex-direction: column; gap: 3%; padding: 16% 5% 5%; overflow: hidden; background: linear-gradient(160deg, #9aa0ac, #6e7480 60%, #59606c); }
 .ds-device .tour__shade img { width: 100%; height: auto; object-fit: contain; border-radius: 5%; flex: none; }
 
+.tour__window { display: contents; }
+
 @media (max-width: 900px) {
   .tour__grid { grid-template-columns: minmax(0, 1fr); }
+  .tour__devnote { min-height: 0; }
+  .tour__inline.is-watch { width: min(210px, 56vw); }
+}
+
+/* Phones: the stage is pinned at the top and the story scrolls underneath it. The device is shown large and the view
+   moves to the part each step talks about; the train on the rail keeps the place in the journey. */
+@media (max-width: 900px) and (min-height: 560px) {
+  .tour__grid { display: flex; flex-direction: column; margin-top: 20px; }
+  .tour__grid > .tour__stage {
+    order: -1; position: sticky; top: var(--nav-h); z-index: 5; display: flex; flex-direction: column;
+    height: 57vh; height: 57svh; margin: 0 calc(-1 * var(--gutter)); background: var(--bg);
+  }
+  .tour__stage::after { content: ''; position: absolute; left: 0; right: 0; top: 100%; height: 30px; background: linear-gradient(var(--bg), transparent); pointer-events: none; }
+  .tour__rail { order: -1; align-self: center; width: min(440px, calc(100% - 20px)); padding: 8px 0 12px; }
+  .tour__track { top: 19px; }
+  .tour__loco { width: 30px; height: 30px; margin-left: -15px; top: -13px; }
+  .tour__stations li { gap: 7px; padding-top: 5px; }
+  .tour__stations i { width: 12px; height: 12px; }
+  .tour__stations span { font-size: 10.5px; max-width: 11ch; }
+  .tour__window {
+    display: block; position: relative; flex: 1; align-self: stretch; width: 100%; min-height: 0; overflow: hidden;
+    -webkit-mask-image: linear-gradient(transparent 0, #000 calc(var(--focus) * 34px), #000 calc(100% - (1 - var(--focus)) * 34px), transparent 100%);
+    mask-image: linear-gradient(transparent 0, #000 calc(var(--focus) * 34px), #000 calc(100% - (1 - var(--focus)) * 34px), transparent 100%);
+  }
+  /* top is a share of the window, the translation the same share of the device: together they slide the view from the
+     top of the screen (focus 0) to its bottom (focus 1). */
+  .tour__phone {
+    position: absolute; left: 50%; width: min(66vw, 280px);
+    top: calc(4px + var(--focus) * (100% - 8px));
+    transform: translate(-50%, calc(var(--focus) * -100%));
+    transition: top 700ms var(--ease-out), transform 700ms var(--ease-out);
+  }
+  .tour__scene.is-watch .ds-watch { width: 82%; }
+
+  .tour__steps { position: relative; z-index: 1; }
+  .tour__step { min-height: 44vh; min-height: 44svh; max-width: none; justify-content: flex-start; gap: 10px; padding: 34px 0 20px; }
+  .tour__step:last-child { margin-bottom: 0; }
+  .tour__step h3 { font-size: clamp(1.45rem, 6.4vw, 1.9rem); }
+  .tour__step p { font-size: 15.5px; line-height: 1.6; }
+  /* the device picker comes before the long text, so it is on screen as soon as the step is */
+  .tour__n { order: 0; } .tour__step h3 { order: 1; } .tour__devices { order: 2; margin-top: 2px; } .tour__step p.tour__devnote { order: 3; margin: 0; }
+  .tour__step > p { order: 4; } .tour__avail { order: 5; }
+}
+
+/* very short screens (a phone held sideways): a plain list, each step with its own device */
+@media (max-width: 900px) and (max-height: 559px) {
   .tour__stage { display: none; }
   .tour__step h3 { color: var(--ink); } .tour__step p { color: var(--ink2); } .tour__n { color: var(--accent); }
   .tour__step { min-height: 0; max-width: none; padding: 40px 0; border-top: 1px solid var(--line); }
   .tour__step:last-child { margin-bottom: 0; }
   .tour__inline { display: block; width: min(250px, 62vw); margin: 14px auto 0; }
-  .tour__inline.is-watch { width: min(210px, 56vw); }
-  .tour__devnote { min-height: 0; }
 }
-@media (prefers-reduced-motion: reduce) { .tour__scene, .tour__n, .tour__step h3, .tour__step p, .tour__fill, .tour__loco, .tour__stations i, .tour__stations span { transition: none; } .tour__scene { filter: none; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .tour__phone, .tour__scene, .tour__n, .tour__step h3, .tour__step p, .tour__fill, .tour__loco, .tour__stations i, .tour__stations span { transition: none; } .tour__scene { filter: none; transform: none; } }

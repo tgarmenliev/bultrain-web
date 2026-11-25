@@ -10,6 +10,10 @@ const GOOGLE_PLAY = 'https://play.google.com/store/apps/details?id=com.bultrain.
 const KINDS = ['results', 'board', 'map', 'lock', 'alarm'] // what each step shows, in order
 // The journey has four moments; each step belongs to one of them (the train on the stage rides to it).
 const PHASE = [0, 1, 2, 2, 3]
+// On a phone the device is bigger than its window and the "camera" moves to what the step is about:
+// 0 = the top of the screen, 1 = the bottom (where the notifications are).
+const FOCUS = { results: 0, board: 0, map: 0.5, alarm: 1, 'lock-ios': 1, 'lock-android': 0.04, 'lock-watch': 0.5 }
+const STACKED = '(max-width: 900px) and (min-height: 560px)' // phone layout: the stage is pinned on top
 const VIDEO = '/video/map-live.mp4'
 const POSTER = '/video/map-live-poster.webp'
 const WATCH = '/img/app/watch-bg-stack.webp' // Bulgarian card: the Watch is offered on the Bulgarian site only
@@ -30,17 +34,22 @@ function LoopVideo({ active, alt = '', lazy }) {
   const ref = useRef(null)
   useEffect(() => {
     const v = ref.current
-    if (!v || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (!v) return
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     v.muted = true
     if (active === undefined) {
-      const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) v.play().catch(() => {}); else v.pause() }, { threshold: 0.25 })
+      const io = new IntersectionObserver(([e]) => {
+        if (!e.isIntersecting) { v.pause(); return }
+        v.poster = POSTER
+        if (!still) v.play().catch(() => {})
+      }, { threshold: 0.25 })
       io.observe(v)
       return () => io.disconnect()
     }
-    if (active) v.play().catch(() => {}); else v.pause()
+    if (active && !still) v.play().catch(() => {}); else v.pause()
   }, [active])
   return (
-    <video ref={ref} muted loop playsInline preload={lazy ? 'none' : 'metadata'} poster={POSTER} aria-label={alt || undefined} aria-hidden={alt ? undefined : true} width="540" height="1108">
+    <video ref={ref} muted loop playsInline preload={lazy ? 'none' : 'metadata'} poster={lazy ? undefined : POSTER} aria-label={alt || undefined} aria-hidden={alt ? undefined : true} width="540" height="1108">
       <source src={VIDEO} type="video/mp4" />
     </video>
   )
@@ -52,6 +61,7 @@ export default function Tour() {
   const tour = t.tour
   const [active, setActive] = useState(0)
   const [picked, setPicked] = useState(null)
+  const [reach, setReach] = useState(0) // the furthest step whose screen the stage has asked for
   const stepRefs = useRef([])
   const radios = useRef({})
 
@@ -59,14 +69,27 @@ export default function Tour() {
   const order = lang === 'bg' ? ['ios', 'android', 'watch'] : ['ios', 'android']
   const platform = order.includes(picked) ? picked : detected
 
-  // The step crossing the middle of the viewport is the active one (no scroll listener).
+  // The step crossing a line of the viewport is the active one (no scroll listener). The line is in the middle on
+  // wide screens, and in the free area under the pinned stage on phones.
   useEffect(() => {
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && setActive(Number(e.target.dataset.i))),
-      { rootMargin: '-45% 0px -45% 0px' },
-    )
-    stepRefs.current.forEach((el) => el && io.observe(el))
-    return () => io.disconnect()
+    const mq = window.matchMedia(STACKED)
+    let io
+    const watch = () => {
+      io?.disconnect()
+      io = new IntersectionObserver(
+        (entries) => entries.forEach((e) => {
+          if (!e.isIntersecting) return
+          const i = Number(e.target.dataset.i)
+          setActive(i)
+          setReach((r) => Math.max(r, i + 1))
+        }),
+        { rootMargin: mq.matches ? '-74% 0px -25% 0px' : '-45% 0px -45% 0px' },
+      )
+      stepRefs.current.forEach((el) => el && io.observe(el))
+    }
+    watch()
+    mq.addEventListener('change', watch)
+    return () => { mq.removeEventListener('change', watch); io.disconnect() }
   }, [])
 
   const onKey = (e) => {
@@ -77,12 +100,12 @@ export default function Tour() {
     setPicked(next); radios.current[next]?.focus()
   }
 
-  // Every scene the stage can show. `node(alt, eager, stage)` draws its screen; the frame is chosen per scene.
-  const img = (src, alt, eager) => <img className="themed" {...screenProps(src)} sizes="300px" alt={alt} width="900" height="1948" loading={eager ? 'eager' : 'lazy'} />
+  // Every scene the stage can show. `node(alt)` draws its screen; the frame is chosen per scene.
+  const img = (src, alt) => <img className="themed" {...screenProps(src)} sizes="300px" alt={alt} width="900" height="1948" loading="lazy" />
   const alarm = appScreenInLang(theme, lang, ['alarm']) || appScreen(theme, lang, ['trip'])
   const lockIos = appScreen(theme, lang, ['lock'])
   const scenes = [
-    { id: 'results', kind: 'results', frame: 'ios', node: (alt, eager) => img(appScreen(theme, lang, ['results']), alt, eager) },
+    { id: 'results', kind: 'results', frame: 'ios', node: (alt) => img(appScreen(theme, lang, ['results']), alt) },
     { id: 'board', kind: 'board', frame: 'ios', node: (alt) => img(appScreen(theme, lang, ['board', 'results']), alt) },
     { id: 'map', kind: 'map', frame: 'ios', node: (alt) => <LoopVideo alt={alt} lazy /> },
     { id: 'alarm', kind: 'alarm', frame: 'ios', node: (alt) => img(alarm, alt) },
@@ -102,6 +125,7 @@ export default function Tour() {
   ]
   const shown = (s, kind) => s.kind === kind && (!s.platform || s.platform === platform)
   const sceneFor = (kind) => scenes.find((s) => shown(s, kind))
+  const focus = FOCUS[sceneFor(KINDS[active])?.id] ?? 0
 
   return (
     <section className="tour" id="tour" aria-labelledby="tour-title">
@@ -153,17 +177,21 @@ export default function Tour() {
           </ol>
 
           <div className="tour__stage" aria-hidden="true">
-            <div className="tour__phone">
-              {scenes.map((s) => {
-                const on = shown(s, KINDS[active])
-                return (
-                  <div key={s.id} className={`tour__scene is-${s.frame}`} data-on={on}>
-                    <Frame kind={s.frame}>
-                      {s.kind === 'map' ? <LoopVideo active={on} /> : s.node('', s.id === 'results')}
-                    </Frame>
-                  </div>
-                )
-              })}
+            <div className="tour__window" style={{ '--focus': focus }}>
+              <div className="tour__phone">
+                {scenes.map((s) => {
+                  const on = shown(s, KINDS[active])
+                  return (
+                    <div key={s.id} className={`tour__scene is-${s.frame}`} data-on={on}>
+                      {KINDS.indexOf(s.kind) <= reach && (
+                        <Frame kind={s.frame}>
+                          {s.kind === 'map' ? <LoopVideo active={on} /> : s.node('', false)}
+                        </Frame>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
             </div>
             <div className="tour__rail" style={{ '--p': PHASE[active] / (tour.phases.length - 1) }}>
               <div className="tour__track">

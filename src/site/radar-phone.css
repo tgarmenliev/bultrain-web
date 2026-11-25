@@ -1,0 +1,107 @@
+/* The phone map: one screen, like the app. */
+.pm__stage {
+  position: relative; height: calc(100vh - var(--nav-h) - 24px); height: calc(100svh - var(--nav-h) - 24px); min-height: 440px; max-height: 760px;
+  margin: 0 calc(10px - var(--gutter)); border-radius: 22px; overflow: hidden; background: var(--surface); border: 1px solid var(--line);
+  scroll-margin-top: calc(var(--nav-h) + 10px);
+}
+.pm__map { display: block; width: 100%; height: 100%; touch-action: pan-y; --u: 1; -webkit-tap-highlight-color: transparent; }
+.pm__land { fill: var(--raised); stroke: var(--line-strong); stroke-width: 1.5; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+/* everything inside .pm__s is drawn in screen pixels, whatever the zoom */
+.pm__s { transform: scale(var(--u)); }
+.pm__rail-lines { fill: none; stroke: color-mix(in srgb, var(--accent) 42%, var(--line-strong)); stroke-width: 1.5; vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round; pointer-events: none; }
+.pm__map[data-zoom='far'] .pm__town { display: none; }
+.pm__city { pointer-events: none; }
+.pm__city circle { fill: var(--ink3); }
+.pm__city text { fill: var(--ink3); font-size: 11px; font-weight: 700; paint-order: stroke; stroke: var(--raised); stroke-width: 3px; stroke-linejoin: round; }
+.pm__city.is-end circle { fill: var(--accent); }
+.pm__city.is-end text { fill: var(--ink); font-size: 12.5px; font-weight: 800; }
+.pm__dot, .pm__me { transition: transform 1.2s linear; }
+.pm__dot circle, .pm__core { stroke-width: 2; }
+.pm__dot--ok circle, .pm__dot--ok .pm__core { fill: var(--ok); stroke: var(--surface); }
+.pm__dot--late circle, .pm__dot--late .pm__core { fill: var(--late); stroke: var(--surface); }
+.pm__dot--unknown circle, .pm__dot--unknown .pm__core { fill: var(--surface); stroke: var(--ink3); }
+.pm__dot { opacity: 0.72; }
+.pm__map[data-zoom='far'] .pm__dot .pm__s { transform: scale(calc(var(--u) * 0.82)); }
+.pm__me .pm__core { stroke: var(--ink); stroke-width: 3; }
+.pm__me .pm__ring { fill: none; stroke: var(--accent); stroke-width: 3; animation: pm-ring 1.8s ease-out infinite; }
+@keyframes pm-ring { from { transform: scale(0.75); opacity: 1; } to { transform: scale(2.1); opacity: 0; } }
+.pm__lbl { fill: var(--ink); font-size: 14px; font-weight: 800; text-anchor: middle; paint-order: stroke; stroke: var(--surface); stroke-width: 5px; stroke-linejoin: round; }
+
+/* search and quick choices, on top of the map */
+.pm__top { position: absolute; left: 10px; right: 10px; top: 10px; z-index: 3; display: grid; gap: 8px; pointer-events: none; }
+.pm__top > * { pointer-events: auto; }
+.pm__search { display: flex; align-items: center; gap: 10px; min-height: 50px; padding: 0 8px 0 14px; border-radius: 16px; background: var(--bg); border: 1px solid var(--line); box-shadow: var(--shadow); color: var(--ink3); }
+.pm__search:focus-within { border-color: var(--accent); }
+.pm__search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font: inherit; font-size: 16px; font-weight: 600; } /* 16px: iOS does not zoom in */
+.pm__search input::placeholder { color: var(--ink3); }
+.pm__search input::-webkit-search-cancel-button { display: none; }
+.pm__search button { display: grid; place-items: center; width: 38px; height: 38px; border: 0; border-radius: 11px; background: var(--raised); color: var(--ink); cursor: pointer; }
+.pm__chips { display: flex; flex-wrap: wrap; gap: 8px; justify-self: start; max-width: 100%; }
+.pm__top > .pm__chips { pointer-events: none; } .pm__chips button { pointer-events: auto; }
+.pm__chips button { flex-shrink: 0; min-height: 38px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18); color: var(--ink); font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+.pm__chips button:active { transform: scale(0.97); }
+.pm__chips button:disabled { opacity: 0.5; }
+
+.pm__results { position: absolute; z-index: 4; left: 10px; right: 10px; top: 68px; max-height: calc(100% - 78px); overflow: auto; overscroll-behavior: contain; border-radius: 18px; background: var(--bg); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.pm__resulthead { position: sticky; top: 0; margin: 0; padding: 12px 14px 8px; background: var(--bg); font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink3); }
+.pm__empty { margin: 0; padding: 6px 14px 16px; font-size: 14px; font-weight: 600; color: var(--ink2); }
+.pm__results ul { list-style: none; margin: 0; padding: 0; }
+.pm__results li { border-top: 1px solid var(--line); }
+.pm__results button { display: grid; grid-template-columns: 86px minmax(0, 1fr) auto; align-items: center; gap: 10px; width: 100%; min-height: 52px; padding: 8px 14px; border: 0; background: transparent; color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.pm__results button:active { background: var(--raised); }
+.pm__results b { font-size: 14px; font-weight: 800; white-space: nowrap; }
+.pm__results span { font-size: 13px; font-weight: 600; color: var(--ink2); line-height: 1.35; }
+.pm__results em { font-style: normal; font-size: 13.5px; font-weight: 800; color: var(--ink3); }
+
+.pm__zoom { position: absolute; z-index: 2; right: 10px; bottom: 180px; display: flex; gap: 8px; }
+.pm__zoom button { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 13px; background: var(--bg); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18); color: var(--ink); cursor: pointer; }
+.pm__zoom button:active { transform: scale(0.95); }
+.pm__zoom button.is-main { background: var(--action); border-color: transparent; color: var(--on-action); }
+.pm__zoom button:disabled { opacity: 0.5; }
+.pm__hint { position: absolute; z-index: 2; left: 50%; top: 45%; transform: translate(-50%, -50%); margin: 0; padding: 10px 16px; border-radius: 999px; background: color-mix(in srgb, var(--ink) 88%, transparent); color: var(--bg); font-size: 13.5px; font-weight: 800; white-space: nowrap; pointer-events: none; }
+
+/* the chosen train */
+.pm__sheet { position: absolute; z-index: 3; left: 10px; right: 10px; bottom: 10px; max-height: calc(100% - 20px); overflow: auto; overscroll-behavior: contain; border-radius: 20px; background: var(--bg); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.pm__sheet[hidden] { display: none; }
+.pm__summary { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; column-gap: 12px; width: 100%; padding: 14px 16px 10px; border: 0; background: transparent; color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.pm__who { display: flex; flex-direction: column; min-width: 0; }
+.pm__type { font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink3); line-height: 1.4; }
+.pm__who b { font-size: 28px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.1; }
+.pm__delay { padding: 5px 10px; border-radius: 9px; font-size: 12.5px; font-weight: 800; max-width: 46vw; text-align: right; }
+.pm__d--late { color: var(--late); background: var(--late-bg); }
+.pm__d--ok { color: var(--ok); background: var(--ok-bg); }
+.pm__d--unknown { color: var(--ink2); background: color-mix(in srgb, var(--ink3) 18%, transparent); }
+.pm__results em.pm__d--late, .pm__results em.pm__d--ok, .pm__results em.pm__d--unknown { background: none; }
+.pm__route { grid-column: 1 / -1; margin-top: 4px; font-size: 15px; font-weight: 700; line-height: 1.35; }
+.pm__rail { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; margin-top: 12px; padding: 0 0 0 4px; }
+.pm__bar { position: relative; flex: 1; height: 6px; border-radius: 3px; background: var(--line-strong); }
+.pm__bar i { position: absolute; inset: 0 auto 0 0; border-radius: 3px; background: var(--accent); transition: width 700ms var(--ease-out); }
+.pm__bar em { position: absolute; top: 50%; width: 24px; height: 24px; margin: -12px 0 0 -12px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: #fff; transition: left 700ms var(--ease-out); }
+.pm__pct { font-size: 13px; font-weight: 800; color: var(--ink2); }
+.pm__toggle { grid-column: 1 / -1; justify-self: center; display: inline-flex; align-items: center; gap: 4px; min-height: 28px; margin-top: 6px; font-size: 12.5px; font-weight: 800; color: var(--accent); }
+.pm__toggle svg { transition: transform 240ms var(--ease-out); }
+.pm__sheet[data-open='true'] .pm__toggle svg { transform: rotate(180deg); }
+.pm__more { padding: 4px 16px 16px; border-top: 1px solid var(--line); }
+.pm__more p { margin: 10px 0 0; font-size: 14px; line-height: 1.55; font-weight: 600; color: var(--ink2); }
+.pm__more .pm__small, .pm__small { font-size: 12.5px; line-height: 1.5; font-weight: 600; color: var(--ink3); }
+.pm__more .pm__stores { display: flex; flex-wrap: wrap; gap: 8px; }
+.pm__summary .pm__small { grid-column: 1 / -1; margin-top: 8px; }
+.pm__wait { margin: 0; padding: 18px 16px; }
+
+.pm__legend { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 14px 0 0; padding: 0; }
+.pm__legend li { display: flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: var(--ink2); }
+.pm__sw { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; box-sizing: border-box; }
+.pm__sw--ok { background: var(--ok); } .pm__sw--late { background: var(--late); width: 13px; height: 13px; }
+.pm__sw--unknown { border: 2px solid var(--ink3); }
+.pm__count { margin: 8px 0 0; font-size: 12.5px; font-weight: 600; color: var(--ink3); }
+
+@media (prefers-reduced-motion: reduce) { .pm__dot, .pm__me, .pm__bar i, .pm__bar em, .pm__toggle svg { transition: none; } .pm__me .pm__ring { animation: none; opacity: 0.8; } }
+
+/* a phone held sideways: search on the left, the train card as a column on the right, the map between them */
+@media (max-height: 560px) and (min-width: 600px) {
+  .pm__stage { min-height: 300px; }
+  .pm__top { right: auto; width: min(300px, 48%); }
+  .pm__chips { display: none; }
+  .pm__sheet { left: auto; width: 290px; max-height: calc(100% - 20px); }
+  .pm__results { right: auto; width: min(380px, 60%); }
+}

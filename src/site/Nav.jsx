@@ -4,6 +4,7 @@ import { stripLang } from '../i18n/routes'
 import { Menu, X, Sun, Moon } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useTheme } from '../theme/ThemeContext'
+import { useStoreLink } from '../data/stores'
 import './nav.css'
 
 function LangSwitch() {
@@ -20,11 +21,11 @@ function LangSwitch() {
   )
 }
 
-function ThemeToggle() {
+function ThemeToggle({ className = '', ...rest }) {
   const { toggleTheme } = useTheme()
   const { t } = useLanguage()
   return (
-    <button type="button" className="nav-theme" onClick={toggleTheme} aria-label={t.nav.theme}>
+    <button type="button" className={`nav-theme ${className}`} onClick={toggleTheme} aria-label={t.nav.theme} {...rest}>
       <Sun size={18} strokeWidth={1.8} className="nav-theme__sun" />
       <Moon size={18} strokeWidth={1.8} className="nav-theme__moon" />
     </button>
@@ -41,6 +42,7 @@ export default function Nav() {
   const { t } = useLanguage()
   const home = stripLang(useLocation().pathname) === '/'
   const [open, setOpen] = useState(false)
+  const store = useStoreLink()
   const [scrolled, setScrolled] = useState(false)
   const sentinel = useRef(null)
 
@@ -60,7 +62,6 @@ export default function Nav() {
     ['about', '#about', t.nav.about],
     ['support', '#support', t.nav.support],
   ]
-  const store = 'https://apps.apple.com/bg/app/bultrain-train-schedules-bg/id6759790703'
 
   return (
     <>
@@ -81,9 +82,9 @@ export default function Nav() {
 
           <div className="nav__tools">
             <LangSwitch />
-            <ThemeToggle />
+            <ThemeToggle className="nav-theme--bar" />
             <a className="ds-btn ds-btn--primary ds-btn--sm nav__cta" href={store} target="_blank" rel="noopener noreferrer">
-              {t.nav.cta}
+              <span className="nav__cta-long">{t.nav.cta}</span><span className="nav__cta-short">{t.nav.ctaShort}</span>
             </a>
             <button type="button" className="nav__burger" aria-label={t.nav.menu} aria-expanded={open} onClick={() => setOpen(!open)}>
               {open ? <X size={20} /> : <Menu size={20} />}
@@ -96,6 +97,7 @@ export default function Nav() {
             {links.map(([id, href, label]) => (
               <Anchor key={id} hash={href} home={home} tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}>{label}</Anchor>
             ))}
+            <p className="nav__sheet-theme"><span>{t.nav.theme}</span><ThemeToggle tabIndex={open ? 0 : -1} /></p>
             <a className="ds-btn ds-btn--primary nav__sheet-cta" href={store} target="_blank" rel="noopener noreferrer" tabIndex={open ? 0 : -1}>
               {t.nav.cta}
             </a>

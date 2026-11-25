@@ -24,10 +24,10 @@ export default function Releases() {
         </header>
 
         <ol className="rel__line">
-          {items.map((x) => {
+          {items.map((x, i) => {
             const c = r.items[x.id]
             return (
-              <li key={x.id} className="rel__stop">
+              <li key={x.id} className="rel__stop" style={{ '--o': items.length - i }}>
                 <span className="rel__dot" aria-hidden="true" />
                 <p className="rel__when tnum"><time dateTime={x.date}>{fmt(x.date, x.precision, lang)}</time> <span>{x.platform}</span></p>
                 <div className="rel__card">

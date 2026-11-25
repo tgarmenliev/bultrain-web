@@ -23,6 +23,8 @@ npm run build      # изгражда dist/ и всички страници (т
 | Данни на живо (табла, радар) | идват от `https://api.bultrain.eu`; не се пишат на ръка |
 | Снимки и видео | `public/img/…`, `public/video/…`; оригиналите са в `design-source/inbox/` (не са в GitHub) и се обработват със `scripts/build-assets.mjs` и `scripts/build-app-update-assets.mjs` |
 | robots, llms.txt | `public/robots.txt`, `public/llms.txt` |
+| Жп линиите на картата за телефон | `src/data/bg-rail.js` (генериран). При промяна на мрежата: `node scripts/build-rail.mjs <папка с shapes.txt от GTFS static>` |
+| Картата „Избери влак“ | компютър: `src/site/Radar.jsx`; телефон: `src/site/RadarPhone.jsx`; обща логика: `src/site/useTrainPicker.js` |
 
 ## Често правени неща
 - **Нова версия на приложението:** добави един запис най-долу в `src/data/releases.js` и два реда превод. Няма нова секция и няма нов линк в менюто.

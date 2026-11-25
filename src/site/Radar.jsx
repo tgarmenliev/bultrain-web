@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Search, TrainFront } from 'lucide-react'
 import { BG_PATH, BG_SIZE, BG_CITIES, project } from '../data/bg-outline'
-import { radarResource, useResource, stationName, trainLabel } from '../data/live'
+import { stationName, trainLabel, routeText } from '../data/live'
+import { keyOf, fill, kind, delayText as sayDelay, clock, useOnScreen, useTrainPicker } from './useTrainPicker'
 import './radar.css'
 
 const PAD = 36
@@ -10,30 +11,10 @@ const APP_STORE = 'https://apps.apple.com/bg/app/bultrain-train-schedules-bg/id6
 const GOOGLE_PLAY = 'https://play.google.com/store/apps/details?id=com.bultrain.vlak_app_test'
 const LIST_SHORT = 6
 
-const keyOf = (x) => `${x.type ?? ''}${x.trainNum ?? ''}`
-const fill = (s, vars) => Object.entries(vars).reduce((a, [k, v]) => a.replace(`{${k}}`, v), s)
-// Colour is never the only carrier: unknown = hollow ring, late = larger dot, and the panel says it in words.
-const kind = (d) => (d === null || d === undefined ? 'unknown' : d >= 5 ? 'late' : 'ok')
-const clock = (iso) => {
-  const d = iso ? new Date(iso) : null
-  return d && !Number.isNaN(d.getTime()) ? d.toLocaleTimeString('bg-BG', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : null
-}
-
-function useOnScreen(ref) {
-  const [on, setOn] = useState(false)
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const io = new IntersectionObserver(([e]) => setOn(e.isIntersecting), { rootMargin: '200px' })
-    io.observe(el)
-    return () => io.disconnect()
-  }, [ref])
-  return on
-}
-
 /**
- * Pick a train, see it. The same thing the app does with a tap, with the real feed (about 80 running trains):
- * search by number or station, or touch a dot on the map. Only what the feed contains is shown: type, number,
+ * Pick a train, see it (wide screens; phones use RadarPhone). The same thing the app does with a tap,
+ * with the real feed (about 80 running trains):
+ * search by number or station, or click a dot on the map. Only what the feed contains is shown: type, number,
  * from, to, delay, how far along the route it is and where it is. No stops and no route line (the app has those),
  * nothing estimated: a missing value is said to be missing.
  */
@@ -42,50 +23,16 @@ export default function Radar({ lang, t }) {
   const wrap = useRef(null)
   const svgRef = useRef(null)
   const onScreen = useOnScreen(wrap)
-  const snap = useResource(radarResource, onScreen) // polls only while the map is on screen
-  const trains = useMemo(() => snap.data?.trains ?? [], [snap.data])
-  const [query, setQuery] = useState('')
-  const [picked, setPicked] = useState(null) // key chosen by the visitor
+  const { snap, trains, placed, current, curKey, gone, mostLate, matches, query, setQuery, searching, setPicked, randomKey, reset } = useTrainPicker(lang, onScreen)
   const [hover, setHover] = useState(null)
   const [all, setAll] = useState(false)
-  const [reveal, setReveal] = useState(0)
-  const panelRef = useRef(null)
-
-  const placed = useMemo(() => trains.filter((x) => x.lat !== null && x.lon !== null), [trains])
-  const byDelay = useMemo(() => [...trains].sort((a, b) => (b.delayMin ?? -1) - (a.delayMin ?? -1)), [trains])
-  // Until the visitor chooses, an ordinary train in the middle of its route is shown (so the panel is never empty and
-  // not a record-breaking outlier). It is chosen once and then kept: it must not change under the visitor every minute.
-  const mostLate = byDelay.find((x) => x.lat !== null && x.delayMin !== null) ?? null
-  const sample = useMemo(() => {
-    const fast = new Set(['БВ', 'МБВ', 'ЕВ'])
-    return [...placed]
-      .filter((x) => x.delayMin !== null && x.progress !== null && x.progress >= 0.15 && x.progress <= 0.85)
-      .sort((a, b) => (fast.has(b.type) ? 1 : 0) - (fast.has(a.type) ? 1 : 0) || Math.abs(a.progress - 0.5) - Math.abs(b.progress - 0.5))[0] ?? placed[0] ?? null
-  }, [placed])
-  const [auto, setAuto] = useState(null)
-  if (auto === null && sample) setAuto(keyOf(sample))
-  const current = trains.find((x) => keyOf(x) === (picked ?? auto)) ?? null
-  const gone = Boolean((picked ?? auto) && !current && snap.data)
-  const curKey = current ? keyOf(current) : null
-
-  const q = query.trim().toLowerCase()
-  const matches = q
-    ? trains.filter((x) => [trainLabel(x.type, x.trainNum, lang), x.trainNum, x.from, x.to, stationName(x.from, lang), stationName(x.to, lang)].some((v) => (v ?? '').toLowerCase().includes(q)))
-    : byDelay
-  const searching = q.length > 0
   const listed = all ? matches : matches.slice(0, LIST_SHORT)
 
-  // Choosing a train closes the search (and the phone's keyboard) and, on a phone, brings its card into view.
+  // Choosing a train closes the search.
   const choose = (key) => {
     setPicked(key); setQuery(''); setAll(false)
     if (document.activeElement instanceof HTMLElement) document.activeElement.blur()
-    setReveal((n) => n + 1)
   }
-  useEffect(() => {
-    if (reveal === 0 || !window.matchMedia('(max-width: 900px)').matches) return
-    panelRef.current?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' })
-  }, [reveal])
-  const showOnMap = () => svgRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
 
   // The nearest dot to the pointer within about 28 px: easy to hit on a phone, where a dot is tiny.
   const nearest = (e) => {
@@ -104,7 +51,7 @@ export default function Radar({ lang, t }) {
     return bd <= 28 * kx ? best : null
   }
 
-  const delayText = (d) => (d === null || d === undefined ? r.delayUnknown : d === 0 ? r.delayNone : fill(r.delayLate, { n: d }))
+  const delayText = (d) => sayDelay(r, d)
   const full = (x) => r.fullType[x.type] ?? null
   const missing = trains.length - placed.length
   const stamp = clock(snap.data?.realtime?.positionsUpdatedAt) ?? clock(snap.data?.generatedAt)
@@ -171,7 +118,7 @@ export default function Radar({ lang, t }) {
         </label>
         <div className="rad__chips" hidden={searching}>
           <button type="button" disabled={!mostLate} onClick={() => choose(keyOf(mostLate))}>{r.quickLate}</button>
-          <button type="button" disabled={!placed.length} onClick={() => choose(keyOf(placed[Math.floor(Math.random() * placed.length)]))}>{r.quickRandom}</button>
+          <button type="button" disabled={!placed.length} onClick={() => choose(randomKey())}>{r.quickRandom}</button>
         </div>
 
         {searching && (
@@ -183,7 +130,7 @@ export default function Radar({ lang, t }) {
                 <li key={keyOf(x)}>
                   <button type="button" aria-pressed={keyOf(x) === curKey} onClick={() => choose(keyOf(x))}>
                     <b className="tnum">{trainLabel(x.type, x.trainNum, lang)}</b>
-                    <span>{stationName(x.from, lang)} → {stationName(x.to, lang)}</span>
+                    <span>{routeText(x.from, x.to, lang)}</span>
                     <em className={`tnum rad__delay--${kind(x.delayMin)}`}>{x.delayMin === null || x.delayMin === undefined ? '–' : `${x.delayMin}′`}</em>
                   </button>
                 </li>
@@ -192,13 +139,13 @@ export default function Radar({ lang, t }) {
           </div>
         )}
 
-        <div className="rad__panel" aria-live="polite" ref={panelRef}>
+        <div className="rad__panel" aria-live="polite">
           {current && (
             <>
               {/* train types without a full name (IFT, ET) show only the label below, once */}
               {full(current) && <p className="rad__type">{full(current)}</p>}
               <p className="rad__num tnum">{full(current) ? current.trainNum : trainLabel(current.type, current.trainNum, lang)}</p>
-              <p className="rad__route">{stationName(current.from, lang)} <span aria-hidden="true">→</span><span className="sr-only"> – </span> {stationName(current.to, lang)}</p>
+              <p className="rad__route">{routeText(current.from, current.to, lang)}</p>
               <p className={`rad__delay rad__delay--${kind(current.delayMin)}`}>{delayText(current.delayMin)}</p>
               {current.progress !== null && current.progress !== undefined ? (
                 <div className="rad__rail">
@@ -216,13 +163,12 @@ export default function Radar({ lang, t }) {
                 <a className="ds-btn ds-btn--sm ds-btn--ghost" href={GOOGLE_PLAY} target="_blank" rel="noopener noreferrer">Google Play</a>
               </p>
               <p className="rad__small">{r.refresh}</p>
-              <button type="button" className="rad__tomap" onClick={showOnMap}>{r.showOnMap} ↑</button>
             </>
           )}
           {gone && (
             <>
               <p className="rad__type">{r.gone}</p>
-              <p className="rad__stores"><button type="button" className="ds-btn ds-btn--sm ds-btn--ghost" onClick={() => { setPicked(null); setAuto(null) }}>{r.pickAnother}</button></p>
+              <p className="rad__stores"><button type="button" className="ds-btn ds-btn--sm ds-btn--ghost" onClick={reset}>{r.pickAnother}</button></p>
             </>
           )}
           {!current && !gone && <p className="rad__small">{snap.data ? r.none : t.network.starting}</p>}
@@ -236,7 +182,7 @@ export default function Radar({ lang, t }) {
               <li key={keyOf(x)}>
                 <button type="button" aria-pressed={keyOf(x) === curKey} onClick={() => setPicked(keyOf(x))}>
                   <b className="tnum">{trainLabel(x.type, x.trainNum, lang)}</b>
-                  <span>{stationName(x.from, lang)} → {stationName(x.to, lang)}</span>
+                  <span>{routeText(x.from, x.to, lang)}</span>
                   <em className={`tnum rad__delay--${kind(x.delayMin)}`}>{x.delayMin === null || x.delayMin === undefined ? '–' : `${x.delayMin}′`}</em>
                 </button>
               </li>

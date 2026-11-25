@@ -8,4 +8,5 @@
 .lang-offer__go { min-height: 40px; padding: 0 16px; border: 0; border-radius: 12px; background: var(--action); color: var(--on-action); font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; white-space: nowrap; }
 .lang-offer__x { display: grid; place-items: center; width: 40px; height: 40px; border: 0; border-radius: 12px; background: transparent; color: var(--ink3); cursor: pointer; }
 .lang-offer__go:hover, .lang-offer__x:hover { filter: brightness(1.08); }
-@media (max-width: 480px) { .lang-offer { flex-wrap: wrap; } .lang-offer p { flex-basis: 100%; } .lang-offer__go { flex: 1; } }
+.lang-offer__short { display: none; }
+@media (max-width: 480px) { .lang-offer__long { display: none; } .lang-offer__short { display: inline; } .lang-offer { left: 10px; right: 10px; bottom: 10px; gap: 8px; padding: 8px 8px 8px 14px; } .lang-offer p { font-size: 13px; } .lang-offer__go { padding: 0 12px; font-size: 13px; } .lang-offer__x { width: 36px; } }

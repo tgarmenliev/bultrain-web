@@ -61,4 +61,24 @@
 .nav__sheet-cta { margin-top: 18px; }
 
 @media (max-width: 1180px) { .nav__links { display: none; } .nav__burger { display: inline-flex; align-items: center; justify-content: center; } .nav__sheet { display: block; } .nav[data-open='true'] .nav__sheet { max-height: 80vh; } }
-@media (max-width: 640px) { .nav .nav__cta { display: none; } .nav-lang button { min-width: 36px; } }
+/* phones: the download button stays in the bar (short label); the theme switch moves into the menu */
+.nav__cta-short, .nav__sheet-theme { display: none; }
+@media (max-width: 640px) {
+  .nav__bar { gap: 12px; }
+  .nav__tools { gap: 8px; }
+  .nav-lang button { min-width: 34px; }
+  .nav .nav-theme--bar { display: none; }
+  .nav__cta-long { display: none; } .nav__cta-short { display: inline; }
+  .nav .nav__cta { padding: 0 14px; }
+  .nav__sheet-theme { display: flex; align-items: center; justify-content: space-between; margin: 0; padding: 12px 2px; border-bottom: 1px solid var(--line); font-size: 17px; font-weight: 700; }
+}
+@media (max-width: 400px) {
+  .nav__bar, .nav__tools { gap: 6px; }
+  .nav__logo { gap: 8px; } .nav__logo img { width: 28px; height: 28px; } .nav__logo span { font-size: 17px; }
+  .nav-lang button { min-width: 30px; }
+  .nav .nav__cta { padding: 0 11px; }
+  .nav__burger { width: 38px; }
+}
+@media (max-width: 339px) { .nav__logo span { display: none; } }
+/* the open menu is a solid panel with the page dimmed behind it */
+@media (max-width: 1180px) { .nav[data-open='true'] { background: var(--bg); box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.45); clip-path: inset(0 0 -100vmax 0); } .nav__sheet .wrap { max-height: calc(100svh - var(--nav-h)); overflow-y: auto; } }

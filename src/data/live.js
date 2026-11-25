@@ -108,6 +108,9 @@ export const trainLabel = (type, num, lang) => {
   return `${t} ${num ?? ''}`.trim()
 }
 
+/** "A → B"; a train without one of the two (the feed sometimes omits it) shows only what is known, never a dangling arrow. */
+export const routeText = (from, to, lang) => [stationName(from, lang), stationName(to, lang)].filter(Boolean).join(' → ')
+
 // Bulgarian "Streamlined System" transliteration, for station names on the English site.
 const MAP = { а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ж: 'zh', з: 'z', и: 'i', й: 'y', к: 'k', л: 'l', м: 'm', н: 'n', о: 'o', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f', х: 'h', ц: 'ts', ч: 'ch', ш: 'sh', щ: 'sht', ъ: 'a', ь: 'y', ю: 'yu', я: 'ya' }
 export function stationName(name, lang) {

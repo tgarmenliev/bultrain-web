@@ -65,8 +65,14 @@ function ScrollToTop() {
     if (samePage) return
     // Arriving (first load, or another page): jump, don't glide, where a long animated scroll would be disorienting.
     const target = hash.length > 1 ? document.getElementById(hash.slice(1)) : null
-    if (target) target.scrollIntoView({ behavior: 'instant' })
-    else window.scrollTo({ top: 0, behavior: 'instant' })
+    if (!target) { window.scrollTo({ top: 0, behavior: 'instant' }); return }
+    target.scrollIntoView({ behavior: 'instant' })
+    // parts above may still change height for a moment (the phone map): land again, unless the visitor moved first
+    const again = setTimeout(() => target.scrollIntoView({ behavior: 'instant' }), 700)
+    const stop = () => clearTimeout(again)
+    const inputs = ['touchstart', 'wheel', 'keydown']
+    inputs.forEach((e) => window.addEventListener(e, stop, { once: true, passive: true }))
+    return () => { stop(); inputs.forEach((e) => window.removeEventListener(e, stop)) }
   }, [path, hash])
   return null
 }

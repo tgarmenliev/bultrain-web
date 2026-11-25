@@ -44,3 +44,11 @@
   .press__list .press__outlet { grid-column: 1 / -1; }
   .rev { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Phones: reviews are cards you swipe through. */
+@media (max-width: 640px) {
+  .rev__quotes { display: flex; align-items: stretch; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter) 6px; scrollbar-width: none; }
+  .rev__quotes::-webkit-scrollbar { display: none; }
+  .rev__quotes li, .rev__quotes li:first-child { flex: 0 0 min(82vw, 340px); scroll-snap-align: start; padding: 20px; border: 1px solid var(--line); border-radius: var(--r-m); background: var(--raised); }
+  .rev__quotes blockquote, .rev__quotes .is-first blockquote { font-size: 1rem; line-height: 1.6; font-weight: 500; }
+}

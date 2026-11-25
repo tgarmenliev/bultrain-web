@@ -1,8 +1,13 @@
-import { lazy, Suspense, useRef, useState } from 'react'
+import { lazy, Suspense, useRef, useState, useSyncExternalStore } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
-import { networkResource, useResource, useNow, ageMinutes, STALE_MS, stationName, trainLabel } from '../data/live'
+import { networkResource, useResource, useNow, ageMinutes, STALE_MS, stationName, trainLabel, routeText } from '../data/live'
 import EinkBoard from './EinkBoard'
+// "Pick a train": wide screens get the radar, phones get their own full-screen map (downloaded only there, with the
+// railway lines it draws). Both are declared here, in the main bundle, so neither pulls the site's CSS a second time.
 const Radar = lazy(() => import('./Radar'))
+const RadarPhone = lazy(() => import('./RadarPhone'))
+const PHONE = '(max-width: 900px)'
+const watchPhone = (fn) => { const mq = window.matchMedia(PHONE); mq.addEventListener('change', fn); return () => mq.removeEventListener('change', fn) }
 import './network.css'
 
 const fill = (str, vars) => Object.entries(vars).reduce((s, [k, v]) => s.replace(`{${k}}`, v), str)
@@ -41,6 +46,7 @@ export default function LiveNetwork() {
   const d = snap.data
   const fr = freshness(snap, now, t)
   const [tab, setTab] = useState('sofia')
+  const phone = useSyncExternalStore(watchPhone, () => window.matchMedia(PHONE).matches, () => false)
   const tabRefs = useRef({})
 
   const available = d?.realtime.available === true
@@ -97,7 +103,7 @@ export default function LiveNetwork() {
               <Stat label={n.max} value={s.maxDelay?.min} unit={` ${n.unit}`}
                 empty={!available || !s.maxDelay ? n.noRealtime : null}
                 note={available && s.maxDelay
-                  ? `${trainLabel(s.maxDelay.type, s.maxDelay.trainNum, lang)} → ${stationName(s.maxDelay.to, lang)}`
+                  ? routeText(trainLabel(s.maxDelay.type, s.maxDelay.trainNum, lang), s.maxDelay.to, lang)
                   : n.noRealtimeNote} />
             )}
           </div>
@@ -106,9 +112,15 @@ export default function LiveNetwork() {
         <div className="net__radar">
           <h3 className="net__h3">{n.radar.title}</h3>
           <p className="net__radardesc">{n.radar.description}</p>
-          <Suspense fallback={<div style={{ aspectRatio: '1072 / 722', maxWidth: '62%' }} aria-hidden="true" />}>
-            <Radar lang={lang} t={t} />
-          </Suspense>
+          {phone ? (
+            <Suspense fallback={<div className="net__map-wait" aria-hidden="true" />}>
+              <RadarPhone lang={lang} t={t} />
+            </Suspense>
+          ) : (
+            <Suspense fallback={<div style={{ aspectRatio: '1072 / 722', maxWidth: '62%' }} aria-hidden="true" />}>
+              <Radar lang={lang} t={t} />
+            </Suspense>
+          )}
         </div>
 
         <div className="net__boards">
