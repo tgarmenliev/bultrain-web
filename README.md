@@ -29,7 +29,7 @@
 
 ## The app
 
-| | |
+| Feature | What you get |
 |---|---|
 | **Live delays** | From the official public feed. If there is no live data, the app says so. |
 | **Live map** | The trains of Bulgaria on a map. Tap a train or a station. |
