@@ -2,6 +2,14 @@
   "name": "bultrain-web",
   "private": true,
   "version": "0.0.0",
+  "description": "Website of BulTrain: trains in Bulgaria in real time. Delays, a live map, station boards and an arrival alarm.",
+  "homepage": "https://bultrain.eu",
+  "author": "Tihomir Garmenliev (https://www.linkedin.com/in/tgarmenliev/)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tgarmenliev/bultrain-web.git"
+  },
+  "license": "UNLICENSED",
   "type": "module",
   "scripts": {
     "dev": "vite",
