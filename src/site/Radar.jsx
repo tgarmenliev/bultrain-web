@@ -195,7 +195,8 @@ export default function Radar({ lang, t }) {
         <div className="rad__panel" aria-live="polite" ref={panelRef}>
           {current && (
             <>
-              <p className="rad__type">{full(current) ?? trainLabel(current.type, '', lang)}</p>
+              {/* train types without a full name (IFT, ET) show only the label below, once */}
+              {full(current) && <p className="rad__type">{full(current)}</p>}
               <p className="rad__num tnum">{full(current) ? current.trainNum : trainLabel(current.type, current.trainNum, lang)}</p>
               <p className="rad__route">{stationName(current.from, lang)} <span aria-hidden="true">→</span><span className="sr-only"> – </span> {stationName(current.to, lang)}</p>
               <p className={`rad__delay rad__delay--${kind(current.delayMin)}`}>{delayText(current.delayMin)}</p>
