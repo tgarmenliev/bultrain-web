@@ -105,7 +105,7 @@ export const translations = {
         },
         {
           title: 'Без профил, без следене',
-          text: 'Местоположението ти не напуска телефона. Не искаме профил и не събираме лични данни.',
+          text: 'Местоположението ти не напуска телефона. Не искаме профил, име или имейл.',
         },
       ],
     },
@@ -220,6 +220,8 @@ export const translations = {
         noResults: 'Няма влак с такъв номер или гара.',
         resultsCount: '{n} резултата',
         closeSearch: 'Затвори търсенето',
+        trainWord: 'Влак',
+        noRoute: 'Маршрутът не е известен',
         twoFingers: 'Мести картата с два пръста',
         delayUnknownShort: 'Няма данни',
         zoomIn: 'Приближи',
@@ -346,7 +348,7 @@ export const translations = {
       disclaimer: 'BulTrain е независим проект и не е свързан с БДЖ (Български държавни железници) и МТС (Министерство на транспорта и съобщенията).',
     },
     contact: {
-      heading: 'Свържете се с нас',
+      heading: 'Свържи се с мен',
       subheading: 'Имаш въпрос или предложение? Избери най-удобния за теб начин за връзка с мен.',
       methods: {
         email: {
@@ -486,7 +488,7 @@ export const translations = {
         },
         {
           title: 'No account, no tracking',
-          text: 'Your location never leaves your phone. We do not ask for an account and we do not collect personal data.',
+          text: 'Your location never leaves your phone. We do not ask for an account, a name or an email address.',
         },
       ],
     },
@@ -601,6 +603,8 @@ export const translations = {
         noResults: 'No train with that number or station.',
         resultsCount: '{n} results',
         closeSearch: 'Close search',
+        trainWord: 'Train',
+        noRoute: 'Route unknown',
         twoFingers: 'Use two fingers to move the map',
         delayUnknownShort: 'No data',
         zoomIn: 'Zoom in',

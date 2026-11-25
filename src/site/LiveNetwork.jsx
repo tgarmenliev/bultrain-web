@@ -103,7 +103,10 @@ export default function LiveNetwork() {
               <Stat label={n.max} value={s.maxDelay?.min} unit={` ${n.unit}`}
                 empty={!available || !s.maxDelay ? n.noRealtime : null}
                 note={available && s.maxDelay
-                  ? routeText(trainLabel(s.maxDelay.type, s.maxDelay.trainNum, lang), s.maxDelay.to, lang)
+                  // a train the source reports without a type or a route is named as such, not shown as a bare number
+                  ? (s.maxDelay.to
+                    ? routeText(s.maxDelay.type ? trainLabel(s.maxDelay.type, s.maxDelay.trainNum, lang) : `${n.radar.trainWord} ${s.maxDelay.trainNum}`, s.maxDelay.to, lang)
+                    : `${s.maxDelay.type ? trainLabel(s.maxDelay.type, s.maxDelay.trainNum, lang) : `${n.radar.trainWord} ${s.maxDelay.trainNum}`} · ${n.radar.noRoute.toLocaleLowerCase(lang)}`)
                   : n.noRealtimeNote} />
             )}
           </div>

@@ -130,7 +130,7 @@ export default function Radar({ lang, t }) {
                 <li key={keyOf(x)}>
                   <button type="button" aria-pressed={keyOf(x) === curKey} onClick={() => choose(keyOf(x))}>
                     <b className="tnum">{trainLabel(x.type, x.trainNum, lang)}</b>
-                    <span>{routeText(x.from, x.to, lang)}</span>
+                    <span>{routeText(x.from, x.to, lang) || r.noRoute}</span>
                     <em className={`tnum rad__delay--${kind(x.delayMin)}`}>{x.delayMin === null || x.delayMin === undefined ? '–' : `${x.delayMin}′`}</em>
                   </button>
                 </li>
@@ -143,9 +143,9 @@ export default function Radar({ lang, t }) {
           {current && (
             <>
               {/* train types without a full name (IFT, ET) show only the label below, once */}
-              {full(current) && <p className="rad__type">{full(current)}</p>}
+              {(full(current) || !current.type) && <p className="rad__type">{full(current) ?? r.trainWord}</p>}
               <p className="rad__num tnum">{full(current) ? current.trainNum : trainLabel(current.type, current.trainNum, lang)}</p>
-              <p className="rad__route">{routeText(current.from, current.to, lang)}</p>
+              <p className="rad__route">{routeText(current.from, current.to, lang) || r.noRoute}</p>
               <p className={`rad__delay rad__delay--${kind(current.delayMin)}`}>{delayText(current.delayMin)}</p>
               {current.progress !== null && current.progress !== undefined ? (
                 <div className="rad__rail">
@@ -182,7 +182,7 @@ export default function Radar({ lang, t }) {
               <li key={keyOf(x)}>
                 <button type="button" aria-pressed={keyOf(x) === curKey} onClick={() => setPicked(keyOf(x))}>
                   <b className="tnum">{trainLabel(x.type, x.trainNum, lang)}</b>
-                  <span>{routeText(x.from, x.to, lang)}</span>
+                  <span>{routeText(x.from, x.to, lang) || r.noRoute}</span>
                   <em className={`tnum rad__delay--${kind(x.delayMin)}`}>{x.delayMin === null || x.delayMin === undefined ? '–' : `${x.delayMin}′`}</em>
                 </button>
               </li>

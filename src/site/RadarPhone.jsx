@@ -301,7 +301,7 @@ export default function RadarPhone({ lang, t }) {
                 <li key={keyOf(x)}>
                   <button type="button" onClick={() => choose(keyOf(x))}>
                     <b className="tnum">{trainLabel(x.type, x.trainNum, lang)}</b>
-                    <span>{routeText(x.from, x.to, lang)}</span>
+                    <span>{routeText(x.from, x.to, lang) || r.noRoute}</span>
                     <em className={`tnum pm__d--${kind(x.delayMin)}`}>{x.delayMin === null || x.delayMin === undefined ? '–' : `${x.delayMin}′`}</em>
                   </button>
                 </li>
@@ -327,11 +327,11 @@ export default function RadarPhone({ lang, t }) {
             <>
               <button type="button" className="pm__summary" onClick={() => setMore((m) => !m)} aria-expanded={more}>
                 <span className="pm__who">
-                  {full && <span className="pm__type">{full}</span>}
+                  {(full || !current.type) && <span className="pm__type">{full ?? r.trainWord}</span>}
                   <b className="tnum">{full ? current.trainNum : trainLabel(current.type, current.trainNum, lang)}</b>
                 </span>
                 <span className={`pm__delay pm__d--${kind(current.delayMin)}`}>{kind(current.delayMin) === 'unknown' ? r.delayUnknownShort : delayText(r, current.delayMin)}</span>
-                <span className="pm__route">{routeText(current.from, current.to, lang)}</span>
+                <span className="pm__route">{routeText(current.from, current.to, lang) || r.noRoute}</span>
                 {pct !== null && (
                   <span className="pm__rail">
                     <span className="pm__bar" role="img" aria-label={fill(r.progressLabel, { p: pct })}><i style={{ width: `${pct}%` }} /><em style={{ left: `${pct}%` }}><TrainFront size={13} strokeWidth={2.4} /></em></span>

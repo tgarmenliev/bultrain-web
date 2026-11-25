@@ -16,7 +16,7 @@ export const articles = [
   { id: 'article-1', url: 'https://www.bloombergtv.bg/a/16-biznes-start/131545-uchenik-sazdava-prilozhenie-sledyashto-marshruti-i-razpisaniya-na-balgarskite-vlakove' },
   { id: 'article-2', url: 'https://economy.bg/featured/view/58604/Mobilno-prilozhenie-predlaga-vsichko-za-pytuvaneto-s-vlak-u-nas-na-edno-myasto' },
   { id: 'article-3', url: 'https://www.dnevnik.bg/duma_na_sedmitsa/2026/04/01/4898677_kak_se_putuva_umno_s_bdj_tihomir_gurmenliev_v_podkasta/?ref=rss' },
-  { id: 'article-4', url: 'http://capital.bg/politika_i_ikonomika/obrazovanie/2026/01/27/4876961_talantite_ot_20_pod_20_programistut_tihomir_gurmenliev/' },
+  { id: 'article-4', url: 'https://capital.bg/politika_i_ikonomika/obrazovanie/2026/01/27/4876961_talantite_ot_20_pod_20_programistut_tihomir_gurmenliev/' },
   { id: 'article-5', url: 'https://bnrnews.bg/horizont/post/492979/tihomir-garmenliev-i-bultrain-za-po-informiran-zhelezopaten-transport' },
   { id: 'article-6', url: 'https://www.economy.bg/bulgaria/view/64492/Celta-mi-vinagi-e-bila-da-resha-svoj-ili-chuzhd-problem-s-pomoshtta-na-tehnologiite', photo: '/img/photo/event-dublin' },
 ]

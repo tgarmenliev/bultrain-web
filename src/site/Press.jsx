@@ -1,10 +1,12 @@
 import { ArrowUpRight } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { sortedArticles, ratings } from '../data/press'
+import { formatDay } from '../data/dates'
 import './press.css'
 
 const fmtRating = (v, lang) => v.toLocaleString(lang === 'bg' ? 'bg-BG' : 'en-GB', { minimumFractionDigits: 1, maximumFractionDigits: 1 })
-const fmtDate = (iso, lang) => new Date(iso).toLocaleDateString(lang === 'bg' ? 'bg-BG' : 'en-GB', { year: 'numeric', month: 'short', day: 'numeric' })
+// English short month names differ between browsers ("Sept" / "Sep"), so English gets the full name.
+const fmtDate = (iso, lang) => formatDay(iso, lang, { year: 'numeric', month: lang === 'bg' ? 'short' : 'long', day: 'numeric' })
 
 export default function Press() {
   const { lang, t } = useLanguage()

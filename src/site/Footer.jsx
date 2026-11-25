@@ -1,10 +1,17 @@
+import { useSyncExternalStore } from 'react'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../i18n/LanguageContext'
 import './footer.css'
 
+/* global __BUILD_YEAR__ */
+// The prerendered page carries the year it was built in; after it starts, the visitor sees the current one. Reading the
+// clock directly would make every page mismatch (and redraw) from 1 January until the next build.
+const never = () => () => {}
+
 export default function Footer() {
   const { t, to: localTo } = useLanguage()
   const f = t.footer
+  const year = useSyncExternalStore(never, () => new Date().getFullYear(), () => __BUILD_YEAR__)
   const links = [
     ['link-privacy', '/privacy', f.privacy],
     ['link-privacy-app', '/privacy-app', f.privacyApp],
@@ -27,7 +34,7 @@ export default function Footer() {
         </div>
         <div className="foot__row foot__row--small">
           <p>{f.madeBy}</p>
-          <p className="tnum">© {new Date().getFullYear()} BulTrain</p>
+          <p className="tnum">© {year} BulTrain</p>
         </div>
         <p className="foot__disclaimer">{f.disclaimer}</p>
       </div>

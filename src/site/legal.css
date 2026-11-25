@@ -27,7 +27,8 @@
 @media (hover: hover) and (pointer: fine) { .legal-jump button:hover { border-color: var(--accent); color: var(--accent); } }
 
 /* contact rows */
-.contact__list { list-style: none; margin: 40px 0 0; padding: 0; border-bottom: 1px solid var(--line); }
+.legal__body .contact__list li { margin: 0; }
+.legal__body .contact__list { list-style: none; margin: 40px 0 0; padding: 0; border-bottom: 1px solid var(--line); }
 .contact__list li { border-top: 1px solid var(--line); }
 .contact__list a { display: grid; grid-template-columns: 140px minmax(0, 1fr) auto; align-items: baseline; gap: 6px 20px; padding: 24px 0; color: var(--ink); text-decoration: none; transition: color 160ms ease, padding 260ms var(--ease-out); }
 .contact__label { font-size: 13px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); }

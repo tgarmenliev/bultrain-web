@@ -1,10 +1,10 @@
 import { useLanguage } from '../i18n/LanguageContext'
 import { releases } from '../data/releases'
+import { formatDay } from '../data/dates'
 import './releases.css'
 
 const fmt = (iso, precision, lang) =>
-  new Date(iso).toLocaleDateString(lang === 'bg' ? 'bg-BG' : 'en-GB',
-    precision === 'month' ? { month: 'long', year: 'numeric' } : { day: 'numeric', month: 'long', year: 'numeric' })
+  formatDay(iso, lang, precision === 'month' ? { month: 'long', year: 'numeric' } : { day: 'numeric', month: 'long', year: 'numeric' })
 
 /**
  * The line of releases: a railway line with one station per release. New work is one entry in src/data/releases.js,
