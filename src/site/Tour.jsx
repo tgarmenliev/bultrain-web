@@ -175,7 +175,9 @@ export default function Tour() {
               const isLock = kind === 'lock'
               const alt = isLock ? tour.platformAlt[platform] : s.alt
               return (
-                <li key={s.title} ref={(el) => (stepRefs.current[i] = el)} data-i={i} className="tour__step" data-active={active === i}>
+                // keyed by what the step shows, never by its text: the observer above watches these very elements, and a
+                // key that changes with the language would replace them and leave the tour stuck
+                <li key={KINDS[i]} ref={(el) => (stepRefs.current[i] = el)} data-i={i} className="tour__step" data-active={active === i}>
                   <span className="tour__n">{tour.phases[PHASE[i]]}</span>
                   <h3>{s.title}</h3>
                   <p>{s.text}</p>
@@ -233,7 +235,7 @@ export default function Tour() {
               </div>
               <ol className="tour__stations">
                 {tour.phases.map((p, i) => (
-                  <li key={p} data-state={i < PHASE[active] ? 'done' : i === PHASE[active] ? 'now' : 'next'}><i /><span>{p}</span></li>
+                  <li key={i} data-state={i < PHASE[active] ? 'done' : i === PHASE[active] ? 'now' : 'next'}><i /><span>{p}</span></li>
                 ))}
               </ol>
             </div>

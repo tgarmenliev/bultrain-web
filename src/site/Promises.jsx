@@ -13,8 +13,8 @@ export default function Promises() {
           <p className="promises__sub">{p.sub}</p>
         </div>
         <ul className="promises__list">
-          {p.items.map((it) => (
-            <li key={it.title}><h3>{it.title}</h3><p>{it.text}</p></li>
+          {p.items.map((it, i) => (
+            <li key={i}><h3>{it.title}</h3><p>{it.text}</p></li>
           ))}
         </ul>
       </div>

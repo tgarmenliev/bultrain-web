@@ -72,7 +72,7 @@ export default function Press() {
 
           <ul className="rev__quotes">
             {p.reviews.map((r, i) => (
-              <li key={r.name} className={i === 0 ? 'is-first' : ''}>
+              <li key={i} className={i === 0 ? 'is-first' : ''}>
                 <blockquote lang={lang}>{r.text}</blockquote>
                 <p className="rev__by"><b>{r.name}</b> <span>{r.store}</span> <span className="tnum">{fmtDate(r.date, lang)}</span></p>
                 {r.lang !== lang && <p className="rev__tr">{p.translated}</p>}

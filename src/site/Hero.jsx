@@ -34,8 +34,8 @@ export default function Hero() {
             </div>
 
             <ul className="hero__facts" data-rise style={{ '--i': 3 }}>
-              {h.facts.map((f) => (
-                <li key={f.label}>
+              {h.facts.map((f, i) => (
+                <li key={i}>
                   <b className="tnum">{f.value}</b>
                   <span>{f.label}</span>
                 </li>
