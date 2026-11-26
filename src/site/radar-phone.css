@@ -10,6 +10,7 @@
 .pm__s { transform: scale(var(--u)); }
 .pm__rail-lines { fill: none; stroke: color-mix(in srgb, var(--accent) 42%, var(--line-strong)); stroke-width: 1.5; vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round; pointer-events: none; }
 .pm__map[data-zoom='far'] .pm__town { display: none; }
+.pm__map text.is-covered { visibility: hidden; }
 .pm__city { pointer-events: none; }
 .pm__city circle { fill: var(--ink3); }
 .pm__city text { fill: var(--ink3); font-size: 11px; font-weight: 700; paint-order: stroke; stroke: var(--raised); stroke-width: 3px; stroke-linejoin: round; }

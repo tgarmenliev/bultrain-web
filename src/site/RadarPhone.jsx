@@ -23,6 +23,20 @@ const ease = (p) => 1 - (1 - p) ** 3
  * train's card sits at the bottom, and the map flies to that train. Nothing scrolls the page away from the map.
  * Dots and labels keep the same size on screen at every zoom.
  */
+/** Names on the map must not sit on each other: keep them by importance (the chosen train, the ends of its route,
+ *  then the cities) and hide any that would cover one already kept. */
+function declutter(svg) {
+  const names = [...svg.querySelectorAll('.pm__lbl'), ...svg.querySelectorAll('.pm__city.is-end text'), ...svg.querySelectorAll('.pm__city:not(.is-end) text')]
+  names.forEach((n) => n.classList.remove('is-covered'))
+  const kept = []
+  for (const n of names) {
+    const r = n.getBoundingClientRect()
+    if (!r.width) continue // not shown at this zoom
+    if (kept.some((k) => r.left < k.right + 2 && r.right > k.left - 2 && r.top < k.bottom && r.bottom > k.top)) n.classList.add('is-covered')
+    else kept.push(r)
+  }
+}
+
 export default function RadarPhone({ lang, t }) {
   const r = t.network.radar
   const stageRef = useRef(null)
@@ -34,6 +48,7 @@ export default function RadarPhone({ lang, t }) {
   const box = useRef(null) // the current viewBox, so a new flight starts where the last one is
   const fit = useRef(1) // screen pixels per map unit when the whole country fits
   const flight = useRef(0) // the running animation
+  const tidy = useRef(0) // pending tidy-up of the names, once the map stops moving
   const manual = useRef(false) // the visitor moved the map: leave it where they put it until they ask for something
   const onScreen = useOnScreen(stageRef)
   const { snap, trains, placed, current, curKey, gone, mostLate, matches, query, setQuery, searching, setPicked, randomKey, reset } = useTrainPicker(lang, onScreen)
@@ -78,6 +93,8 @@ export default function RadarPhone({ lang, t }) {
     svg.setAttribute('viewBox', v.join(' '))
     svg.style.setProperty('--u', String(v[2] / width)) // map units per screen pixel
     svg.dataset.zoom = width / v[2] / fit.current >= NEAR ? 'near' : 'far'
+    clearTimeout(tidy.current)
+    tidy.current = setTimeout(() => declutter(svg), 90)
   }, [])
 
   const flyTo = useCallback((to) => {
@@ -112,7 +129,12 @@ export default function RadarPhone({ lang, t }) {
     const [cx, cy] = follow ? [sx, sy] : [BG_SIZE.width / 2, BG_SIZE.height / 2]
     flyTo([cx - wide / 2 / scale, cy - (size.top + free / 2) / scale, size.w / scale, size.h / scale])
   }, [size, view, sx, sy, flyTo])
-  useEffect(() => () => cancelAnimationFrame(flight.current), [])
+  useEffect(() => () => { cancelAnimationFrame(flight.current); clearTimeout(tidy.current) }, [])
+  // a new train or fresh positions change which names are on the map
+  useEffect(() => {
+    const id = setTimeout(() => { if (svgRef.current) declutter(svgRef.current) }, 120)
+    return () => clearTimeout(id)
+  }, [curKey, trains, lang])
 
   const goTo = useCallback((follow) => { manual.current = false; setMoved(false); setView({ follow }) }, [])
 
