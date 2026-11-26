@@ -293,8 +293,9 @@ export default function RadarPhone({ lang, t }) {
               </g>
             )
           })}
+          {/* keyed by train: a newly chosen one appears where it is (it used to slide over from the previous one) */}
           {spot && (
-            <g style={{ transform: `translate(${sx}px, ${sy}px)` }} className={`pm__me pm__dot--${kind(current.delayMin)}`}>
+            <g key={curKey} style={{ transform: `translate(${sx}px, ${sy}px)` }} className={`pm__me pm__dot--${kind(current.delayMin)}`}>
               <g className="pm__s">
                 <circle className="pm__ring" r="15" />
                 <circle className="pm__core" r="11" />
