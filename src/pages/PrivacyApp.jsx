@@ -1,6 +1,7 @@
 import LegalPage from '../site/LegalPage'
 import PolicyBody from '../site/PolicyBody'
 import { PRIVACY_UPDATED, formatLegalDate } from '../site/legal-meta'
+import { prefersReducedMotion } from '../data/motion'
 import { translations } from '../i18n/translations'
 
 // The page linked from the App Store and Google Play. It shows the same policy as /privacy, in English and in
@@ -12,7 +13,7 @@ const DISCLAIMER = {
 }
 
 export default function PrivacyApp() {
-  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
 
   return (
     <LegalPage title="BulTrain App Privacy Policy" wide>

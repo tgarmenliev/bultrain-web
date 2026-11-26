@@ -82,3 +82,8 @@
 @media (max-width: 339px) { .nav__logo span { display: none; } }
 /* the open menu is a solid panel with the page dimmed behind it */
 @media (max-width: 1180px) { .nav[data-open='true'] { background: var(--bg); box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.45); clip-path: inset(0 0 -100vmax 0); } .nav__sheet .wrap { max-height: calc(100svh - var(--nav-h)); overflow-y: auto; } }
+
+@media (prefers-reduced-motion: reduce) and (max-width: 1180px) {
+  .nav__sheet { transition: opacity 240ms ease; opacity: 0; }
+  .nav[data-open='true'] .nav__sheet { opacity: 1; }
+}

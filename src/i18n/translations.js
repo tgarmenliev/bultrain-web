@@ -68,6 +68,8 @@ export const translations = {
           alt: 'Известие от умната аларма: „Приближавате вашата гара!“',
         },
       ],
+      videoPlay: 'Пусни записа',
+      videoPause: 'Спри записа',
       platformsLabel: 'Устройство',
       platforms: { ios: 'iPhone', android: 'Android', watch: 'Apple Watch' },
       platformText: {
@@ -451,6 +453,8 @@ export const translations = {
           alt: 'Smart alarm notification',
         },
       ],
+      videoPlay: 'Play the recording',
+      videoPause: 'Pause the recording',
       platformsLabel: 'Device',
       platforms: { ios: 'iPhone', android: 'Android', watch: 'Apple Watch' },
       platformText: {

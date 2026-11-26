@@ -116,4 +116,17 @@
   .tour__step:last-child { margin-bottom: 0; }
   .tour__inline { display: block; width: min(250px, 62vw); margin: 14px auto 0; }
 }
-@media (prefers-reduced-motion: reduce) { .tour__phone, .tour__scene, .tour__n, .tour__step h3, .tour__step p, .tour__fill, .tour__loco, .tour__stations i, .tour__stations span { transition: none; } .tour__scene { filter: none; transform: none; } }
+/* Reduce Motion: scenes cross-fade without zoom or blur, the phone's view changes without panning. The train on the
+   line still slides: it is small and in place. */
+@media (prefers-reduced-motion: reduce) {
+  .tour__phone { transition: none; }
+  .tour__scene { filter: none; transform: none; transition: opacity 340ms ease; }
+}
+
+/* play / pause for the recording */
+.vid { position: relative; width: 100%; height: 100%; }
+.vid__btn { position: absolute; z-index: 3; right: 6%; top: 50%; width: 40px; height: 40px; margin-top: -20px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: rgba(10, 11, 15, 0.62); color: #fff; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); cursor: pointer; pointer-events: auto; transition: background-color 180ms ease, transform 160ms var(--ease-out); }
+.vid__btn:active { transform: scale(0.94); }
+.vid__btn[data-playing='false'] { right: 50%; margin-right: -32px; width: 64px; height: 64px; margin-top: -32px; background: rgba(10, 11, 15, 0.74); }
+.vid__btn[data-playing='false'] svg { width: 28px; height: 28px; margin-left: 3px; }
+@media (hover: hover) and (pointer: fine) { .vid__btn:hover { background: var(--action); } }

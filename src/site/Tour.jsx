@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
-import { TrainFront } from 'lucide-react'
+import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react'
+import { Pause, Play, TrainFront } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useTheme } from '../theme/ThemeContext'
 import { appScreen, appScreenInLang, screenProps } from '../data/screens'
+import { prefersReducedMotion, fadeIn } from '../data/motion'
 import './tour.css'
 
 const APP_STORE = 'https://apps.apple.com/bg/app/bultrain-train-schedules-bg/id6759790703'
@@ -29,29 +30,50 @@ function Frame({ kind, children }) {
   return <div className={`ds-device${kind === 'android' ? ' ds-device--android' : ''}`}>{children}</div>
 }
 
-/** A short muted loop of the real app. Plays while it is wanted (the stage tells it) or, on its own, while on screen. */
-function LoopVideo({ active, alt = '', lazy }) {
+/**
+ * A short muted loop of the real app, with a play / pause button. It starts by itself while it is wanted (the stage
+ * says so, or it is on screen), except for visitors who asked for less motion: they press play. The button always
+ * shows what the video is really doing, so it also works where the phone refuses to autoplay (Low Power Mode).
+ */
+function LoopVideo({ active, alt = '', lazy, labels }) {
   const ref = useRef(null)
+  const [onScreen, setOnScreen] = useState(false)
+  const [playing, setPlaying] = useState(false)
+  const [choice, setChoice] = useState(null) // the visitor's own: true / false; null = automatic
+  const standalone = active === undefined
+
+  useEffect(() => {
+    const v = ref.current
+    if (!v || !standalone) return
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) v.poster = POSTER
+      setOnScreen(e.isIntersecting)
+    }, { threshold: 0.25 })
+    io.observe(v)
+    return () => io.disconnect()
+  }, [standalone])
+
+  const shown = standalone ? onScreen : active
   useEffect(() => {
     const v = ref.current
     if (!v) return
-    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     v.muted = true
-    if (active === undefined) {
-      const io = new IntersectionObserver(([e]) => {
-        if (!e.isIntersecting) { v.pause(); return }
-        v.poster = POSTER
-        if (!still) v.play().catch(() => {})
-      }, { threshold: 0.25 })
-      io.observe(v)
-      return () => io.disconnect()
-    }
-    if (active && !still) v.play().catch(() => {}); else v.pause()
-  }, [active])
+    if (shown && (choice ?? !prefersReducedMotion())) v.play().catch(() => {})
+    else v.pause()
+  }, [shown, choice])
+
   return (
-    <video ref={ref} muted loop playsInline preload={lazy ? 'none' : 'metadata'} poster={lazy ? undefined : POSTER} aria-label={alt || undefined} aria-hidden={alt ? undefined : true} width="540" height="1108">
-      <source src={VIDEO} type="video/mp4" />
-    </video>
+    <div className="vid">
+      <video ref={ref} muted loop playsInline preload={lazy ? 'none' : 'metadata'} poster={lazy ? undefined : POSTER} aria-label={alt || undefined} aria-hidden={alt ? undefined : true} width="540" height="1108"
+        onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}>
+        <source src={VIDEO} type="video/mp4" />
+      </video>
+      {(standalone || active) && (
+        <button type="button" className="vid__btn" data-playing={playing} onClick={() => setChoice(!playing)} aria-label={playing ? labels.pause : labels.play}>
+          {playing ? <Pause size={18} fill="currentColor" strokeWidth={0} /> : <Play size={18} fill="currentColor" strokeWidth={0} />}
+        </button>
+      )}
+    </div>
   )
 }
 
@@ -107,7 +129,7 @@ export default function Tour() {
   const scenes = [
     { id: 'results', kind: 'results', frame: 'ios', node: (alt) => img(appScreen(theme, lang, ['results']), alt) },
     { id: 'board', kind: 'board', frame: 'ios', node: (alt) => img(appScreen(theme, lang, ['board', 'results']), alt) },
-    { id: 'map', kind: 'map', frame: 'ios', node: (alt) => <LoopVideo alt={alt} lazy /> },
+    { id: 'map', kind: 'map', frame: 'ios', node: (alt) => <LoopVideo alt={alt} lazy labels={videoLabels} /> },
     { id: 'alarm', kind: 'alarm', frame: 'ios', node: (alt) => img(alarm, alt) },
     { id: 'lock-ios', kind: 'lock', platform: 'ios', frame: 'ios', node: (alt) => img(lockIos, alt) },
     {
@@ -126,6 +148,16 @@ export default function Tour() {
   const shown = (s, kind) => s.kind === kind && (!s.platform || s.platform === platform)
   const sceneFor = (kind) => scenes.find((s) => shown(s, kind))
   const focus = FOCUS[sceneFor(KINDS[active])?.id] ?? 0
+
+  // With Reduce Motion the phone's view does not pan to the new spot: it appears there and fades in.
+  const view = useRef(null)
+  const lastFocus = useRef(focus)
+  useLayoutEffect(() => {
+    if (lastFocus.current === focus) return
+    lastFocus.current = focus
+    if (prefersReducedMotion()) fadeIn(view.current)
+  }, [focus])
+  const videoLabels = { play: tour.videoPlay, pause: tour.videoPause }
 
   return (
     <section className="tour" id="tour" aria-labelledby="tour-title">
@@ -176,8 +208,9 @@ export default function Tour() {
             })}
           </ol>
 
-          <div className="tour__stage" aria-hidden="true">
-            <div className="tour__window" style={{ '--focus': focus }}>
+          {/* the pictures here repeat the ones described in the steps, so they carry no text; only the video button speaks */}
+          <div className="tour__stage">
+            <div className="tour__window" ref={view} style={{ '--focus': focus }}>
               <div className="tour__phone">
                 {scenes.map((s) => {
                   const on = shown(s, KINDS[active])
@@ -185,7 +218,7 @@ export default function Tour() {
                     <div key={s.id} className={`tour__scene is-${s.frame}`} data-on={on}>
                       {KINDS.indexOf(s.kind) <= reach && (
                         <Frame kind={s.frame}>
-                          {s.kind === 'map' ? <LoopVideo active={on} /> : s.node('', false)}
+                          {s.kind === 'map' ? <LoopVideo active={on} labels={videoLabels} /> : s.node('', false)}
                         </Frame>
                       )}
                     </div>
@@ -193,7 +226,7 @@ export default function Tour() {
                 })}
               </div>
             </div>
-            <div className="tour__rail" style={{ '--p': PHASE[active] / (tour.phases.length - 1) }}>
+            <div className="tour__rail" aria-hidden="true" style={{ '--p': PHASE[active] / (tour.phases.length - 1) }}>
               <div className="tour__track">
                 <i className="tour__fill" />
                 <span className="tour__loco"><TrainFront size={18} strokeWidth={2} /></span>

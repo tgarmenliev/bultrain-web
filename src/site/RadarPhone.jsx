@@ -4,6 +4,7 @@ import { BG_PATH, BG_SIZE, BG_CITIES, BG_TOWNS, project } from '../data/bg-outli
 import { BG_RAIL } from '../data/bg-rail'
 import { stationName, trainLabel, routeText } from '../data/live'
 import { keyOf, fill, kind, delayText, clock, useOnScreen, useTrainPicker } from './useTrainPicker'
+import { prefersReducedMotion as reduced, fadeIn } from '../data/motion'
 import './radar-phone.css'
 
 const APP_STORE = 'https://apps.apple.com/bg/app/bultrain-train-schedules-bg/id6759790703'
@@ -15,7 +16,6 @@ const SHOWN_WHEN_IDLE = 8
 const BIG = new Set(['София', 'Пловдив', 'Варна', 'Бургас']) // the only names on the whole-country view
 const EAST = 27.2 // towns east of this are labelled to their left, so nothing runs off the screen
 
-const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const ease = (p) => 1 - (1 - p) ** 3
 
 /**
@@ -83,7 +83,14 @@ export default function RadarPhone({ lang, t }) {
   const flyTo = useCallback((to) => {
     cancelAnimationFrame(flight.current)
     const from = box.current
-    if (!from || reduced()) { apply(to); return }
+    if (!from) { apply(to); return }
+    if (reduced()) {
+      // no flight: show the new view and fade it in (small corrections, e.g. a train that moved a little, stay silent)
+      const far = Math.hypot(to[0] - from[0], to[1] - from[1]) > from[2] * 0.08 || Math.abs(to[2] - from[2]) > from[2] * 0.08
+      apply(to)
+      if (far) fadeIn(svgRef.current, 0.1)
+      return
+    }
     const t0 = performance.now()
     const step = (now) => {
       const p = ease(Math.min(1, Math.max(0, now - t0) / 650))

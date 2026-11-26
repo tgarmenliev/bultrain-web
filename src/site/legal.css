@@ -39,3 +39,5 @@
 .contact__note { margin-top: 48px; padding-top: 28px; }
 .contact__note h2 { margin: 0 0 10px; font-size: clamp(1.3rem, 2.2vw, 1.7rem); font-weight: 800; letter-spacing: -0.03em; color: var(--ink); }
 @media (max-width: 640px) { .contact__list a { grid-template-columns: minmax(0, 1fr) auto; } .contact__label, .contact__desc { grid-column: 1; } .contact__list svg { grid-column: 2; grid-row: 1 / span 3; } }
+
+@media (prefers-reduced-motion: reduce) { .contact__list a { transition: color 160ms ease; } .legal__body .contact__list a:hover { padding-left: 0; } }

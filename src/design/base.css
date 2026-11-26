@@ -116,9 +116,9 @@ body {
   border-radius: 11% / 5.1%; background: var(--raised);
 }
 
+/* Reduce Motion: each stylesheet turns its own large movements into fades (see src/data/motion.js). */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
 
 /* ---- Skip link: first stop for keyboard and screen-reader users ---- */

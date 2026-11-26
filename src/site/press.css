@@ -52,3 +52,5 @@
   .rev__quotes li, .rev__quotes li:first-child { flex: 0 0 min(82vw, 340px); scroll-snap-align: start; padding: 20px; border: 1px solid var(--line); border-radius: var(--r-m); background: var(--raised); }
   .rev__quotes blockquote, .rev__quotes .is-first blockquote { font-size: 1rem; line-height: 1.6; font-weight: 500; }
 }
+
+@media (prefers-reduced-motion: reduce) { .press__list a { transition: color 160ms ease; } .press__list a:hover { padding-left: 0; } }

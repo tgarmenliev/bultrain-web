@@ -95,7 +95,7 @@
 .pm__sw--unknown { border: 2px solid var(--ink3); }
 .pm__count { margin: 8px 0 0; font-size: 12.5px; font-weight: 600; color: var(--ink3); }
 
-@media (prefers-reduced-motion: reduce) { .pm__dot, .pm__me, .pm__bar i, .pm__bar em, .pm__toggle svg { transition: none; } .pm__me .pm__ring { animation: none; opacity: 0.8; } }
+@media (prefers-reduced-motion: reduce) { .pm__me .pm__ring { animation: none; opacity: 0.8; } }
 
 /* a phone held sideways: search on the left, the train card as a column on the right, the map between them */
 @media (max-height: 560px) and (min-width: 600px) {
